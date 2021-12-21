@@ -1,2 +1,2 @@
 # empyrion
-empyrion vanilla
+empyrion vanilla config files

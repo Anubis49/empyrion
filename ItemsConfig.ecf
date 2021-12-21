@@ -5,6 +5,24 @@
 # LifetimeOnDrop: float  = specifies in seconds how long an item will live after dropping it. Default is 200 seconds. Please only increase this time if ABSOLUTELY needed as lots of items can bring down the performance of a server, but als in SP.
 # DropOnDeath:   > If set to 'False'  this item or block is not dropped on player death. Use for important story items that players shall not lose on death. Default is set to 'True'.
 #
+# BuffMod: "StatusID_01, DurationFactor, ValueFactor, PreventsOnExpired(Optional);"
+# BuffMod: "MedikitBandages, 0.5, 0.5, true; MedikitApplied, -0.2, 2"
+#== Armor Suits and Boosters
+# Booster-Items need to be set in the Armors "SlotItems" section to work with the armor
+# SlotItems can only have 15 entries at the moment; In case you add more, the boosters beyond 15 will vanish when dropped into a booster slot of the armor
+# = Armor/Booster props
+# Armor:  
+# Oxygen:  
+# Radiation:  
+# Heat:  
+# Cold:  
+# PowerFac:  
+# SpeedFac:  
+# StaminaFac:  
+# JetpackFac:  
+# JumpFac:  
+# FoodFac:  
+# 
 #== Information about weapon types == 
 # Class:Ranged > Damage is defined in the weapon; the Ammotype of those weapons only hold statistic parameters (mass, volume, cost etc)
 # Class:LauncherSS > Damage AND BlastDamage (optional) are defined in the Ammotype in the ammo's child entry of 'Class: Projectile' ; If a projectile is used, you still can set BlastDamage to 0 
@@ -14,7 +32,7 @@
 # LauncherSS type weapons can also have a BLAST damage, defined by BlastDamage & BlastRadius. Note that the BlastDamage is ADDED on top of the weapons base DAMAGE for the CENTER (hit) block (only)! The calculation for the combinded Damage for this block can e approximated by the following formula: (Damage + BlastDamage) - (BlastDamage / BlastRadius)
 # Weapons can have multipliers to modify the base/blast damage
 # Syntax examples:
-# DamageMultiplier_1: <value>, param1: <material1>|<material2>
+# DamageMultiplier_1: <value>, param1: <material1>|<material2>  ; NOTE: You can add the parameter "Material: " to an creature/NPC entry in the EClassConfig and use the string set there as reference at this point in the Itemsconfig (for the weapon being more or less effective against a certain creature/NPC!)
 # BlastDamageMultiplier_1: <value>, param1: <material1>|<material2>
 # >> Available materials: head, body, dirt, stone, rock, metallight, metal, metalhard, woodsoft, wood, woodhard, concrete, concrete, hull, hullarmored, hullcombat, shield 
 # -- BlastDamage/Radius/Effect setup --
@@ -67,7 +85,7 @@
 }
 { +Item Id: 2, Name: Flashlight
   Meshfile: Entities/Items/Tools/flashlight01Prefab
-  # DropMeshfile: Entities/Misc/BagSmallPrefab  
+  # DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab  
   LifetimeOnDrop: 720
   MarketPrice: 126, display: true
   Material: metalweapon
@@ -188,7 +206,7 @@
   TechTreeNames: Weapons
 }
 { +Item Id: 5, Name: Minigun
-  Meshfile: Entities/Items/Weapons/ScifiMinigun/ScifiMinigunPrefab
+  Meshfile: Entities\Items\Weapons\ScifiMinigun\MinigunPrefab
   PickupToToolbar: true
   Material: metalweapon
   MarketPrice: 2561, display: true
@@ -293,7 +311,7 @@
 
 { +Item Id: 7, Name: Sniper
   # Meshfile: Entities/Items/Weapons/Snipers/SniperT1Prefab
-  Meshfile: Entities/Items/Weapons/Snipers/ScifiSniper1Prefab
+  Meshfile: Entities/Items/Weapons/Snipers/SniperRiflePrefab
   PickupToToolbar: true
   Material: metalweapon
   MarketPrice: 2731, display: true
@@ -454,18 +472,18 @@
     Class: Ranged
     AllowRemote: false  
     ROF: 0.85, type: float, display: true, formatter: ROF
-    Range: 75, display: false
+    Range: 66, display: false
     NoiseStrength: 80, display: false    
     CameraShake: 3  
     Automatic: false
     BulletsPerShot: 8
-    BulletSpread: 2
+    BulletSpread: 0
     RaySpread: 0.750, display: true
     Recoil: 1.68, display: true
-    Damage: 125, display: true
-    AmmoCapacity: 15, display: true
+    Damage: 115, display: true
+    AmmoCapacity: 7, display: true
     AmmoType: ShotgunShells, display: true
-    ReloadDelay: 2.50, display: true
+    ReloadDelay: 2.85, display: true
     # SfxBegin: Weapons/Player/Shotgun/w1200_fire
     SfxBegin: Weapons/Player/Shotgun/Resistance-ShotGun-01-Single_Shot-03
     SfxNoAmmo: Weapons/Misc/PumpgunDryFire02
@@ -477,7 +495,7 @@
     DamageMultiplier_3: 0, param1: dirt|stone|rock|hullarmored|hullcombat 
     DamageMultiplier_4: 0.4, param1: metal       # able to destroy door
     DamageMultiplier_5: 0.05, param1: metalhard  # able to destroy door
-    DamageMultiplier_6: 0-, param1: shield 
+    DamageMultiplier_6: 0, param1: shield 
   }
   { Child 1
     Class: Zoom
@@ -505,7 +523,7 @@
   #just for display - BlastRadius and BlastDamage is controlled by "SlowRocket"
   BlastRadius: 3, display: true
   BlastDamage: 500, display: true
-  Durability: 500, display: false
+  Durability: 100, display: false
   DegradationProb: 1, type: float, display: false
   SfxJammed: Weapons/Player/Reload/WeaponJammedSingleShot  
   { Child 0
@@ -516,9 +534,9 @@
     NoiseStrength: 140, display: false 
     Recoil: 2.4, display: true
     CameraShake: 3  
-    AmmoCapacity: 10, display: true
+    AmmoCapacity: 4, display: true
     AmmoType: SlowRocket, display: true
-    ReloadDelay: 3.0, display: true
+    ReloadDelay: 4.5, display: true
     SfxBegin: Weapons/Player/RocketLauncher/FLYBYMissile02Slow
     SfxNoAmmo: Weapons/DryFireFromManuallyCockedHammer
     SfxReload: Weapons/Player/Reload/RifleReloadSlow
@@ -552,20 +570,20 @@
     Class: Driller
     AllowAt: "UnderWater, Planet, Space"
     ROF: 0.5, type: float, display: false, formatter: ROF
-    Range: 6
+    Range: 5
     NoiseStrength: 10, display: false  
     CameraShake: 0    
     IgnoreAtmo: true
     Automatic: true
     Damage: 120
-    # Recoil: 0, display: true
+    # Recoil: 0.2, display: true
     Radius: 3
-    ReturnFactor: 0.555, display: true
-    # Bullet_use_per_shot: 1
+    ReturnFactor: 0.333, display: true
+    # Bullet_use_per_shot: 2
     AmmoCapacity: 250, display: true
     AmmoType: MultiCharge, display: true
     UseSingleMagazine: true
-    ReloadDelay: 2.0, display: true
+    ReloadDelay: 3.0, display: true
     ParticleTransform: Muzzle/Particle1  # particle effect shown at muzzle      
     SfxBegin: Weapons/Player/Tools/WeaponLightning_start
     SfxLoop: Weapons/Player/Tools/WeaponLightning_loop
@@ -573,7 +591,7 @@
     # SfxReload: Weapons/Player/Drill/WaltherP99MagInQuick01
     # ParticleTransform: ""     #  do NOT show a particle effect  
 	
-    DamageMultiplier_1: 0, param1: dirt|stone|wood|shield
+    DamageMultiplier_1: 0, param1: dirt|stone|wood|shield|rock
     DamageMultiplier_2: 10, param1: metalhard    # 80 damage
     DamageMultiplier_3: 5, param1: metal         # 40 damage
     DamageMultiplier_4: 10, param1: hull         # 80 damage
@@ -590,17 +608,17 @@
     Class: Repair
     AllowAt: "UnderWater, Planet, Space"
     Range: 5
-    # Recoil: 0, display: true
+    # Recoil: 0.2, display: true
     NoiseStrength: 10, display: false  
     CameraShake: 0    
     IgnoreAtmo: true
     ROF: 0.4, type: float
-    RepairPoints: 20
+    RepairPoints: 10
     Automatic: true
     AmmoCapacity: 250
     AmmoType: MultiCharge
     UseSingleMagazine: true
-    ReloadDelay: 2.0
+    ReloadDelay: 3.0
     ParticleTransform: Muzzle/Particle2  # particle effect shown at muzzle    
     SfxBegin: Weapons/Player/Tools/WeaponLightning02_start
     SfxLoop: Weapons/Player/Tools/WeaponLightning02_loop
@@ -615,7 +633,7 @@
   { Child 2 # "Exchange and Rotate"
     Class: ExchangeBlockEx
 	AllowAt: "UnderWater, Planet, Space"
-    Range: 6
+    Range: 5
     NoiseStrength: 10, display: false  
     CameraShake: 0      
 	IgnoreAtmo: true
@@ -623,7 +641,7 @@
     AmmoCapacity: 250
     AmmoType: MultiCharge
     UseSingleMagazine: true
-    ReloadDelay: 2.0
+    ReloadDelay: 3.0
     Focused_blockname_1: "Window_v1x1, Window_v1x1Inv"
     Focused_blockname_2: "Window_v1x2, Window_v1x2Inv"
     Focused_blockname_3: "Window_v2x2, Window_v2x2Inv"
@@ -731,18 +749,18 @@
     Class: Repair
 	  AllowAt: "UnderWater, Planet, Space"
     Range: 5
-    # Recoil: 0, display: true
+    # Recoil: 0.2, display: true
     NoiseStrength: 10, display: false  
     CameraShake: 0     
 	  IgnoreAtmo: true
     ROF: 0.4, type: float
-    RepairPoints: 20
-    ReturnFactor: 0.555
+    RepairPoints: 10
+    ReturnFactor: 0.333
     Automatic: true
     AmmoCapacity: 250
     AmmoType: MultiCharge
     UseSingleMagazine: true
-    ReloadDelay: 2.0
+    ReloadDelay: 3.0
     ParticleTransform: Muzzle/Particle2    # particle effect shown at muzzle  
     SfxBegin: Weapons/Player/Tools/WeaponLightning02_start
     SfxLoop: Weapons/Player/Tools/WeaponLightning02_loop
@@ -762,12 +780,12 @@
     CameraShake: 0     
 	  IgnoreAtmo: true
     ROF: 0.4, type: float
-    RepairPoints: 20
+    RepairPoints: 10
     Automatic: true
     AmmoCapacity: 250
     AmmoType: MultiCharge
     UseSingleMagazine: true
-    ReloadDelay: 2.0
+    ReloadDelay: 3.0
     ParticleTransform: Muzzle/Particle2    # particle effect shown at muzzle  
     SfxBegin: Weapons/Player/Tools/WeaponLightning02_start
     SfxLoop: Weapons/Player/Tools/WeaponLightning02_loop
@@ -784,27 +802,27 @@
     AllowAt: "UnderWater, Planet, Space"
     ROF: 0.5, type: float, display: false, formatter: ROF
     Range: 5
-    # Recoil: 0, display: true
+    # Recoil: 0.2, display: true
     NoiseStrength: 10, display: false  
     CameraShake: 0      
     IgnoreAtmo: true
     Automatic: true
     Damage: 120
-    Radius: 6
+    Radius: 3
     Demolish: True
-    ReturnFactor: 0.555 
-    # Bullet_use_per_shot: 1
+    ReturnFactor: 0.333 
+    # Bullet_use_per_shot: 2
     AmmoCapacity: 250
     AmmoType: MultiCharge
     UseSingleMagazine: true
-    ReloadDelay: 2.0
+    ReloadDelay: 3.0
     ParticleTransform: Muzzle/Particle3      # particle effect shown at muzzle  
     SfxBegin: Weapons/Player/Tools/WeaponLightning_start
     SfxLoop: Weapons/Player/Tools/WeaponLightning_loop
     SfxReload: Weapons/Player/Reload/RifleReloadNormal
     # ParticleTransform: ""     #  do NOT show a particle effect  
 	
-    DamageMultiplier_1: 0, param1: dirt|stone|wood|shield
+    DamageMultiplier_1: 0, param1: dirt|stone|wood|shield|rock|plants
     DamageMultiplier_2: 10, param1: metalhard    # 80 damage
     DamageMultiplier_3: 5, param1: metal         # 40 damage
     DamageMultiplier_4: 10, param1: hull         # 80 damage
@@ -863,7 +881,7 @@
     AllowAt: "UnderWater, Planet, Space"
     FlattenTerrain: true
     ROF: 0.5, type: float
-    Range: 7
+    Range: 5.5
     NoiseStrength: 10, display: false   
     IgnoreAtmo: true
     Automatic: true
@@ -872,8 +890,8 @@
     AmmoCapacity: 750
     AmmoType: FillerCharge
     UseSingleMagazine: true
-    Bullet_use_per_shot: 1
-    ReloadDelay: 2.0
+    Bullet_use_per_shot: 2
+    ReloadDelay: 2.9
     SfxBegin: Weapons/Player/Drill/THRUSTERFlangerShiftingBurningAirHot_start
     SfxLoop: Weapons/Player/Drill/THRUSTERFlangerShiftingBurningAirHot_loop
     #  ParticleTransform: Muzzle/Particle2   
@@ -886,7 +904,7 @@
 { Item Id: 13, Name: ChangeTool
   # Class: RotateBlock 
   Meshfile: Entities/Items/Tools/ChangeToolPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalweapon
   Canhold: false
   HoldType: 0
@@ -956,7 +974,8 @@
   # TechTreeNames: Tools
 }
 { +Item Id: 14, Name: LaserPistol
-  Meshfile: Entities/Items/Weapons/Pistols/ScifiEnergyPistol3T1Prefab
+  Meshfile: Entities/Items/Weapons/Pistols/LaserPistolPrefab
+  # Meshfile: Entities/Items/Weapons/Pistols/ScifiEnergyPistol3T1Prefab
   # Meshfile: Entities/Items/Weapons/Pistols/SciFiPistol2BluePrefab
   PickupToToolbar: true
   MarketPrice: 935, display: true
@@ -980,7 +999,7 @@
     IgnoreAtmo: true, display: true
     Automatic: true  
     BulletSpread: 0, display: true
-    Recoil: 0, display: true
+    Recoil: 0.2, display: true
     Damage: 100, display: true
     AmmoCapacity: 20, display: true
     AmmoType: PulseLaserChargePistol, display: true
@@ -1008,7 +1027,7 @@
     # Range: 400, display: false
     # AmmoCapacity: 20, display: true
     # AmmoType: PulseLaserChargePistol, display: true
-    # ReloadDelay: 2, display: true
+    # ReloadDelay: 2.2, display: true
     # SfxBegin: Weapons/Player/LaserPistol/BLASTERLargeFastKickback
     # SfxNoAmmo: Weapons/Misc/G36DryFire
     # SfxReload: Weapons/Player/Reload/PistolReloadNormal
@@ -1040,16 +1059,16 @@
     Class: Ranged
     AllowRemote: false
     ROF: 0.2, type: float, display: true, formatter: ROF
-    Range: 190, display: false
+    Range: 150, display: false
     NoiseStrength: 100, display: false 
     CameraShake: 1  
     Automatic: true, display: true 
     BulletSpread: 0.16, display: true
     Recoil: 0.6, display: true
     Damage: 70, display: true
-    AmmoCapacity: 35, display: true
+    AmmoCapacity: 20, display: true
     AmmoType: 5.8mmBullet, display: true
-    ReloadDelay: 3.0, display: true
+    ReloadDelay: 3.1, display: true
     SfxBegin: Weapons/ProjectileWeapons/Automatic/HK416_Modern_start
     SfxLoop: Weapons/ProjectileWeapons/Automatic/HK416_Modern_loop
     SfxStop: Weapons/ProjectileWeapons/Automatic/HK416_Modern_end
@@ -1104,10 +1123,10 @@
     Recoil: 0, display: true
     IgnoreAtmo: true, display: true
     Automatic: true, display: true 
-    Damage: 120, display: true
+    Damage: 110, display: true
     AmmoCapacity: 25, display: true
     AmmoType: PulseLaserChargeRifle, display: true
-    ReloadDelay: 2.0, display: true
+    ReloadDelay: 3.0, display: true
     ParticleTransform: Muzzle/Particle1
     SfxBegin: Weapons/EnergyWeapons/Automatic/BLASTERComplexFireTriggerDigitalDischarge_start
     SfxLoop: Weapons/EnergyWeapons/Automatic/BLASTERComplexFireTriggerDigitalDischarge_loop
@@ -1131,7 +1150,7 @@
     # Range: 600, display: false
     # AmmoCapacity: 25, display: true
     # AmmoType: PulseLaserChargeRifle, display: true
-    # ReloadDelay: 2.0, display: true
+    # ReloadDelay: 3.0, display: true
     # SfxBegin: Weapons/Player/LaserRifle/BLASTERComplexFireTriggerDigitalDischarge
     # SfxNoAmmo: Weapons/Misc/G36DryFire
     # SfxReload: Weapons/Player/Reload/RifleReloadNormal
@@ -1167,7 +1186,7 @@
   BlastRadius: 3, display: true
   BlastDamage: 500, display: true
   # Explosion Radius: 3, display: true 
-  Durability: 300, display: false
+  Durability: 100, display: false
   DegradationProb: 1, type: float, display: false
   SfxJammed: Weapons/Player/Reload/WeaponJammedSingleShot  
   { Child 0
@@ -1211,25 +1230,25 @@
     Class: Ranged
     AllowRemote: false
     ROF: 0.425, type: float, display: true, formatter: ROF
-    Range: 1000, display: false
-    NoiseStrength: 200, display: false    
-    CameraShake: 3 
-    Automatic: true
-    BulletSpread: 0.013, display: true
-    Recoil: 0.5, display: true
-    Damage: 400, display: true
-    AmmoCapacity: 10, display: true
+    Range: 333, display: false
+    NoiseStrength: 100, display: false    
+    CameraShake: 2 
+    Automatic: false
+    BulletSpread: 0.023, display: true
+    Recoil: 0.88, display: true
+    Damage: 300, display: true
+    AmmoCapacity: 8, display: true
     AmmoType: 12.7mmBullet, display: true
-    ReloadDelay: 3.0, display: true
+    ReloadDelay: 2.945, display: true
     SfxBegin: Weapons/Player/Sniper/Resistance-SniperRifle-02-Single_Shot-01
     SfxNoAmmo: Weapons/Misc/AK47DryFire01
     SfxReload: Weapons/Player/Reload/RifleReloadNormal
     # SfxReload: Weapons/Player/Rifle/M16ChargingHandle01_V2
     PfxMuzzle: MuzzleFlash7
     Tracer: Weapons/Projectiles/TracerOrange1
-    TracerPerBullet: 2
+    TracerPerBullet: 1
 	
-    DamageMultiplier_1: 6, param1: head, display: DmgMultiplierHead
+    DamageMultiplier_1: 5, param1: head, display: DmgMultiplierHead
     DamageMultiplier_2: 0, param1: dirt|stone|rock|wood
     DamageMultiplier_3: 0, param1: hullarmored|hullcombat
     DamageMultiplier_4: 0, param1: shield 
@@ -1273,8 +1292,8 @@
     AllowAt: "UnderWater, Planet, Space"
     ROF: 0.5, type: float
     Damage: 600
-    Radius: 4
-    Range: 9, display: false
+    Radius: 2
+    Range: 7, display: false
     NoiseStrength: 40, display: false 
     CameraShake: 0 
     IgnoreAtmo: true
@@ -1282,7 +1301,7 @@
     AmmoCapacity: 750, display: true
     AmmoType: DrillCharge, display: true
     UseSingleMagazine: true
-    ReloadDelay: 2.0, display: true
+    ReloadDelay: 2.9, display: true
     Bullet_use_per_shot: 0.25
     Particles: digger     # particle effect shown at impact
     ParticleTransform: Muzzle/Particle1  # particle effect shown at muzzle  
@@ -1317,7 +1336,7 @@
 	AllowAt: "UnderWater, Planet, Space"
     ROF: 0.5, type: float
     Damage: 35
-    Radius: 3
+    Radius: 1
     Range: 5, display: false    # lower range to match resource mining range (DrillMode: 2 seems to have lower range)
     NoiseStrength: 40, display: false 
     CameraShake: 0 
@@ -1326,7 +1345,7 @@
     AmmoCapacity: 750
     AmmoType: DrillCharge
     UseSingleMagazine: true
-    ReloadDelay: 2.0
+    ReloadDelay: 2.9
     Bullet_use_per_shot: 0.25
     Particles: digger     # particle effect shown at impact
     ParticleTransform: Muzzle/Particle2 # particle effect shown at muzzle  
@@ -1356,7 +1375,7 @@
     ROF: 0.5, type: float
     Damage: 500
     Radius: 3
-    Range: 9, display: false    # lower range to match resource mining range (DrillMode: 2 seems to have lower range)
+    Range: 5, display: false    # lower range to match resource mining range (DrillMode: 2 seems to have lower range)
     NoiseStrength: 40, display: false    
     CameraShake: 0  
     IgnoreAtmo: true
@@ -1364,8 +1383,8 @@
     AmmoCapacity: 750
     AmmoType: DrillCharge
     UseSingleMagazine: true
-    ReloadDelay: 2.0
-    Bullet_use_per_shot: 1
+    ReloadDelay: 2.9
+    Bullet_use_per_shot: 2
     Particles:                           # particle effect shown at impact
     ParticleTransform: Muzzle/Particle3  # particle effect shown at muzzle       
     PfxMuzzle: MuzzleFlashLightningLargeGreen
@@ -1429,8 +1448,8 @@
     # AmmoCapacity: 750
     # AmmoType: DrillCharge
     # UseSingleMagazine: true
-    # ReloadDelay: 2.0
-    # Bullet_use_per_shot: 1
+    # ReloadDelay: 2.9
+    # Bullet_use_per_shot: 2
     # Particles: diggerplasma_green        # particle effect shown at impact
     # ParticleTransform: Muzzle/Particle2  # particle effect shown at muzzle    
     # SfxBegin: Weapons/Player/Drill/THRUSTERFlangerShiftingBurningAirHot_start
@@ -1599,10 +1618,10 @@
     CameraShake: 0   
     IgnoreAtmo: true
     Automatic: true  
-    Damage: 90, display: true
-    AmmoCapacity: 160, display: true
+    Damage: 85, display: true
+    AmmoCapacity: 125, display: true
     AmmoType: BioFuel, display: true
-    ReloadDelay: 2.0, display: true
+    ReloadDelay: 3.8, display: true
     UseSingleMagazine: true
     #  SfxBegin: Weapons/Player/Tools/Chainsaw_start   
     SfxLoop: Weapons/Player/Tools/Chainsaw_loop
@@ -1610,9 +1629,9 @@
     SfxReload: Weapons/Player/Reload/HeavyWeaponReloadNormal
     # SfxReload: Weapons/Player/Drill/WaltherP99MagInQuick01
 	
-    DamageMultiplier_1: 0.5, param1: wood|plants     # be able to remove trees and plants
-    DamageMultiplier_2: 0.5, param1: concrete|hull|hullarmored|hullcombat|metal|metalhard
-    DamageMultiplier_3: 0.5, param1: dirt|stone|rock   
+    DamageMultiplier_1: 0.04, param1: wood|plants     # be able to remove trees and plants
+    DamageMultiplier_2: 0, param1: concrete|hull|hullarmored|hullcombat|metal|metalhard
+    DamageMultiplier_3: 0, param1: dirt|stone|rock   
     DamageMultiplier_4: 0, param1: shield 
   }
 
@@ -1678,40 +1697,40 @@
   OverrideTradingConstraints: true # even if other constraints exist allow trading this item
   Durability: 500, display: false
   DegradationProb: 0.305, type: float, display: false
-  RepairDisabled: false, display: true
+  RepairDisabled: true, display: true
   SfxJammed: Weapons/Player/Reload/WeaponJammedSingleShot  
   { Child 0
     ROF: 0.425, type: float, display: true, formatter: ROF
-    Range: 1200, display: false
-    NoiseStrength: 350, display: false 
+    Range: 400, display: false
+    NoiseStrength: 100, display: false 
     BulletSpread: 0.011, display: true
-    Recoil: 0.5, display: true
+    Recoil: 0.528, display: true
     AmmoType: 15mmBullet, display: true
-    Damage: 800, display: true
-    AmmoCapacity: 12, display: true
+    Damage: 500, display: true
+    AmmoCapacity: 13, display: true
     ReloadDelay: 5, display: true
     # AmmoType: PulseLaserChargeRifle, display: true
     # SfxBegin: Weapons/Player/Sniper/weapon_sniper_004
     SfxBegin: Weapons/Player/Sniper/Resistance-SniperRifle-01-Single_Shot-03
     # PfxMuzzle: MuzzleFlash5
 	
-    DamageMultiplier_1: 12, param1: head, display: DmgMultiplierHead
-    DamageMultiplier_2: 2, param1: dirt|stone|rock|wood 
-    DamageMultiplier_3: 1.75, param1: hullarmored|hullcombat
-    DamageMultiplier_4: 2, param1: shield 
+    DamageMultiplier_1: 8, param1: head, display: DmgMultiplierHead
+    DamageMultiplier_2: 0, param1: dirt|stone|rock|wood 
+    DamageMultiplier_3: 0.75, param1: hullarmored|hullcombat
+    DamageMultiplier_4: 0, param1: shield 
   }
   { Child 1
     Class: Zoom
     ZoomOverlay: Entities/Items/Weapons/SniperScopes/ScopeNew
-    ZoomOut: 45
+    ZoomOut: 40
     ZoomIn: 5
     RedDot: true
   }
 
   UnlockCost: 0
   UnlockLevel: 25
-  TechTreeParent: "Weapons"
-  TechTreeNames: Weapons
+  TechTreeParent: ""
+  TechTreeNames: Hidden
   # UnlockCost: 0, display: true
   # UnlockLevel: 15, display: true
   # TechTreeParent: Sniper2
@@ -1733,11 +1752,11 @@
     Range: 198, display: false
     NoiseStrength: 100, display: false  
     BulletSpread: 0.113, display: true
-    Recoil: 0.2, display: true
-    Damage: 99, display: true
+    Recoil: 0.24, display: true
+    Damage: 80, display: true
     AmmoCapacity: 560, display: true
     AmmoType: PulseLaserChargeRifle, display: true
-    ReloadDelay: 2.149, display: true
+    ReloadDelay: 3.149, display: true
     SfxBegin: Weapons/Player/Minigun/minigun2_start
     SfxLoop: Weapons/Player/Minigun/minigun2_loop
     SfxStop: Weapons/Player/Minigun/minigun2_end
@@ -1863,23 +1882,23 @@
   MarketPrice: 12500, display: true
   Info: bkiEpicWeapon, display: true
   OverrideTradingConstraints: true # even if other constraints exist allow trading this item
-  Durability: 1000, display: false
-  DegradationProb: 0.288, type: float, display: false
+  Durability: 700, display: false
+  DegradationProb: 0.488, type: float, display: false
   RepairDisabled: true, display: true
   SfxJammed: Weapons/Player/Reload/WeaponJammedSingleShot  
   { Child 0
     ROF: 0.5, type: float, display: true, formatter: ROF
     Automatic: true, display: true
-    AmmoCapacity: 10, display: true
-    Recoil: 1.1, display: true 
-    ReloadDelay: 5, display: true
+    AmmoCapacity: 3, display: true
+    Recoil: 1.44, display: true 
+    ReloadDelay: 6, display: true
   }
 
   UnlockCost: 0
   UnlockLevel: 25
   TechTreeParent: ""
-  TechTreeNames: Weapons
-  # UnlockCost: 30, display: true
+  TechTreeNames: Hidden
+  # UnlockCost: 0, display: true
   # UnlockLevel: 25, display: true
   # TechTreeParent: ScifiCannon
   # TechTreeNames: Weapons
@@ -1890,7 +1909,7 @@
   MarketPrice: 1200, display: true
   Info: bkiEpicWeapon, display: true
   OverrideTradingConstraints: true # even if other constraints exist allow trading this item
-  Durability: 1000, display: false
+  Durability: 500, display: false
   DegradationProb: 0.151, type: float, display: false
   RepairDisabled: true, display: true
   SfxJammed: Weapons/Player/Reload/WeaponJammedSingleShot  
@@ -1929,12 +1948,12 @@
 }
 { +Item Id: 31, Name: MultiToolT2, Ref: MultiTool
   Meshfile: Entities/Items/Weapons/MultiToolT2Prefab
-  MarketPrice: 10998, display: true
+  MarketPrice: 1998, display: true
   { Child 0 # "Retrieve Blocks" (= get complete blocks in own structure, do "Salvage" in others)
-    Range: 10
-	  ReturnFactor: 0.888, display: true
+    Range: 8
+	  ReturnFactor: 0.667, display: true
 	
-    DamageMultiplier_1: 0, param1: dirt|stone|wood|shield
+    DamageMultiplier_1: 0, param1: dirt|stone|wood|shield|rock
     DamageMultiplier_2: 50, param1: metalhard    # 400 damage
     DamageMultiplier_3: 25, param1: metal        # 200 damage
     DamageMultiplier_4: 65, param1: hull         # 500 damage
@@ -1944,24 +1963,24 @@
     DamageMultiplier_8: 50, param1: woodblock    # 400 damage
   }
   { Child 1 # "Repair"
-    Range: 10
-    RepairPoints: 100
+    Range: 8
+    RepairPoints: 50
   }
   { Child 2 # "Exchange and Rotate"
-    Range: 10
+    Range: 8
   }
   { Child 3 # "Downgrade"
-    Range: 10
-    ReturnFactor: 0.888
+    Range: 8
+    ReturnFactor: 0.667
   }
   { Child 4 # "Upgrade"
-    Range: 10
+    Range: 8
   }
   { Child 5 # "Salvage" (get components from a block)
-	  ReturnFactor: 0.888 
-    Range: 10
+	  ReturnFactor: 0.667 
+    Range: 8
 	
-    DamageMultiplier_1: 0, param1: dirt|stone|wood|shield
+    DamageMultiplier_1: 0, param1: dirt|stone|wood|shield|rock
     DamageMultiplier_2: 50, param1: metalhard    # 400 damage
     DamageMultiplier_3: 25, param1: metal        # 200 damage
     DamageMultiplier_4: 65, param1: hull         # 500 damage
@@ -1980,22 +1999,22 @@
 { +Item Id: 32, Name: Explosives
   MarketPrice: 340, display: true
   Meshfile: Entities/Misc/ScifiExplosiveDevice1Prefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   PickupToToolbar: true
   Material: metalitem
   Canhold: false
   HoldType: 0
-  Stacksize: 4000
+  StackSize: 2000
   Mass: 0.5, type: float, display: true, formatter: Kilogram
   Volume: 1, type: float, display: true, formatter: Liter
   Category: Weapons/Items
   Info: bkiExplosives, display: true
   { Child 0
     Class: PlaceExplosives
-    AllowRemote: true
+    AllowRemote: false
     ROF: 1, type: float
-    Range: 3
-    NoiseStrength: 150, display: false   
+    Range: 2
+    NoiseStrength: 100, display: false   
     SfxBegin: UseActions/ExplosivesAttach
 	
   }
@@ -2045,7 +2064,7 @@
   BlastRadius: 3, display: true
   BlastDamage: 500, display: true
   OverrideTradingConstraints: true # even if other constraints exist allow trading this item
-  Durability: 1000, display: false
+  Durability: 500, display: false
   DegradationProb: 0.488, type: float, display: false
   RepairDisabled: true, display: true
   SfxJammed: Weapons/Player/Reload/WeaponJammedSingleShot  
@@ -2068,7 +2087,7 @@
   
   UnlockCost: 0
   UnlockLevel: 25
-  TechTreeParent: "Weapons"
+  TechTreeParent: ""
   TechTreeNames: Hidden
   # UnlockCost: 0, display: true
   # UnlockLevel: 20, display: true
@@ -2115,7 +2134,7 @@
   # Meshfile: Entities/Items/Weapons/Rifles/ScifiRifle2BlackPrefab
   PickupToToolbar: true
   MarketPrice: 2960, display: true
-  Durability: 1000, display: false
+  Durability: 500, display: false
   DegradationProb: 0.06, type: float, display: false
   SfxJammed: Weapons/Player/Reload/WeaponJammedAutoFire
   { Child 0
@@ -2125,7 +2144,7 @@
     BulletSpread: 0.12, display: true
     Recoil: 0.48, display: true
     Damage: 81, display: true
-    AmmoCapacity: 35, display: true
+    AmmoCapacity: 28, display: true
     ReloadDelay: 2.945, display: true
     # SfxBegin: Weapons/Player/AssaultRifle/AWDS_AR_HK416_start
     # SfxLoop: Weapons/Player/AssaultRifle/AWDS_AR_HK416_loop
@@ -2162,16 +2181,16 @@
   { Child 0
     Class: Ranged
     ROF: 0.1, type: float, display: true, formatter: ROF
-    Range: 199, display: false
+    Range: 187, display: false
     BulletSpread: 0.075, display: true
-    Recoil: 0.22, display: true
+    Recoil: 0.32, display: true
     Automatic: true, display: true    
-    Damage: 82, display: true
-    AmmoCapacity: 45, display: true
+    Damage: 80, display: true
+    AmmoCapacity: 35, display: true
     AmmoType: 5.8mmBullet, display: true
-    ReloadDelay: 2.0, display: true
+    ReloadDelay: 2.945, display: true
 	
-    DamageMultiplier_1: 3.9, param1: head, display: DmgMultiplierHead  
+    DamageMultiplier_1: 3.5, param1: head, display: DmgMultiplierHead  
     DamageMultiplier_2: 0, param1: dirt|stone|rock|wood|hullarmored|hullcombat
     DamageMultiplier_3: 0, param1: shield 
   }
@@ -2192,7 +2211,7 @@
   # Meshfile: Entities/Items/Weapons/PulseRifle/PulseRifleEpicPrefab
   PickupToToolbar: true
   MarketPrice: 4650, display: true
-  Durability: 1000, display: false
+  Durability: 500, display: false
   DegradationProb: 0.061, type: float, display: false
   RepairDisabled: true, display: true
   SfxJammed: Weapons/Player/Reload/WeaponJammedAutoFire
@@ -2201,12 +2220,12 @@
   { Child 0
     Class: Ranged
     ROF: 0.1, type: float, display: true, formatter: ROF
-    ReloadDelay: 2, display: true
+    ReloadDelay: 3, display: true
     Range: 224, display: false
     BulletSpread: 0.038, display: true
     Recoil: 0.192, display: true
     Automatic: true, display: true    
-    Damage: 145, display: true
+    Damage: 140, display: true
     AmmoCapacity: 56, display: true
     AmmoType: PulseLaserChargeRifle, display: true
 	
@@ -2253,18 +2272,18 @@
     Class: Ranged
     AllowRemote: false
     ROF: 0.25, type: float
-    Range: 20, display: false
+    Range: 15, display: false
     NoiseStrength: 20, display: false  
     CameraShake: 0  
     IgnoreAtmo: true
     Automatic: true  
-    Damage: 50, display: true
+    Damage: 19, display: true
     # Recoil: 0.2, display: true
     # Stamina: -7, display: false
-    AmmoCapacity: 40, display: false           # no need to display since unlimited ammo
+    AmmoCapacity: 25, display: false           # no need to display since unlimited ammo
     AmmoType: AmmoInfinite, display: true     # no need to display since unlimited ammo
     AmmoUnlimited: true
-    ReloadDelay: 2, display: false             # no need to display since unlimited ammo
+    ReloadDelay: 3, display: false             # no need to display since unlimited ammo
     HarvestSupport: true
     UseSingleMagazine: true
     ParticleTransform: Muzzle/Particle1  
@@ -2293,17 +2312,17 @@
     AllowAt: "UnderWater, Planet, Space"
     ROF: 0.5, type: float, display: false, formatter: ROF
     Damage: 120
-    Radius: 2
-    Range: 6, display: false
+    Radius: 1.75
+    Range: 5, display: false
     NoiseStrength: 50, display: false  
     CameraShake: 0    
     IgnoreAtmo: true
     Automatic: true
-    AmmoCapacity: 100, display: false           # no need to display since unlimited ammo
+    AmmoCapacity: 25, display: false           # no need to display since unlimited ammo
     AmmoType: AmmoInfinite, display: true     # no need to display since unlimited ammo
     AmmoUnlimited: true
     UseSingleMagazine: true
-    ReloadDelay: 2.0, display: true
+    ReloadDelay: 3.1, display: true
     Bullet_use_per_shot: 0.25
     Particles: digger     # particle effect shown at impact
     ParticleTransform: Muzzle/Particle2  # particle effect shown at muzzle  
@@ -2334,22 +2353,22 @@
     CameraShake: 0 
     IgnoreAtmo: true
     Automatic: true
-    Damage: 25
+    Damage: 17
     # Stamina: -7
-    Radius: 4
+    Radius: 3
     Demolish: True
     ReturnFactor: 0.333, display: true
-    AmmoCapacity: 100, display: false           # no need to display since unlimited ammo
+    AmmoCapacity: 25, display: false           # no need to display since unlimited ammo
     AmmoType: AmmoInfinite, display: true      # no need to display since unlimited ammo
     AmmoUnlimited: true
-    ReloadDelay: 2, display: false             # no need to display since unlimited ammo
+    ReloadDelay: 3, display: false             # no need to display since unlimited ammo
     ParticleTransform: Muzzle/Particle3      # particle effect shown at muzzle  
     SfxBegin: Weapons/Player/Tools/WeaponLightning_start
     SfxLoop: Weapons/Player/Tools/WeaponLightning_loop
     SfxReload: Weapons/Player/Reload/RifleReloadNormal
     # ParticleTransform: ""     #  do NOT show a particle effect  
 	
-    DamageMultiplier_1: 0, param1: dirt|stone|wood|shield
+    DamageMultiplier_1: 0, param1: dirt|stone|wood|shield    # no wood/plant harvesting
     DamageMultiplier_2: 10, param1: metalhard    # 20/3 damage
     DamageMultiplier_3: 5, param1: metal         # 10/3 damage
     DamageMultiplier_4: 10, param1: hull         # 20/3 damage
@@ -2402,7 +2421,7 @@
     Class: TextureColorBlock
     AllowAt: "UnderWater, Planet, Space"
     ROF: 0.1, type: float
-    Range: 50, display: false
+    Range: 30, display: false
     CameraShake: 0 
     IgnoreAtmo: true
     Automatic: true
@@ -2489,8 +2508,8 @@
   BlastRadius: 3, display: true
   BlastDamage: 500, display: true
   # Explosion Radius: 3, display: true 
-  Durability: 777, display: false
-  DegradationProb: 0.4, type: float, display: false
+  Durability: 350, display: false
+  DegradationProb: 1, type: float, display: false
   SfxJammed: Weapons/Player/Reload/WeaponJammedSingleShot  
   { Child 0
     Class: LauncherSS
@@ -2501,9 +2520,9 @@
     CameraShake: 1 
     Recoil: 0, display: true
     IgnoreAtmo: true, display: true
-    AmmoCapacity: 10, display: true
+    AmmoCapacity: 5, display: true
     AmmoType: PlasmaCannonAlienCharge, display: true
-    ReloadDelay: 2, display: true
+    ReloadDelay: 3, display: true
     SfxBegin: Weapons/SS/RocketAlienSS/BLASTERComplexFireTriggerPowerfulRelease
     SfxNoAmmo: Weapons/DryFireFromManuallyCockedHammer
     SfxReload: Weapons/Player/Reload/HeavyWeaponReloadNormal
@@ -2539,13 +2558,13 @@
     Buff: "Fire"
     Buff_chance: 1
     Automatic: true
-    Damage: 90
-    Radius: 5
+    Damage: 70
+    Radius: 3
     AmmoCapacity: 750, display: true
     AmmoType: BioFuel, display: true
     UseSingleMagazine: true
     ReloadDelay: 0.0, display: true
-    Bullet_use_per_shot: 0.20
+    Bullet_use_per_shot: 0.25
     ForceMuzzleAiming: false
     # Particles: diggerplasma              # particle effect shown at impact
     PfxMuzzle: land_predator_fire_breath
@@ -2584,11 +2603,11 @@
     ROF: 0, type: float
     Range: 30, display: true
     IgnoreAtmo: true     # Ground NPC must ignore atmo - otherwise no particle is visible
-    Damage: 90, display: true
+    Damage: 35, display: true
     AmmoCapacity: 250, display: true
     AmmoUnlimited: true
     AmmoType: OtyughFireBall, display: true
-    ReloadDelay: 3.3, display: true
+    ReloadDelay: 6.3, display: true
     SfxBegin: Enemies/Otyugh/Otyugh_SfxAttack_a2
 	# MaxFireAngle: 15 #we need bigger angle, as the bug firing angle is not perfectly aligned with look angle
   }
@@ -2706,14 +2725,14 @@
 { +Item Id: 51, Name: SlowRocket
   Meshfile: Entities/Items/Weapons/Projectiles/rocket01HandheldPrefab
   #  Meshfile: Entities/Items/Weapons/Projectiles/rocket01Prefab 
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalweapon
   HoldType: 0
   MarketPrice: 18, display: true
   Canhold: false
   Info: bkiAmmoExplosive, display: true
   Category: Weapons/Items
-  Stacksize: 4000
+  StackSize: 2000
   Mass: 0.9, type: float, display: true, formatter: Kilogram
   Volume: 0.45, type: float, display: true, formatter: Liter
   { Child 0
@@ -2740,7 +2759,7 @@
 }
 { +Item Id: 52, Name: 50Caliber
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalweapon
   HoldType: 0 
   MarketPrice: 1, display: true
@@ -2779,7 +2798,7 @@
   Volume: 0.1, type: float, display: true, formatter: Liter 
 }
 { +Item Id: 57, Name: DrillCharge, Ref: 50Caliber
-  Stacksize: 4000
+  StackSize: 2000
   MarketPrice: 7, display: true
   Mass: 1.05, type: float, display: true, formatter: Kilogram
   Volume: 0.75, type: float, display: true, formatter: Liter
@@ -2809,14 +2828,14 @@
   Volume: 0.06, type: float, display: true, formatter: Liter
 }
 { +Item Id: 62, Name: MultiCharge, Ref: 50Caliber
-  Stacksize: 4000
+  StackSize: 2000
   MarketPrice: 11, display: true
   Mass: 1.05, type: float, display: true, formatter: Kilogram
   Volume: 0.6, type: float, display: true, formatter: Liter
   Info: bkiAmmoFullLoad, display: true
 }
 { +Item Id: 63, Name: BioFuel, Ref: 50Caliber
-  StackSize: 4000
+  StackSize: 2000
   Info: bkiBioFuel, display: true
   AutoFill: false
   MarketPrice: 3.5, display: true
@@ -2828,14 +2847,14 @@
 
 { +Item Id: 64, Name: SciFiCannonPlasmaCharge
   Meshfile: Entities/Items/Weapons/Projectiles/PlasmaProjectilePrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalweapon
   MarketPrice: 15, display: true
   HoldType: 0
   Canhold: false
   Info: bkiAmmoHoming, display: true
   Category: Weapons/Items
-  Stacksize: 4000
+  StackSize: 2000
   Mass: 4, type: float, display: true, formatter: Kilogram
   Volume: 0.5, type: float, display: true, formatter: Liter
   { Child 0
@@ -2863,7 +2882,7 @@
 }
 { +Item Id: 65, Name: SlowRocketHoming, Ref: SlowRocket
   Info: bkiAmmoExplosive, display: true
-  Stacksize: 4000
+  StackSize: 2000
   MarketPrice: 32, display: true
   Mass: 1.6, type: float, display: true, formatter: Kilogram
   Volume: 1, type: float, display: true, formatter: Liter
@@ -2884,7 +2903,7 @@
 }
 { +Item Id: 66, Name: PlasmaCannonAlienCharge
   Meshfile: Entities/Items/Weapons/Projectiles/AlienRocketRedPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   CustomIcon: EnergyCellHydrogen
   MarketPrice: 20, display: true
   Material: metalweapon
@@ -2892,7 +2911,7 @@
   Canhold: false
   Info: bkiPlasmaCannonAlienCharge, display: true
   Category: Weapons/Items
-  Stacksize: 4000
+  StackSize: 2000
   Mass: 4, type: float, display: true, formatter: Kilogram
   Volume: 0.5, type: float, display: true, formatter: Liter
   { Child 0
@@ -2921,14 +2940,14 @@
 }
 { +Item Id: 67, Name: FlameThrowerCanister
   Meshfile: Entities/Items/Weapons/Projectiles/FlameThrowerProjectilePrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab 
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab 
   Material: metalweapon
   MarketPrice: 6, display: true
   HoldType: 0
   Canhold: false
   Info: bkiFlameThrowerCanister, display: true
   Category: Weapons/Items
-  Stacksize: 4000
+  StackSize: 2000
   Mass: 4, type: float, display: true, formatter: Kilogram
   Volume: 0.5, type: float, display: true, formatter: Liter
   { Child 0
@@ -3051,7 +3070,7 @@
 
 { Item Id: 78, Name: AmmoInfinite       # Dummy ammo needed for weapons that have unlimited ammo (eg DrillAttachmentWeapon)
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalweapon
   HoldType: 0
   Canhold: false
@@ -3090,7 +3109,7 @@
 ## Please do not rename - referenced in code
 { +Item Id: 80, Name: OxygenBottleLarge
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalweapon
   MarketPrice: 37, display: true
   Canhold: false
@@ -3104,13 +3123,13 @@
 ## Please do not rename - referenced in code
 { +Item Id: 81, Name: OxygenBottleSmall
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   MarketPrice: 5, display: true
   Material: metalweapon
   Canhold: false
   AutoFill: false
   HoldType: 0
-  Stacksize: 4000
+  StackSize: 2000
   Mass: 1, type: float, display: true, formatter: Kilogram
   Volume: 1.5, type: float, display: true, formatter: Liter
   O2Value: 75, display: false, type: int 
@@ -3128,7 +3147,7 @@
 }
 { Item Id: 82, Name: TestDecOxygen
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalweapon
   Canhold: false
   HoldType: 0
@@ -3146,7 +3165,7 @@
 }
 { Item Id: 83, Name: TestDecFood
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalweapon
   Canhold: false
   HoldType: 0
@@ -3164,7 +3183,7 @@
 }
 { Item Id: 84, Name: TestDecHealth
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalweapon
   Canhold: false
   HoldType: 0
@@ -3183,7 +3202,7 @@
 
 { Item Id: 85, Name: SpawnNewBase
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   AllowPlacingAt: Base, display: true
   MarketPrice: 320, display: true
   Material: metal
@@ -3205,7 +3224,7 @@
 }
 { Item Id: 86, Name: SpawnNewSV
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   AllowPlacingAt: SS, display: true
   MarketPrice: 150, display: true
   Material: metal
@@ -3228,7 +3247,7 @@
 }
 { Item Id: 87, Name: SpawnNewCV
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   AllowPlacingAt: MS, display: true
   MarketPrice: 355, display: true
   Material: metal
@@ -3252,7 +3271,7 @@
 }
 { Item Id: 88, Name: SpawnNewGV
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   AllowPlacingAt: GV, display: true
   Material: metal
   MarketPrice: 125, display: true
@@ -3277,7 +3296,7 @@
 
 { Item Id: 89, Name: SpawnNewPrefab
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metal
   HoldType: 0
   StackSize: 1
@@ -3295,12 +3314,12 @@
 
 { +Item Id: 90, Name: RespiratorCharge
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalweapon
   Canhold: false
   AutoFill: false
   HoldType: 0
-  Stacksize: 4000
+  StackSize: 2000
   Mass: 0.5, type: float, display: true, formatter: Kilogram
   Volume: 0.5, type: float, display: true, formatter: Liter
   O2Value: 35, display: false, type: int
@@ -3319,7 +3338,7 @@
 }
 { +Item Id: 91, Name: SpawnNewBaseM
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   AllowPlacingAt: Base, display: true
   Material: metal
   HoldType: 0
@@ -3342,7 +3361,7 @@
 }
 { +Item Id: 92, Name: SpawnNewBaseS
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   AllowPlacingAt: Base, display: true
   Material: metal
   HoldType: 0
@@ -3365,7 +3384,7 @@
 }
 { +Item Id: 93, Name: SpawnNewCVM
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   AllowPlacingAt: MS, display: true
   Material: metal
   HoldType: 0
@@ -3390,7 +3409,7 @@
 }
 { +Item Id: 94, Name: SpawnNewCVS
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   AllowPlacingAt: MS, display: true
   Material: metal
   HoldType: 0
@@ -3418,7 +3437,7 @@
 #  CATEGORIE: WEAPONS FOR SS MS id 100-199  
 { +Item Id: 100, Name: MinigunSSWeapon
   Meshfile: @models/Blocks/WeaponsShip/WeaponSSMinigunPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -3457,7 +3476,7 @@
 }
 { +Item Id: 101, Name: PlasmaCannonSSWeapon
   Meshfile: @models/Blocks/WeaponsShip/WeaponSSPlasmaPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS 
   Canhold: false
   Material: metalweapon
@@ -3487,7 +3506,7 @@
 #  Pulse Laser for SS  
 { +Item Id: 102, Name: PulseLaserSSWeapon
   Meshfile: @models/Blocks/WeaponsShip/WeaponSSLaserPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -3537,7 +3556,7 @@
 }
 { +Item Id: 103, Name: TurretMSArtilleryWeapon
   Meshfile: @models/Blocks/Turrets/TurretMSArtilleryPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -3566,7 +3585,7 @@
 #  For planetary POIs  
 { +Item Id: 104, Name: TurretIONCannonWeapon
   Meshfile: @models/Blocks/Turrets/TurretsEnemy/turretIONcannonPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -3592,7 +3611,7 @@
 }
 { +Item Id: 105, Name: TurretBaseFlakWeapon
   Meshfile: @models/Blocks/Turrets/ModularTurret1/SingleFlakTurretBluePrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -3621,7 +3640,7 @@
 }
 { +Item Id: 106, Name: TurretBaseRocketWeapon
   Meshfile: @models/Blocks/Turrets/ModularTurret1/SingleMissileTurretBluePrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -3652,7 +3671,7 @@
 #  alternative sound: sound_start=Weapons/Planet/TurretPS01/Cannon_2  
 { +Item Id: 107, Name: RocketLauncherSSWeapon
   Meshfile: @models/Blocks/WeaponsShip/WeaponSSMissilePrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -3680,7 +3699,7 @@
 }
 { +Item Id: 108, Name: RailgunSSWeapon
   Meshfile: @models/Blocks/WeaponsShip/WeaponSSGaussPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -3709,7 +3728,7 @@
 }
 { +Item Id: 109, Name: TurretMSMinigunWeapon
   Meshfile: @models/Blocks/Turrets/TurretMSMinigunPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -3750,7 +3769,7 @@
 }
 { +Item Id: 110, Name: RocketLauncherMSWeapon
   Meshfile: @models/Blocks/WeaponsShip/WeaponMSArtilleryPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -3780,7 +3799,7 @@
 }
 { +Item Id: 111, Name: TurretEnemyLaserWeapon
   Model: Entities/Blocks/Turrets/TurretsEnemy/TurretEnemyLaserPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -3807,7 +3826,7 @@
 }
 { +Item Id: 112, Name: PulseLaserMSWeapon
   Meshfile: @models/Blocks/WeaponsShip/WeaponMSPlasmaPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -3863,7 +3882,7 @@
 #  For space POIs  
 { +Item Id: 113, Name: TurretIONCannon2Weapon
   Meshfile: @models/Blocks/Turrets/TurretsEnemy/turretIONcannon2Prefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -3890,7 +3909,7 @@
 }
 { +Item Id: 114, Name: TurretGVMinigunWeapon
   Meshfile: @models/Blocks/Turrets/RealisticTurret/TurretGVMinigunPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -3930,7 +3949,7 @@
 }
 { +Item Id: 115, Name: TurretGVRocketWeapon
   Meshfile: @models/Blocks/Turrets/RealisticTurret/TurretGVRocketPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -3957,7 +3976,7 @@
 }
 { +Item Id: 116, Name: TurretGVPlasmaWeapon
   Meshfile: @models/Blocks/Turrets/RealisticTurret/TurretGVPlasmaPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -3985,7 +4004,7 @@
 }
 { +Item Id: 117, Name: TurretBaseCannonWeapon
   Meshfile: @models/Blocks/Turrets/ModularTurret1/SinglePlasmaTurretBluePrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -4024,7 +4043,7 @@
 }
 { +Item Id: 118, Name: TurretMSPlasmaWeapon
   Meshfile: @models/Blocks/Turrets/TurretMSPlasmaPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -4053,7 +4072,7 @@
 }
 { +Item Id: 119, Name: TurretBasePlasmaWeapon
   Meshfile: @models/Blocks/Turrets/RealisticTurret/TurretGVPlasmaPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -4082,7 +4101,7 @@
 }
 { +Item Id: 120, Name: TurretGVArtilleryWeapon
   Meshfile: @models/Blocks/Turrets/TurretMSArtilleryPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -4109,7 +4128,7 @@
 }
 { +Item Id: 121, Name: SawAttachmentWeapon
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -4148,7 +4167,7 @@
 }
 { +Item Id: 122, Name: TurretMSCannonWeapon
   Meshfile: @models/Blocks/Turrets/ModularTurret1/SinglePlasmaTurretBluePrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -4187,7 +4206,7 @@
 }
 { +Item Id: 123, Name: TurretMSPulseLaserWeapon
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -4218,7 +4237,7 @@
 }
 { +Item Id: 124, Name: TurretBasePulseLaserWeapon
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -4249,7 +4268,7 @@
 }
 { +Item Id: 125, Name: TurretMSFlakWeapon
   Meshfile: @models/Blocks/Turrets/ModularTurret1/SingleFlakTurretBluePrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -4278,7 +4297,7 @@
 }
 { +Item Id: 126, Name: TurretMSRocketWeapon
   Meshfile: @models/Blocks/Turrets/ModularTurret1/SingleMissileTurretBluePrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -4308,7 +4327,7 @@
 }
 { +Item Id: 127, Name: TurretBaseMinigunWeapon
   Meshfile: @models/Blocks/Turrets/TurretMSMinigunPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -4349,7 +4368,7 @@
 }
 { +Item Id: 128, Name: TurretBaseArtilleryWeapon
   Meshfile: @models/Blocks/Turrets/TurretMSArtilleryPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -4378,7 +4397,7 @@
 #  alternative sound: sound_start=Weapons/Planet/TurretPS01/Cannon_2  
 { +Item Id: 129, Name: RocketLauncherSSHomingWeapon
   Meshfile: @models/Blocks/WeaponsShip/WeaponSSMissileHomingPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -4407,7 +4426,7 @@
 
 { +Item Id: 130, Name: DrillAttachmentWeapon
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWSButCSV   # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -4496,7 +4515,7 @@
 }
 { +Item Id: 131, Name: TurretGVDrillWeapon
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -4590,7 +4609,7 @@
 
 { +Item Id: 132, Name: TurretMSDrillWeapon
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -4676,7 +4695,7 @@
 }
 { +Item Id: 134, Name: TurretGVToolWeapon
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -4785,7 +4804,7 @@
 }
 { +Item Id: 135, Name: TurretMSToolWeapon
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -4897,7 +4916,7 @@
 
 { +Item Id: 136, Name: TurretEnemyRocketWeapon
   Meshfile: @models/Blocks/Turrets/ModularTurret1/SingleMissileTurretBluePrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -4923,7 +4942,7 @@
 }
 { +Item Id: 137, Name: TurretEnemyArtilleryWeapon
   Meshfile: @models/Blocks/Turrets/TurretMSArtilleryPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -4950,7 +4969,7 @@
 }
 { +Item Id: 138, Name: DrillAttachmentCVWeapon
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: No
   Canhold: false
   Material: metalweapon
@@ -4994,7 +5013,7 @@
 }
 { +Item Id: 139, Name: TurretEnemyBallistaWeapon
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -5019,7 +5038,7 @@
 }
 { +Item Id: 140, Name: TurretEnemyEMPWeapon
   Model: Entities/Blocks/Turrets/TurretsEnemy/TurretEnemyLaserPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -5046,7 +5065,7 @@
 }
 { +Item Id: 141, Name: TurretEnemyLaserWeaponT2
   Model: Entities/Blocks/Turrets/TurretsEnemy/TurretEnemyLaserPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -5078,7 +5097,7 @@
 
 { +Item Id: 142, Name: TurretEnemyPlasmaWeapon
   Meshfile: @models/Blocks/Turrets/TurretMSPlasmaPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   ShowUser: NoButCSV  # reported by HWS
   Canhold: false
   Material: metalweapon
@@ -5163,11 +5182,11 @@
 
 { +Item Id: 150, Name: PlasmaCannonChargeSS
   Meshfile: Entities/Items/Weapons/Projectiles/PlasmaProjectilePrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalweapon
   AllowPlacingAt: SS, display: false
   HoldType: 0
-  Stacksize: 4000
+  StackSize: 2000
   Canhold: false
   Mass: 12, type: float, display: true, formatter: Kilogram
   Volume: 1.25, type: float, display: true, formatter: Liter
@@ -5200,12 +5219,12 @@
 }
 { +Item Id: 151, Name: RailgunBullet
   Meshfile: Entities/Items/Weapons/Projectiles/sniperBulletPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalweapon
   AllowPlacingAt: SS, display: false
   HoldType: 0
   Canhold: false
-  Stacksize: 4000
+  StackSize: 2000
   Mass: 20.6, type: float, display: true, formatter: Kilogram
   Volume: 0.9, type: float, display: true, formatter: Liter
   Info: bkiAmmoExplosive, display: true
@@ -5237,11 +5256,11 @@
 }
 { +Item Id: 152, Name: FastRocket
   Meshfile: Entities/Items/Weapons/Projectiles/rocket01Prefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalweapon
   AllowPlacingAt: SS, display: false
   HoldType: 0
-  Stacksize: 4000
+  StackSize: 2000
   Canhold: false
   Mass: 3, type: float, display: true, formatter: Kilogram
   Volume: 1.8, type: float, display: true, formatter: Liter
@@ -5275,7 +5294,7 @@
 }
 { +Item Id: 153, Name: 30mmBullet
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalweapon
   AllowPlacingAt: "Base,MS", display: false
   HoldType: 0
@@ -5293,11 +5312,11 @@
 { +Item Id: 154, Name: PulseLaserChargeSS
   MarketPrice: 6, display: true
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalweapon
   AllowPlacingAt: SS, display: false
   HoldType: 0
-  Stacksize: 4000
+  StackSize: 2000
   Canhold: false
   Mass: 1, type: float, display: true, formatter: Kilogram
   Volume: 0.75, type: float, display: true, formatter: Liter
@@ -5311,11 +5330,11 @@
 { +Item Id: 155, Name: IONCannonCharge
   Meshfile: Entities/Items/Weapons/Projectiles/AlienRocketGreenPrefab
   # Meshfile: Entities/Items/Weapons/Projectiles/alienRocketPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalweapon
   AllowPlacingAt: "Base,MS", display: false
   HoldType: 0
-  Stacksize: 4000
+  StackSize: 2000
   Canhold: false
   MarketPrice: 5, display: true
   ShowUser: No
@@ -5350,7 +5369,7 @@
 
 { +Item Id: 156, Name: LargeRocket
   Meshfile: Entities/Items/Weapons/Projectiles/RocketLargePrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalweapon
   AllowPlacingAt: Base, display: false
   HoldType: 0
@@ -5389,11 +5408,11 @@
 { +Item Id: 157, Name: PulseLaserChargeMS
   Meshfile: Entities/Items/Weapons/Projectiles/LaserShotBlueTurret
   #  Meshfile: Entities/Items/Weapons/Projectiles/LaserShot02   
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalweapon
   AllowPlacingAt: MS, display: false
   HoldType: 0
-  Stacksize: 4000
+  StackSize: 2000
   Canhold: false
   Mass: 15, type: float, display: true, formatter: Kilogram
   Volume: 5, type: float, display: true, formatter: Liter
@@ -5425,11 +5444,11 @@
 }
 { +Item Id: 158, Name: FastRocketMS
   Meshfile: Entities/Items/Weapons/Projectiles/rocket01Prefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalweapon
   AllowPlacingAt: MS, display: false
   HoldType: 0
-  Stacksize: 4000
+  StackSize: 2000
   Canhold: false
   Mass: 49, type: float, display: true, formatter: Kilogram
   Volume: 32, type: float, display: true, formatter: Liter
@@ -5465,7 +5484,7 @@
 { +Item Id: 159, Name: IONCannonCharge2
   Meshfile: Entities/Items/Weapons/Projectiles/AlienRocketRedPrefab
   # Meshfile: Entities/Items/Weapons/Projectiles/alienRocket2Prefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalweapon
   AllowPlacingAt: "Base,MS", display: false
   HoldType: 0
@@ -5504,11 +5523,11 @@
 
 { +Item Id: 160, Name: TurretGVPlasmaCharge
   Meshfile: Entities/Items/Weapons/Projectiles/PlasmaProjectilePrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalweapon
   AllowPlacingAt: GV, display: false
   HoldType: 0
-  Stacksize: 4000
+  StackSize: 2000
   Canhold: false
   Mass: 2, type: float, display: true, formatter: Kilogram
   Volume: 0.9, type: float, display: true, formatter: Liter
@@ -5542,11 +5561,11 @@
 
 { +Item Id: 161, Name: FlakRocket
   Meshfile: Entities/Items/Weapons/Projectiles/rocket01Prefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalweapon
   AllowPlacingAt: Base, display: false
   HoldType: 0
-  Stacksize: 4000
+  StackSize: 2000
   Canhold: false
   Mass: 10.1, type: float, display: true, formatter: Kilogram
   Volume: 6, type: float, display: true, formatter: Liter
@@ -5581,11 +5600,11 @@
 
 { +Item Id: 162, Name: TurretMSPlasmaCharge
   Meshfile: Entities/Items/Weapons/Projectiles/PlasmaProjectilePrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalweapon
   AllowPlacingAt: MS, display: false
   HoldType: 0
-  Stacksize: 4000
+  StackSize: 2000
   Canhold: false
   Mass: 50, type: float, display: true, formatter: Kilogram
   Volume: 20, type: float, display: true, formatter: Liter
@@ -5618,11 +5637,11 @@
 }
 { +Item Id: 163, Name: ArtilleryRocket
   Meshfile: Entities/Items/Weapons/Projectiles/rocket01Prefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalweapon
   AllowPlacingAt: GV, display: false
   HoldType: 0
-  Stacksize: 4000
+  StackSize: 2000
   Canhold: false
   Mass: 47, type: float, display: true, formatter: Kilogram
   Info: bkiAmmoExplosive, display: true
@@ -5656,7 +5675,7 @@
 
 { +Item Id: 164, Name: TurretEnemyLaserCharge
   Meshfile: Entities/Items/Weapons/Projectiles/LaserShotRedAlien
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalweapon
   AllowPlacingAt: "Base,MS", display: false
   HoldType: 0
@@ -5844,11 +5863,11 @@
 }
 { +Item Id: 171, Name: PulseLaserChargeMSWeapon
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalweapon
   AllowPlacingAt: MS, display: false
   HoldType: 0
-  Stacksize: 4000
+  StackSize: 2000
   Canhold: false
   Mass: 10, type: float, display: true, formatter: Kilogram
   Volume: 5, type: float, display: true, formatter: Liter
@@ -5932,12 +5951,12 @@
 }
 { +Item Id: 175, Name: BallistaBolt
   Meshfile: Entities/Items/Weapons/Projectiles/BallistaBoltPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalweapon
   AllowPlacingAt: Base, display: false
   MarketPrice: 1, display: true
   HoldType: 0
-  Stacksize: 4000
+  StackSize: 2000
   Canhold: false
   ShowUser: No
   Mass: 1, type: float, display: true, formatter: Kilogram
@@ -6008,7 +6027,7 @@
 }
 { +Item Id: 177, Name: TurretEnemyEMPCharge
   Meshfile: Entities/Items/Weapons/Projectiles/LaserShotYellowAlien
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalweapon
   AllowPlacingAt: "Base,MS", display: false
   HoldType: 0
@@ -6046,8 +6065,9 @@
   TechTreeNames: Hidden
 }
 { +Item Id: 178, Name: TurretEnemyLaserChargeT2
+  Info: bkiTurretAntiProtonFactionAmmo, display: true
   Meshfile: Entities/Items/Weapons/Projectiles/AlienRocketGreenPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalweapon
   AllowPlacingAt: "Base,MS", display: false
   HoldType: 0
@@ -6057,7 +6077,6 @@
   ShowUser: No
   Mass: 1, type: float, display: true, formatter: Kilogram
   Volume: 1.5, type: float, display: true, formatter: Liter
-  Info: bkiAmmoExplosive, display: true
   Category: Weapons/Items
   { Child 0
     Class: Projectile
@@ -6088,7 +6107,7 @@
 # TEMPLATES
 { +Item Id: 197, Name: FoodTemplate
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: plants
   Mass: 0.1, type: float, display: true, formatter: Kilogram
   Volume: 0.5, type: float, display: true, formatter: Liter
@@ -6113,7 +6132,7 @@
 }
 { +Item Id: 199, Name: ComponentsTemplate
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalitem
   Canhold: false
   HoldType: 0
@@ -6739,6 +6758,46 @@
   ShowUser: Yes
 }
 
+{ +Item Id: 286, Name: DetectorHVEpicUpgradeKit, Ref: ComponentsTemplate
+  CustomIcon: KeyCardRed
+  DropOnDeath: false
+  Info: bkiDetectorHVEpicUpgradeKit, display: true
+  Mass: 15, type: float, display: true, formatter: Kilogram
+  Volume: 3, type: float, display: true, formatter: Liter
+  #MarketPrice: 59206, display: true
+  ShowUser: Yes
+}
+
+{ +Item Id: 287, Name: DetectorCVEpicUpgradeKit, Ref: ComponentsTemplate
+  CustomIcon: KeyCardRed
+  DropOnDeath: false
+  Info: bkiDetectorCVEpicUpgradeKit, display: true
+  Mass: 25, type: float, display: true, formatter: Kilogram
+  Volume: 5, type: float, display: true, formatter: Liter
+  #MarketPrice: 59206, display: true
+  ShowUser: Yes
+}
+
+{ +Item Id: 288, Name: WarpDriveCVEpicUpgradeKit, Ref: ComponentsTemplate
+  CustomIcon: KeyCardRed
+  DropOnDeath: false
+  Info: bkiWarpDriveCVEpicUpgradeKit, display: true
+  Mass: 50, type: float, display: true, formatter: Kilogram
+  Volume: 10, type: float, display: true, formatter: Liter
+  #MarketPrice: 59206, display: true
+  ShowUser: Yes
+}
+
+{ +Item Id: 289, Name: TeleporterBAEpicUpgradeKit, Ref: ComponentsTemplate
+  CustomIcon: KeyCardRed
+  DropOnDeath: false
+  Info: bkiTeleporterBAEpicUpgradeKit, display: true
+  Mass: 50, type: float, display: true, formatter: Kilogram
+  Volume: 10, type: float, display: true, formatter: Liter
+  #MarketPrice: 59206, display: true
+  ShowUser: Yes
+}
+
 #  CATEGORIE CRAFTING: FOOD PROCESSOR id 300-399 
 # delete when save game break
 { +Item Id: 300, Name: SpaceDurian, Ref: FoodTemplate
@@ -6863,47 +6922,6 @@
     Buff: "Hangover,Intoxication"
     Buff_chance: "0.4,0.2"
    # Debuff: Cold, display: EffectiveAgainst
-  }
-}
-{ +Item Id: 307, Name: Medikit02, Ref: FoodTemplate
-  Mass: 0.4, type: float, display: true, formatter: Kilogram
-  Volume: 1, type: float, display: true, formatter: Liter
-  Category: Medical
-  MarketPrice: 600, display: true
-  Info: bkiMedikit02, display: true
-  StackSize: 1000
-  ShowUser: Yes
-  { Child 0
-    Class: Eat
-    ROF: 1, type: float
-    AddHealth: 0
-    AddStamina: 0
-    AddFood: 0
-    AddOxygen: 0
-    Buff: MedikitApplied
-    Debuff: "Indigestion,PoisonFood,PoisonBit,Intoxication,FeverAttack,OrganFailure", display: EffectiveAgainst
-    SfxBegin: UseActions/exhale
-  }
-}
-{ +Item Id: 308, Name: Medikit03, Ref: FoodTemplate
-  Mass: 0.4, type: float, display: true, formatter: Kilogram
-  Volume: 1, type: float, display: true, formatter: Liter
-  MarketPrice: 570, display: true
-  Category: Medical
-  Info: bkiMedikit03, display: true
-  StackSize: 1000
-  ShowUser: Yes
-  { Child 0
-    Class: Eat
-    ROF: 1, type: float
-    AddHealth: 0
-    AddStamina: 0
-    AddFood: 0
-    AddOxygen: 0
-    AddRadiation: -7, display: RadiationValue
-    Buff: MedikitApplied
-    Debuff: "DermalParasite,EndoParasite,AlienParasite,RadiationBurn,RadiationPoisoning,RadiationSickness", display: EffectiveAgainst
-    SfxBegin: UseActions/exhale
   }
 }
 { +Item Id: 309, Name: AlienParts01, Ref: FoodTemplate
@@ -7215,27 +7233,6 @@
   }
 }
 
-{ +Item Id: 327, Name: Medikit01, Ref: FoodTemplate
-  Mass: 0.04, type: float, display: true, formatter: Kilogram
-  Volume: 1, type: float, display: true, formatter: Liter
-  Category: Medical
-  MarketPrice: 160, display: true
-  Info: bkiMedikit01, display: true  #NewRequired
-  StackSize: 1000
-  ShowUser: Yes
-  { Child 0
-    Class: Eat
-    ROF: 1, type: float
-    AddHealth: 0
-    AddStamina: 0
-    AddFood: 0
-    AddOxygen: 0
-    Buff: MedikitApplied
-    Debuff: "DermalBurn,Frostbite,Necrosis,OpenWound,InfectedWound,Sepsis,BrokenLeg,FractureClosed,FractureOpen,Mutilation", display: EffectiveAgainst
-    SfxBegin: UseActions/exhale
-  }
-}
-
 { +Item Id: 328, Name: Cheese, Ref: FoodTemplate
   Mass: 0.95, type: float, display: true, formatter: Kilogram
   Volume: 0.85, type: float, display: true, formatter: Liter
@@ -7253,27 +7250,6 @@
     AddFood: 36, display: FoodValue
     AddOxygen: 0
     SfxBegin: UseActions/playerEatingSoft
-  }
-}
-
-{ +Item Id: 329, Name: Medikit04, Ref: FoodTemplate
-  Mass: 0.12, type: float, display: true, formatter: Kilogram
-  Volume: 0.11, type: float, display: true, formatter: Liter
-  Category: Medical
-  MarketPrice: 340, display: true
-  Info: bkiMedikit01, display: true  #NewRequired
-  StackSize: 1000
-  ShowUser: Yes
-  { Child 0
-    Class: Eat
-    ROF: 1, type: float
-    AddHealth: 0
-    AddStamina: 0
-    AddFood: 0
-    AddOxygen: 0
-    Buff: MedikitApplied
-    Debuff: "OpenWound", display: EffectiveAgainst
-    SfxBegin: UseActions/exhale
   }
 }
 { +Item Id: 330, Name: Beer, Ref: FoodTemplate
@@ -7301,7 +7277,7 @@
 { +Item Id: 332, Name: NutrientSolution, Ref: FoodTemplate
   Info: bkiIngredient, display: true
   Category: Food
-  Stacksize: 4000
+  StackSize: 2000
   MarketPrice: 101, display: true
   ShowUser: Yes
   Mass: 6, type: float, display: true, formatter: Kilogram
@@ -7310,7 +7286,7 @@
 { +Item Id: 333, Name: RottenFood, Ref: FoodTemplate
   Info: bkiIngredient, display: true
   Category: Food 
-  Stacksize: 4000
+  StackSize: 2000
   MarketPrice: 0.67, display: true
   Mass: 0.2, type: float, display: true, formatter: Kilogram
   Volume: 0.1, type: float, display: true, formatter: Liter
@@ -7327,25 +7303,7 @@
    SfxBegin: UseActions/playerEatingPain
   }
 }
-{ +Item Id: 334, Name: AntibioticPills, Ref: FoodTemplate
-  Info: bkiConsumable, display: true
-  Category: Medical
-  Stacksize: 4000
-  MarketPrice: 45, display: true
-  ShowUser: Yes
-  { Child 0
-    Class: Eat
-    ROF: 1, type: float
-    AddHealth: -10
-    AddStamina: 0
-    AddFood: -50
-    AddOxygen: 0
-    Debuff: "InfectedWound,Necrosis,OpenWound,DermalBurn,Frostbite", display: EffectiveAgainst
-    SfxBegin: UseActions/exhale
-    Buff: Indigestion
-    Buff_chance: 0.15
-  }
-}
+
 { +Item Id: 335, Name: HerbalLeaves, Ref: FoodTemplate
   Mass: 0.01, type: float, display: true, formatter: Kilogram
   Volume: 0.01, type: float, display: true, formatter: Liter
@@ -7387,30 +7345,12 @@
    SfxBegin: UseActions/playerEatingSoft
  }
 }
-{ +Item Id: 337, Name: RadiationImmunityShot, Ref: FoodTemplate
-  Info: bkiRadiationImmunity, display: true
-  MarketPrice: 90, display: true
-  Category: Medical
-  Stacksize: 4000
-  ShowUser: Yes
-  { Child 0
-    Class: Eat
-    ROF: 1, type: float
-    AddHealth: -10
-    AddStamina: 0
-    AddFood: -50
-    AddOxygen: 0
-    SfxBegin: UseActions/exhale
-    Buff: "RadiationImmunity,BadTrip"
-    Buff_chance: "1,0.2"
-  }
-}
 
 { +Item Id: 338, Name: PhoenixFernFonds, Ref: FoodTemplate
   Info: bkiIngredient, display: true
   Category: Ingredients
   MarketPrice: 2, display: true
-  Stacksize: 4000
+  StackSize: 2000
   ShowUser: Yes
 }
 
@@ -7453,14 +7393,18 @@
     SfxBegin: UseActions/playerEatingSoft
   }
 }
+
+# =========================================================================== MEDICAL CONSUMABLES =================================================================
+
 { +Item Id: 341, Name: Bandages, Ref: FoodTemplate
   Mass: 0.05, type: float, display: true, formatter: Kilogram
   Volume: 0.32, type: float, display: true, formatter: Liter
   Category: Medical
   MarketPrice: 10, display: true
   Info: bkiBandages, display: true
-  Stacksize: 4000
+  StackSize: 2000
   ShowUser: Yes
+  BuffMod: "FractureClosed, -0.3, -0.8, true; FractureOpen, -0.4, -0.6, true"
   { Child 0
     Class: Eat
     ROF: 10, type: float
@@ -7468,10 +7412,407 @@
     AddStamina: 0
     AddFood: 0
     AddOxygen: 0
-    Debuff: "OpenWound,BrokenLeg,FractureClosed,FractureOpen", display: EffectiveAgainst
+    Debuff: "OpenWound,DermalBurn", display: EffectiveAgainst
     SfxBegin: UseActions/exhale
   }
 }
+
+{ +Item Id: 382, Name: StomachPills, Ref: FoodTemplate
+  Mass: 0.01, type: float, display: true, formatter: Kilogram
+  Volume: 0.01, type: float, display: true, formatter: Liter
+  Info: bkiConsumable, display: true
+  MarketPrice: 12, display: true
+  Category: Medical
+  StackSize: 2000
+  ShowUser: Yes
+  BuffMod: "PoisonFood, -0.7, 0, true; Frostbite, 0.2, -0.7, false; Necrosis, 0, -0.85, false; OrganFailure, 0, -0.4; FeverAttack, 0.3, -0.4, false"
+  { Child 0
+    Class: Eat
+    ROF: 1, type: float
+    AddHealth: 0
+    AddStamina: 0
+    AddFood: 0
+    AddOxygen: 0
+    Debuff: "Hangover,Indigestion", display: EffectiveAgainst
+    SfxBegin: UseActions/playerSwallow
+  }
+}
+
+{ +Item Id: 327, Name: Medikit01, Ref: FoodTemplate         #TraumaKit
+  Mass: 0.04, type: float, display: true, formatter: Kilogram
+  Volume: 1, type: float, display: true, formatter: Liter
+  Category: Medical
+  MarketPrice: 160, display: true
+  Info: bkiMedikit01, display: true  #NewRequired
+  StackSize: 1000
+  ShowUser: Yes
+  { Child 0
+    Class: Eat
+    ROF: 1, type: float
+    AddHealth: 0
+    AddStamina: 0
+    AddFood: 0
+    AddOxygen: 0
+    Buff: MedikitApplied
+    Debuff: "DermalBurn,OpenWound,BrokenLeg,FractureClosed,FractureOpen,Mutilation,Hangover,BadTrip,FeverAttack,Frostbite,Necrosis,PoisonFood,OrganFailure", display: EffectiveAgainst
+    SfxBegin: UseActions/exhale
+  }
+}
+
+{ +Item Id: 334, Name: AntibioticPills, Ref: FoodTemplate
+  Info: bkiConsumable, display: true
+  Category: Medical
+  StackSize: 2000
+  MarketPrice: 45, display: true
+  ShowUser: Yes
+  BuffMod: "InfectedWound, -0.2, -0.4, true; Sepsis, -0.1, -0.25;EndoParasite2, 0.5, 0, false"
+  { Child 0
+    Class: Eat
+    ROF: 1, type: float
+    AddHealth: -10
+    AddStamina: 0
+    AddFood: -50
+    AddOxygen: 0
+    Debuff: "DermalParasite,EndoParasite", display: EffectiveAgainst
+    SfxBegin: UseActions/exhale
+    Buff: Indigestion
+    Buff_chance: 0.15
+  }
+}
+
+{ +Item Id: 345, Name: AntibioticInjection, Ref: FoodTemplate
+  Info: bkiConsumable, display: true
+  Category: Medical
+  StackSize: 2000
+  MarketPrice: 90, display: true
+  ShowUser: Yes
+  BuffMod: "Sepsis, -0.15, -0.4; EndoParasite3, -0.6, -0.2, false"
+  { Child 0
+    Class: Eat
+    ROF: 1, type: float
+    AddHealth: 0
+    AddStamina: 0
+    AddFood: 0
+    AddOxygen: 0
+    Debuff: "DermalParasite,EndoParasite,EndoParasite2,InfectedWound", display: EffectiveAgainst
+    Buff: Indigestion
+    Buff_chance: 0.10
+    SfxBegin: UseActions/exhale
+  }
+}
+
+{ +Item Id: 389, Name: AntiToxicPills, Ref: FoodTemplate
+  Info: bkiConsumable, display: true
+  Category: Medical
+  MarketPrice: 60, display: true
+  StackSize: 2000
+  ShowUser: Yes
+  BuffMod: "PoisonBit2, 0.6, -0.9, false;Intoxication, 1, -0.4, true"
+  { Child 0
+    Class: Eat
+    ROF: 1, type: float
+    AddHealth: -10
+    AddStamina: 0
+    AddFood: -50
+    AddOxygen: 0
+    Debuff: "PoisonBit,BadTrip", display: EffectiveAgainst
+    SfxBegin: UseActions/exhale
+  }
+}
+
+{ +Item Id: 391, Name: AntiToxicInjection, Ref: FoodTemplate
+  Info: bkiConsumable, display: true
+  Category: Medical
+  MarketPrice: 120, display: true
+  StackSize: 2000
+  ShowUser: Yes
+  { Child 0
+    Class: Eat
+    ROF: 1, type: float
+    AddHealth: 0
+    AddStamina: 0
+    AddFood: 0
+    AddOxygen: 0
+    Debuff: "Intoxication,BadTrip,PoisonBit,PoisonBit2", display: EffectiveAgainst
+    SfxBegin: UseActions/exhale
+  }
+}
+
+{ +Item Id: 307, Name: Medikit02, Ref: FoodTemplate         #DetoxKit
+  Mass: 0.4, type: float, display: true, formatter: Kilogram
+  Volume: 1, type: float, display: true, formatter: Liter
+  Category: Medical
+  MarketPrice: 600, display: true
+  Info: bkiMedikit02, display: true
+  StackSize: 1000
+  ShowUser: Yes
+  { Child 0
+    Class: Eat
+    ROF: 1, type: float
+    AddHealth: 0
+    AddStamina: 0
+    AddFood: 0
+    AddOxygen: 0
+    Buff: MedikitApplied
+    Debuff: "Intoxication,Indigestion,PoisonBit,PoisonBit2,DermalParasite,EndoParasite,EndoParasite2,EndoParasite3,InfectedWound,Sepsis,AlienParasite", display: EffectiveAgainst
+    SfxBegin: UseActions/exhale
+  }
+}
+
+{ +Item Id: 368, Name: RadiationPills, Ref: FoodTemplate
+  Mass: 0.01, type: float, display: true, formatter: Kilogram
+  Volume: 0.01, type: float, display: true, formatter: Liter
+  Info: bkiConsumable, display: true
+  MarketPrice: 75, display: true
+  Category: Medical
+  StackSize: 4000
+  ShowUser: Yes
+  { Child 0
+    Class: Eat
+    ROF: 1, type: float
+    AddHealth: -50, display: HealthValue
+    AddStamina: 0, display: StaminaValue
+    AddFood: -50, display: FoodValue
+    AddOxygen: 0
+    AddRadiation: -3, display: RadiationValue
+    Debuff: "RadiationPoisoning,RadiationBurn", display: EffectiveAgainst
+    SfxBegin: UseActions/exhale
+    Buff: Indigestion
+    Buff_chance: 0.15
+  }
+}
+
+{ +Item Id: 393, Name: AntiRadiationInjection, Ref: FoodTemplate
+  Info: bkiConsumable, display: true
+  Category: Medical
+  StackSize: 2000
+  MarketPrice: 150, display: true
+  ShowUser: Yes
+  { Child 0
+    Class: Eat
+    ROF: 1, type: float
+    AddHealth: 0
+    AddStamina: 0
+    AddFood: 0
+    AddOxygen: 0
+    AddRadiation: -5, display: RadiationValue
+    Debuff: "RadiationSickness,RadiationPoisoning,RadiationBurn", display: EffectiveAgainst
+    SfxBegin: UseActions/exhale
+  }
+}
+
+{ +Item Id: 308, Name: Medikit03, Ref: FoodTemplate         #DecontKit
+  Mass: 0.4, type: float, display: true, formatter: Kilogram
+  Volume: 1, type: float, display: true, formatter: Liter
+  MarketPrice: 570, display: true
+  Category: Medical
+  Info: bkiMedikit03, display: true
+  StackSize: 1000
+  ShowUser: Yes
+  { Child 0
+    Class: Eat
+    ROF: 1, type: float
+    AddHealth: 0
+    AddStamina: 0
+    AddFood: 0
+    AddOxygen: 0
+    AddRadiation: -7, display: RadiationValue
+    Buff: MedikitApplied
+    Debuff: "DermalParasite,EndoParasite,EndoParasite2,EndoParasite3,AlienParasite,RadiationBurn,RadiationPoisoning,RadiationSickness", display: EffectiveAgainst
+    SfxBegin: UseActions/exhale
+  }
+}
+
+{ +Item Id: 329, Name: Medikit04, Ref: FoodTemplate         #HealingVial
+  Mass: 0.12, type: float, display: true, formatter: Kilogram
+  Volume: 0.11, type: float, display: true, formatter: Liter
+  Category: Medical
+  MarketPrice: 340, display: true
+  Info: bkiMedikit01, display: true  #NewRequired
+  StackSize: 1000
+  ShowUser: Yes
+  { Child 0
+    Class: Eat
+    ROF: 1, type: float
+    AddHealth: 0
+    AddStamina: 0
+    AddFood: 0
+    AddOxygen: 0
+    Buff: MedikitApplied
+    Debuff: "OpenWound", display: EffectiveAgainst
+    SfxBegin: UseActions/exhale
+  }
+}
+
+{ +Item Id: 379, Name: AntibioticOintment, Ref: FoodTemplate
+  Mass: 0.01, type: float, display: true, formatter: Kilogram
+  Volume: 0.05, type: float, display: true, formatter: Liter
+  Info: bkiConsumable, display: true
+  MarketPrice: 15, display: true
+  Category: Medical
+  StackSize: 2000
+  ShowUser: Yes
+  { Child 0
+    Class: Eat
+    ROF: 1, type: float
+    AddHealth: 0
+    AddStamina: 0
+    AddFood: 0
+    AddOxygen: 0
+    Debuff: "DermalBurn,Frostbite,Necrosis", display: EffectiveAgainst
+    SfxBegin: UseActions/exhale
+  }
+}
+
+{ +Item Id: 388, Name: AntiToxicOintment, Ref: FoodTemplate
+  Info: bkiConsumable, display: true
+  Category: Medical
+  MarketPrice: 20, display: true
+  StackSize: 2000
+  ShowUser: Yes
+  { Child 0
+    Class: Eat
+    ROF: 1, type: float
+    AddHealth: 0
+    AddStamina: 0
+    AddFood: 0
+    AddOxygen: 0
+    Debuff: "PoisonBit,PoisonBit2,DermalParasite", display: EffectiveAgainst
+    SfxBegin: UseActions/exhale
+  }
+}
+
+{ +Item Id: 387, Name: AntiRadiationOintment, Ref: FoodTemplate
+  Info: bkiConsumable, display: true
+  Category: Medical
+  MarketPrice: 25, display: true
+  StackSize: 2000
+  ShowUser: Yes
+  { Child 0
+    Class: Eat
+    ROF: 1, type: float
+    AddHealth: 0
+    AddStamina: 0
+    AddFood: 0
+    AddOxygen: 0
+    AddRadiation: -1, display: RadiationValue
+    Debuff: RadiationBurn, display: EffectiveAgainst
+    SfxBegin: UseActions/exhale
+  }
+}
+
+{ +Item Id: 337, Name: RadiationImmunityShot, Ref: FoodTemplate
+  Info: bkiRadiationImmunity, display: true
+  MarketPrice: 90, display: true
+  Category: Medical
+  StackSize: 2000
+  ShowUser: Yes
+  { Child 0
+    Class: Eat
+    ROF: 1, type: float
+    AddHealth: -10
+    AddStamina: 0
+    AddFood: -50
+    AddOxygen: 0
+    SfxBegin: UseActions/exhale
+    Buff: "RadiationImmunity,BadTrip"
+    Buff_chance: "1,0.2"
+  }
+}
+
+{ +Item Id: 390, Name: AntiParasitePills, Ref: FoodTemplate
+  Info: bkiConsumable, display: true
+  Category: Medical
+  StackSize: 2000
+  MarketPrice: 90, display: true
+  ShowUser: Yes
+  { Child 0
+    Class: Eat
+    ROF: 1, type: float
+    AddHealth: -10
+    AddStamina: 0
+    AddFood: -50
+    AddOxygen: 0
+    Debuff: "DermalParasite,EndoParasite,EndoParasite2", display: EffectiveAgainst
+    Buff: Indigestion
+    Buff_chance: 0.30
+    SfxBegin: UseActions/exhale
+  }
+}
+
+{ +Item Id: 392, Name: AntiParasiteInjection, Ref: FoodTemplate
+  Info: bkiConsumable, display: true
+  Category: Medical
+  StackSize: 2000
+  MarketPrice: 180, display: true
+  ShowUser: Yes
+  { Child 0
+    Class: Eat
+    ROF: 1, type: float
+    AddHealth: 0
+    AddStamina: 0
+    AddFood: 0
+    AddOxygen: 0
+    Debuff: "DermalParasite,AlienParasite,EndoParasite,EndoParasite2,EndoParasite3", display: EffectiveAgainst
+    SfxBegin: UseActions/exhale
+  }
+}
+
+{ +Item Id: 378, Name: EnergyPills, Ref: FoodTemplate
+  Mass: 0.01, type: float, display: true, formatter: Kilogram
+  Volume: 0.01, type: float, display: true, formatter: Liter
+  Info: bkiEnergyPills, display: true
+  MarketPrice: 30, display: true
+  Category: Medical
+  StackSize: 4000
+  ShowUser: Yes
+  { Child 0
+    Class: Eat
+    ROF: 1, type: float
+    AddHealth: -10
+    AddStamina: 300
+    AddFood: -50
+    AddOxygen: 0
+    Buff: "StimBoosterUp,BadTrip"
+    Debuff: "Stunned", display: EffectiveAgainst
+    Buff_chance: "0.8,0.1"
+    SfxBegin: UseActions/playerSwallow
+  }
+}
+
+{ +Item Id: 380, Name: AdrenalineShot, Ref: FoodTemplate
+  Mass: 0.01, type: float, display: true, formatter: Kilogram
+  Volume: 0.05, type: float, display: true, formatter: Liter
+  Info: bkiAdrenalineShot, display: true
+  Category: Medical
+  MarketPrice: 15, display: true
+  StackSize: 2000
+  ShowUser: Yes
+  { Child 0
+    Class: Eat
+    ROF: 1, type: float
+    AddHealth: 0
+    AddStamina: 100
+    AddFood: -20
+    AddOxygen: 0
+    Buff: StaminaBoost
+    Debuff: "Stunned,PoisonBit,PoisonBit2", display: EffectiveAgainst
+    SfxBegin: UseActions/exhale
+  }
+}
+
+# ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+/* ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Wound:      OpenWound,DermalBurn            BrokenLeg,FractureClosed,FractureOpen        Mutilation
+Disease:    Hangover,BadTrip                FeverAttack,Frostbite,PoisonFood             Necrosis,OrganFailure
+Infection:  DermalParasite,EndoParasite     InfectedWound,EndoParasite2                  Sepsis,EndoParasite3
+Toxin:      PoisonBite,Indigestion          PoisonBite2,Intoxication
+
+ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^*/
+
 { +Item Id: 342, Name: BrafusFungi, Ref: FoodTemplate
   Info: bkiConsumable, display: true
   Category: Ingredients
@@ -7531,25 +7872,7 @@
     SfxBegin: UseActions/playerEatingSoft
   }
 }
-{ +Item Id: 345, Name: AntibioticInjection, Ref: FoodTemplate
-  Info: bkiConsumable, display: true
-  Category: Medical
-  Stacksize: 4000
-  MarketPrice: 90, display: true
-  ShowUser: Yes
-  { Child 0
-    Class: Eat
-    ROF: 1, type: float
-    AddHealth: 0
-    AddStamina: 0
-    AddFood: 0
-    AddOxygen: 0
-    Debuff: "Sepsis,InfectedWound,Necrosis,DermalBurn,Frostbite", display: EffectiveAgainst
-    Buff: Indigestion
-    Buff_chance: 0.10
-    SfxBegin: UseActions/exhale
-  }
-}
+
 { +Item Id: 346, Name: EmergencyRations, Ref: FoodTemplate
   Mass: 0.3, type: float, display: true, formatter: Kilogram
   Volume: 0.50, type: float, display: true, formatter: Liter
@@ -7619,7 +7942,7 @@
   Info: bkiConsumable, display: true
   Category: Components
   MarketPrice: 4.88, display: true
-  Stacksize: 4000
+  StackSize: 2000
   ShowUser: Yes
   Mass: 1, type: float, display: true, formatter: Kilogram
   Volume: 1, type: float, display: true, formatter: Liter
@@ -7723,7 +8046,7 @@
   Info: bkiIngredient, display: true
   MarketPrice: 1.5, display: true
   Category: Medical
-  Stacksize: 4000
+  StackSize: 2000
   ShowUser: Yes
 }
 { +Item Id: 356, Name: AlienSpikeLemon, Ref: FoodTemplate
@@ -7940,28 +8263,6 @@
     SfxBegin: UseActions/playerEatingCrunchy
   }
 }
-{ +Item Id: 368, Name: RadiationPills, Ref: FoodTemplate
-  Mass: 0.01, type: float, display: true, formatter: Kilogram
-  Volume: 0.01, type: float, display: true, formatter: Liter
-  Info: bkiConsumable, display: true
-  MarketPrice: 75, display: true
-  Category: Medical
-  StackSize: 4000
-  ShowUser: Yes
-  { Child 0
-    Class: Eat
-    ROF: 1, type: float
-    AddHealth: -50, display: HealthValue
-    AddStamina: 0, display: StaminaValue
-    AddFood: -50, display: FoodValue
-    AddOxygen: 0
-    AddRadiation: -3, display: RadiationValue
-    Debuff: "RadiationPoisoning,RadiationBurn", display: EffectiveAgainst
-    SfxBegin: UseActions/exhale
-    Buff: Indigestion
-    Buff_chance: 0.15
-  }
-}
 { +Item Id: 369, Name: Sandwich, Ref: FoodTemplate
   Mass: 0.07, type: float, display: true, formatter: Kilogram
   Volume: 0.2, type: float, display: true, formatter: Liter
@@ -7985,7 +8286,7 @@
   Info: bkiIngredient, display: true
   Category: Ingredients
   MarketPrice: 1, display: true
-  Stacksize: 4000
+  StackSize: 2000
   ShowUser: Yes
 }
 { +Item Id: 371, Name: Salami, Ref: FoodTemplate
@@ -8126,66 +8427,6 @@
     SfxBegin: UseActions/playerEatingCrunchy
   }
 }
-{ +Item Id: 378, Name: EnergyPills, Ref: FoodTemplate
-  Mass: 0.01, type: float, display: true, formatter: Kilogram
-  Volume: 0.01, type: float, display: true, formatter: Liter
-  Info: bkiEnergyPills, display: true
-  MarketPrice: 30, display: true
-  Category: Medical
-  StackSize: 4000
-  ShowUser: Yes
-  { Child 0
-    Class: Eat
-    ROF: 1, type: float
-    AddHealth: -10
-    AddStamina: 300
-    AddFood: -50
-    AddOxygen: 0
-    Buff: "StimBoosterUp,BadTrip"
-    Debuff: "Stunned", display: EffectiveAgainst
-    Buff_chance: "0.8,0.1"
-    SfxBegin: UseActions/playerSwallow
-  }
-}
-{ +Item Id: 379, Name: AntibioticOintment, Ref: FoodTemplate
-  Mass: 0.01, type: float, display: true, formatter: Kilogram
-  Volume: 0.05, type: float, display: true, formatter: Liter
-  Info: bkiConsumable, display: true
-  MarketPrice: 15, display: true
-  Category: Medical
-  Stacksize: 4000
-  ShowUser: Yes
-  { Child 0
-    Class: Eat
-    ROF: 1, type: float
-    AddHealth: 0
-    AddStamina: 0
-    AddFood: 0
-    AddOxygen: 0
-    Debuff: "DermalBurn,Frostbite,Necrosis", display: EffectiveAgainst
-    SfxBegin: UseActions/exhale
-  }
-}
-{ +Item Id: 380, Name: AdrenalineShot, Ref: FoodTemplate
-  Mass: 0.01, type: float, display: true, formatter: Kilogram
-  Volume: 0.05, type: float, display: true, formatter: Liter
-  Info: bkiAdrenalineShot, display: true
-  Category: Medical
-  MarketPrice: 15, display: true
-  Stacksize: 4000
-  ShowUser: Yes
-  { Child 0
-    Class: Eat
-    ROF: 1, type: float
-    AddHealth: 0
-    AddStamina: 100
-    AddFood: -20
-    AddOxygen: 0
-    Buff: StaminaBoost
-    Debuff: "Stunned,PoisonBit", display: EffectiveAgainst
-    SfxBegin: UseActions/exhale
-  }
-}
 { +Item Id: 381, Name: FruitPie, Ref: FoodTemplate
   Mass: 0.8, type: float, display: true, formatter: Kilogram
   Volume: 1, type: float, display: true, formatter: Liter
@@ -8206,32 +8447,13 @@
     SfxBegin: UseActions/playerEatingSoft
   }
 }
-{ +Item Id: 382, Name: StomachPills, Ref: FoodTemplate
-  Mass: 0.01, type: float, display: true, formatter: Kilogram
-  Volume: 0.01, type: float, display: true, formatter: Liter
-  Info: bkiConsumable, display: true
-  MarketPrice: 12, display: true
-  Category: Medical
-  Stacksize: 4000
-  ShowUser: Yes
-  { Child 0
-    Class: Eat
-    ROF: 1, type: float
-    AddHealth: 0
-    AddStamina: 0
-    AddFood: 0
-    AddOxygen: 0
-    Debuff: "Indigestion,PoisonFood", display: EffectiveAgainst
-    SfxBegin: UseActions/playerSwallow
-  }
-}
 { +Item Id: 383, Name: HotBeverage, Ref: FoodTemplate
   Mass: 0.5, type: float, display: true, formatter: Kilogram
   Volume: 0.5, type: float, display: true, formatter: Liter
   Info: bkiConsumable, display: true
   MarketPrice: 4.30, display: true
   Category: Food
-  Stacksize: 4000
+  StackSize: 2000
   ShowUser: Yes
   { Child 0
     Class: Eat
@@ -8273,7 +8495,7 @@
   Info: bkiConsumable, display: true
   MarketPrice: 4.50, display: true
   Category: Food
-  Stacksize: 4000
+  StackSize: 2000
   FoodDecayTime: 80, display: true, type: int
   FoodDecayedItem: RottenFood
   ShowUser: Yes
@@ -8296,7 +8518,7 @@
   Info: bkiConsumable, display: true
   Category: Food
   FoodDecayTime: 70, display: true, type: int
-  Stacksize: 4000
+  StackSize: 2000
   ShowUser: Yes
   { Child 0
     Class: Eat
@@ -8310,131 +8532,6 @@
     SfxBegin: UseActions/playerDrinking
   }
 }
-{ +Item Id: 387, Name: AntiRadiationOintment, Ref: FoodTemplate
-  Info: bkiConsumable, display: true
-  Category: Medical
-  MarketPrice: 25, display: true
-  Stacksize: 4000
-  ShowUser: Yes
-  { Child 0
-    Class: Eat
-    ROF: 1, type: float
-    AddHealth: 0
-    AddStamina: 0
-    AddFood: 0
-    AddOxygen: 0
-    AddRadiation: -1, display: RadiationValue
-    Debuff: RadiationBurn, display: EffectiveAgainst
-    SfxBegin: UseActions/exhale
-  }
-}
-{ +Item Id: 388, Name: AntiToxicOintment, Ref: FoodTemplate
-  Info: bkiConsumable, display: true
-  Category: Medical
-  MarketPrice: 20, display: true
-  Stacksize: 4000
-  ShowUser: Yes
-  { Child 0
-    Class: Eat
-    ROF: 1, type: float
-    AddHealth: 0
-    AddStamina: 0
-    AddFood: 0
-    AddOxygen: 0
-    Debuff: "PoisonBit,DermalParasite", display: EffectiveAgainst
-    SfxBegin: UseActions/exhale
-  }
-}
-{ +Item Id: 389, Name: AntiToxicPills, Ref: FoodTemplate
-  Info: bkiConsumable, display: true
-  Category: Medical
-  MarketPrice: 60, display: true
-  Stacksize: 4000
-  ShowUser: Yes
-  { Child 0
-    Class: Eat
-    ROF: 1, type: float
-    AddHealth: -10
-    AddStamina: 0
-    AddFood: -50
-    AddOxygen: 0
-    Debuff: "PoisonBit,PoisonFood,Intoxication,Indigestion", display: EffectiveAgainst
-    SfxBegin: UseActions/exhale
-    Buff: Indigestion
-    Buff_chance: 0.15
-  }
-}
-{ +Item Id: 390, Name: AntiParasitePills, Ref: FoodTemplate
-  Info: bkiConsumable, display: true
-  Category: Medical
-  Stacksize: 4000
-  MarketPrice: 90, display: true
-  ShowUser: Yes
-  { Child 0
-    Class: Eat
-    ROF: 1, type: float
-    AddHealth: -10
-    AddStamina: 0
-    AddFood: -50
-    AddOxygen: 0
-    Debuff: "DermalParasite,EndoParasite", display: EffectiveAgainst
-    Buff: Indigestion
-    Buff_chance: 0.30
-    SfxBegin: UseActions/exhale
-  }
-}
-{ +Item Id: 391, Name: AntiToxicInjection, Ref: FoodTemplate
-  Info: bkiConsumable, display: true
-  Category: Medical
-  MarketPrice: 120, display: true
-  Stacksize: 4000
-  ShowUser: Yes
-  { Child 0
-    Class: Eat
-    ROF: 1, type: float
-    AddHealth: 0
-    AddStamina: 0
-    AddFood: 0
-    AddOxygen: 0
-    Debuff: "FeverAttack,OrganFailure,PoisonFood,Intoxication,PoisonBit", display: EffectiveAgainst
-    SfxBegin: UseActions/exhale
-  }
-}
-{ +Item Id: 392, Name: AntiParasiteInjection, Ref: FoodTemplate
-  Info: bkiConsumable, display: true
-  Category: Medical
-  Stacksize: 4000
-  MarketPrice: 180, display: true
-  ShowUser: Yes
-  { Child 0
-    Class: Eat
-    ROF: 1, type: float
-    AddHealth: 0
-    AddStamina: 0
-    AddFood: 0
-    AddOxygen: 0
-    Debuff: "DermalParasite,AlienParasite,EndoParasite", display: EffectiveAgainst
-    SfxBegin: UseActions/exhale
-  }
-}
-{ +Item Id: 393, Name: AntiRadiationInjection, Ref: FoodTemplate
-  Info: bkiConsumable, display: true
-  Category: Medical
-  Stacksize: 4000
-  MarketPrice: 150, display: true
-  ShowUser: Yes
-  { Child 0
-    Class: Eat
-    ROF: 1, type: float
-    AddHealth: 0
-    AddStamina: 0
-    AddFood: 0
-    AddOxygen: 0
-    AddRadiation: -5, display: RadiationValue
-    Debuff: "RadiationSickness,RadiationPoisoning,RadiationBurn", display: EffectiveAgainst
-    SfxBegin: UseActions/exhale
-  }
-}
 { +Item Id: 394, Name: BerryJuice, Ref: FoodTemplate
   Mass: 1, type: float, display: true, formatter: Kilogram
   Volume: 1, type: float, display: true, formatter: Liter
@@ -8442,7 +8539,7 @@
   Category: Food
   MarketPrice: 8, display: true
   FoodDecayTime: 80, display: true, type: int
-  Stacksize: 4000
+  StackSize: 2000
   ShowUser: Yes
   { Child 0
     Class: Eat
@@ -8521,7 +8618,7 @@
 }
 { Item Id: 398, Name: XP
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalitem
   Canhold: false
   HoldType: 0
@@ -8530,7 +8627,7 @@
 }
 { Item Id: 399, Name: RP
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalitem
   Canhold: false
   HoldType: 0
@@ -9527,7 +9624,7 @@
 #  Player used Sentry Gun  
 { +Item Id: 570, Name: sentryGunSingle
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalweapon
   Canhold: false
   HoldType: 0
@@ -9561,7 +9658,7 @@
 #  Alien Sentry Gun  
 { +Item Id: 571, Name: sentryGunSingle2
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalweapon
   Canhold: false
   HoldType: 0
@@ -9594,7 +9691,7 @@
 #  Alien Sentry Gun 
 { +Item Id: 572, Name: sentryGunSingle3
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalweapon
   Canhold: false
   HoldType: 0
@@ -10185,7 +10282,7 @@
   RecipeName: LightArmor
   MarketPrice: 4397, display: true
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metal
   Mass: 25, type: float, display: false, formatter: Kilogram
   Volume: 24, type: float, display: true, formatter: Liter
@@ -10211,7 +10308,7 @@
   FoodFac: 1.44, type: float, display: true          #  calculations are based on 70 minutes
   StaminaFac: 1.21, type: float, display: true       # calculations are based on 20 stamina per second while running
   NrSlots: 2, type: int, display: true
-  SlotItems: "InsulationBoost, ArmorBoost, JetpackBoost, MultiBoost, OxygenBoost, MobilityBoost, RadiationBoost, EVABoost, TransportationBoost"
+  SlotItems: "InsulationBoost, ArmorBoost, JetpackBoost, MultiBoost, OxygenBoost, MobilityBoost, RadiationBoost, EVABoost, TransportationBoost,EVABoostEpic,InsulationBoostEpic,RadiationBoostEpic"
   
   UnlockCost: 2, display: true
   UnlockLevel: 5, display: true
@@ -10223,7 +10320,7 @@
   RecipeName: MediumArmor
   MarketPrice: 50000, display: true
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metal
   Mass: 44, type: float, display: false, formatter: Kilogram
   Volume: 34, type: float, display: true, formatter: Liter
@@ -10249,7 +10346,7 @@
   FoodFac: 1.73, type: float, display: true
   StaminaFac: 1.33, type: float, display: true
   NrSlots: 3, type: int, display: true
-  SlotItems: "InsulationBoost, ArmorBoost, JetpackBoost, MultiBoost, OxygenBoost, MobilityBoost, RadiationBoost, EVABoost, TransportationBoost"
+  SlotItems: "InsulationBoost, ArmorBoost, JetpackBoost, MultiBoost, OxygenBoost, MobilityBoost, RadiationBoost, EVABoost, TransportationBoost,EVABoostEpic,InsulationBoostEpic,RadiationBoostEpic"
 }
 ## Please do not rename - referenced in code
 { +Item Id: 602, Name: ArmorHeavy
@@ -10257,7 +10354,7 @@
   RecipeName: HeavyArmor
   MarketPrice: 90000, display: true
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metal
   Mass: 52, type: float, display: false, formatter: Kilogram
   Volume: 41, type: float, display: true, formatter: Liter
@@ -10283,7 +10380,7 @@
   FoodFac: 2.5, type: float, display: true
   StaminaFac: 1.46, type: float, display: true
   NrSlots: 4, type: int, display: true
-  SlotItems: "InsulationBoost, ArmorBoost, JetpackBoost, MultiBoost, OxygenBoost, MobilityBoost, RadiationBoost, EVABoost, TransportationBoost"
+  SlotItems: "InsulationBoost, ArmorBoost, JetpackBoost, MultiBoost, OxygenBoost, MobilityBoost, RadiationBoost, EVABoost, TransportationBoost,EVABoostEpic,InsulationBoostEpic,RadiationBoostEpic"
 }
 
 # Not yet used in game  
@@ -10355,7 +10452,7 @@
   Class: ArmorBoost
   Info: bkiArmorBoost, display: true
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metal
   Mass: 2.5, type: float, display: false, formatter: Kilogram
   Volume: 2, type: float, display: true, formatter: Liter
@@ -10391,17 +10488,17 @@
   ShowUser: Yes
 }
 { +Item Id: 623, Name: MultiBoost, Ref: ArmorBoostTemplate
-  Armor: 15, type: int, display: true  
-  Oxygen: 25, type: int, display: true  
-  Radiation: 1, type: int, display: true
-  Heat: 6, type: int, display: true
-  Cold: 3, type: int, display: true
-  PowerFac: 0.05, type: float, display: true
-  SpeedFac: 0.05, type: float, display: true
-  StaminaFac: -0.05, type: float, display: true
-  JetpackFac: -0.10, type: float, display: true
-  JumpFac: 0.05, type: float, display: true
-  FoodFac: -0.25, type: float, display: true
+  Armor: 15, type: int, display: true 
+  Oxygen: 25, type: int, display: true 
+  Radiation: 1, type: int, display: true 
+  Heat: 6, type: int, display: true 
+  Cold: 3, type: int, display: true 
+  PowerFac: 0.05, type: float, display: true 
+  SpeedFac: 0.05, type: float, display: true 
+  StaminaFac: -0.05, type: float, display: true 
+  JetpackFac: -0.10, type: float, display: true 
+  JumpFac: 0.05, type: float, display: true 
+  FoodFac: -0.25, type: float, display: true 
   
   Volume: 3.5, type: float, display: true, formatter: Liter
   Mass: 7.5, type: float, display: true, formatter: Kilogram
@@ -10472,75 +10569,116 @@
 }
 
 # Epic Armor Booster
-{ Item Id: 650, Name: ArmorBoostEpic , Ref: ArmorBoost
-  Armor: 80, type: int, display: true
-  MarketPrice: 900, display: true
-  
-  ShowUser: No
-}
-{ Item Id: 651, Name: JetpackBoostEpic , Ref: JetpackBoost
-  JetpackFac: -0.25, type: float, display: true
-  
+{ Item Id: 650, Name: ArmorBoostEpic, Ref: ArmorBoostTemplate
   MarketPrice: 650, display: true
-  ShowUser: No
-}
-{ Item Id: 652, Name: MultiBoostEpic , Ref: MultiBoost
-  Armor: 30, type: int, display: true  
-  Oxygen: 30, type: int, display: true  
-  Radiation: 5, type: int, display: true
-  Heat: 5, type: int, display: true
-  Cold: 5, type: int, display: true
-  PowerFac: 0.04, type: float, display: true
-  SpeedFac: 0.08, type: float, display: true
-  StaminaFac: -0.02, type: float, display: true
-  JetpackFac: -0.12, type: float, display: true
-  JumpFac: 0.04, type: float, display: true
-  FoodFac: -0.5, type: float, display: true
+  Armor: 150, type: int, display: true
+  Heat: -1, type: int, display: true
+  Cold: -1, type: int, display: true
+  Radiation: 2, type: int, display: true
+  PowerFac: -0.04, type: float, display: true
+  SpeedFac: -0.06, type: float, display: true
+  StaminaFac: 0.2, type: float, display: true
+  JetpackFac: 0.2, type: float, display: true
+  JumpFac: -0.04, type: float, display: true
+  FoodFac: 0.26, type: float, display: true
   
-  ShowUser: No
-  MarketPrice: 750, display: true
+  Volume: 2.5, type: float, display: true, formatter: Liter
+  Mass: 5.5, type: float, display: true, formatter: Kilogram
+  ShowUser: Yes
 }
-{ Item Id: 653, Name: OxygenBoostEpic , Ref: OxygenBoost
-  Oxygen: 100, type: int, display: true   
+{ Item Id: 651, Name: JetpackBoostEpic, Ref: ArmorBoostTemplate
+  JetpackFac: -0.67, type: float, display: true
   
+  Volume: 2.25, type: float, display: true, formatter: Liter
+  Mass: 4.25, type: float, display: true, formatter: Kilogram
   MarketPrice: 450, display: true
-  ShowUser: No
+  ShowUser: Yes
 }
-{ Item Id: 654, Name: InsulationBoostEpic , Ref: InsulationBoost
-  Heat: 10, type: int, display: true
-  Cold: 10, type: int, display: true 
+{ Item Id: 652, Name: MultiBoostEpic, Ref: ArmorBoostTemplate
+  Armor: 60, type: int, display: true 
+  Oxygen: 100, type: int, display: true 
+  Radiation: 4, type: int, display: true 
+  Heat: 25, type: int, display: true 
+  Cold: 15, type: int, display: true 
+  PowerFac: 0.05, type: float, display: true 
+  SpeedFac: 0.05, type: float, display: true 
+  StaminaFac: -0.05, type: float, display: true 
+  JetpackFac: -0.10, type: float, display: true 
+  JumpFac: 0.05, type: float, display: true 
+  FoodFac: -0.25, type: float, display: true 
   
-  MarketPrice: 430, display: true
-  ShowUser: No
+  Volume: 3.5, type: float, display: true, formatter: Liter
+  Mass: 7.5, type: float, display: true, formatter: Kilogram
+  MarketPrice: 500, display: true
+  ShowUser: Yes
 }
-{ Item Id: 655, Name: MobilityBoostEpic , Ref: MobilityBoost
-  PowerFac: 0.08, type: float, display: true
-  SpeedFac: 0.08, type: float, display: true
-  StaminaFac: -0.04, type: float, display: true
-  JumpFac: 0.08, type: float, display: true
+{ Item Id: 653, Name: OxygenBoostEpic, Ref: ArmorBoostTemplate 
+  Armor: -5, type: int, display: true
+  Oxygen: 300, type: int, display: true   
+  PowerFac: -0.03, type: float, display: true 
+  SpeedFac: -0.03, type: float, display: true 
   
-  MarketPrice: 450, display: true
-  ShowUser: No
+  Volume: 10, type: float, display: true, formatter: Liter
+  Mass: 2.5, type: float, display: true, formatter: Kilogram
+  MarketPrice: 300, display: true
+  ShowUser: Yes
 }
-{ Item Id: 656, Name: RadiationBoostEpic , Ref: RadiationBoost
-  Radiation: 5, type: int, display: true
+{ Item Id: 654, Name: InsulationBoostEpic, Ref: ArmorBoostTemplate
+  Heat: 100, type: int, display: true
+  Cold: 50, type: int, display: true
+  
+  Volume: 2.5, type: float, display: true, formatter: Liter
+  Mass: 3.5, type: float, display: true, formatter: Kilogram
+  MarketPrice: 350, display: true
+  ShowUser: Yes
+}
+{ Item Id: 655, Name: MobilityBoostEpic, Ref: ArmorBoostTemplate
+  Armor: -15, type: int, display: true
+  PowerFac: 0.05, type: float, display: true
+  SpeedFac: 0.05, type: float, display: true
+  StaminaFac: -0.05, type: float, display: true
+  JumpFac: 0.05, type: float, display: true
+  FoodFac: 0.05, type: float, display: true
+  
+  Volume: 2.2, type: float, display: true, formatter: Liter
+  Mass: 1.7, type: float, display: true, formatter: Kilogram
+  MarketPrice: 350, display: true
+  ShowUser: Yes
+}
+{ Item Id: 656, Name: RadiationBoostEpic, Ref: ArmorBoostTemplate 
+  Radiation: 15, type: int, display: true
+  PowerFac: -0.02, type: float, display: true
+  SpeedFac: -0.05, type: float, display: true
   
   MarketPrice: 400, display: true
-  ShowUser: No
+  ShowUser: Yes
 }
-{ Item Id: 657, Name: EVABoostEpic , Ref: EVABoost
-  Cold: 120, type: int, display: true
+{ Item Id: 657, Name: EVABoostEpic, Ref: ArmorBoostTemplate 
+  Armor: -20, type: int, display: true
+  Heat: -4, type: int, display: true
+  Cold: 350, type: int, display: true
+  JetpackFac: 0.1, type: float, display: true
+  PowerFac: -0.2, type: float, display: true
+  SpeedFac: -0.2, type: float, display: true
   
-  MarketPrice: 350, display: true
-  ShowUser: No
+  ShowUser: Yes
+  Mass: 34.5, type: float, display: false, formatter: Kilogram
+  Volume: 14.5, type: float, display: true, formatter: Liter
+  MarketPrice: 250, display: true
 }
 
+{ +Item Id: 658, Name: TransportationBoostEpic, Ref: ArmorBoostTemplate
+  VolumeCapacity: 500, type: float, display: true, formatter: Liter 
+  MarketPrice: 300, display: true
+  
+  ShowUser: Yes
+}
 #  CATEGORIE: ARMOR EQUIPMENT id 620 - 699  
 
 { +Item Id: 700, Name: NightVision
   # Class: ArmorBoost
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metal
   Volume: 2.5, type: float, display: true, formatter: Liter
   Mass: 1.3, type: float, display: true, formatter: Kilogram
@@ -10556,7 +10694,7 @@
   # Class: ArmorBoost  
   Info: bkiOreScanner, display: true
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metal
   Mass: 0.78, type: float, display: true, formatter: Kilogram 
   Volume: 1.25, type: float, display: true, formatter: Liter
@@ -10577,7 +10715,7 @@
   Info: bkiDetector, display: true
   MarketPrice: 250, display: true
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metal
   Mass: 1.3, type: float, display: true, formatter: Kilogram
   Volume: 1.7, type: float, display: true, formatter: Liter
@@ -10616,7 +10754,7 @@
 { +Item Id: 704, Name: DetectorHVWeapon 
   Meshfile: Entities/Misc/DummyPrefab  
   CustomIcon: DetectorSVT1
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Category: Weapons/Items
   ShowUser: No
   Canhold: false
@@ -10640,7 +10778,7 @@
 
 { +Item Id: 705, Name: DetectorSVWeapon 
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Category: Weapons/Items
   ShowUser: No
   Canhold: false
@@ -10664,7 +10802,7 @@
 
 { +Item Id: 706, Name: DetectorCVWeapon 
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Category: Weapons/Items
   ShowUser: No
   Canhold: false
@@ -10689,7 +10827,7 @@
 # Damage and Multipliers defined in EClassConfig > Entity Name: ExplosiveDevice
 { +Item Id: 707, Name: SurvivalConstructor
   Meshfile: @models/Blocks/Terrain/ConstructorSurvivalPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   PickupToToolbar: true
   Material: metalitem
   Canhold: false
@@ -11254,7 +11392,7 @@
 }
 { +Item Id: 869, Name: highexplosiveantitank
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalweapon
   HoldType: 0 
   MarketPrice: 1, display: true
@@ -11477,8 +11615,92 @@
     BlastDamageMultiplier_4: 0, param1: shield
   }
 }
+{ +Item Id: 878, Name: cannonDroneSpace
+  Meshfile: Entities/Enemies/Drones/Weapons/cannonDronePrefab
+  Material: metalweapon
+  HoldType: 0
+  StackSize: 25
+  Canhold: false
+  Category: Weapons/Items
+  ShowUser: No
+  { Child 0
+    Class: Ranged
+    ROF: 0.75, type: float
+    Range: 300      #  Drone will attack from: Range*WeaponRangeFactor  
+    Automatic: true
+    Damage: 45
+    AmmoCapacity: 200
+    AmmoUnlimited: true
+    AmmoType: cannonDroneSpaceAmmo, display: true
+    ReloadDelay: 3.1
+    SfxBegin: Weapons/Player/Misc/Single/Cannon_2_short
+    SfxLoop: Misc/MuteSound
+    SfxStop: Misc/MuteSound
+    TracerPerBullet: 1
+  }
+}
+{ +Item Id: 879, Name: cannonDroneSpaceAmmo
+  Meshfile: Entities/Misc/DummyPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
+  Material: metalweapon
+  HoldType: 0 
+  MarketPrice: 1, display: true
+  Canhold: false
+  StackSize: 4000
+  Info: bkiAmmo, display: true
+  Category: Weapons/Items
+  Mass: 0.01, type: float, display: true, formatter: Kilogram
+  Volume: 0.01, type: float, display: true, formatter: Liter
+}
+{ +Item Id: 880, Name: DetectorHVEpicWeapon 
+  Meshfile: Entities/Misc/DummyPrefab  
+  CustomIcon: DetectorSVT1
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
+  Category: Weapons/Items
+  ShowUser: No
+  Canhold: false
+  Material: metalweapon
+  HoldType: 0
+  IsRadarItem: true
+  # CustomIcon: DetectorSVT1
+  { Child 0
+    ROF: 5, type: float
+    Class: RadarScan
+    Range: 10000               #Epic; standard 2500
+    RangeSpace: 10000
+    DiscoveryFac: 0.12
+    ShowObjectTime: 30
+    AmmoCapacity: 0, display: false
+    AmmoType: AmmoInfinite, display: true
+    AmmoUnlimited: true
+    AllowAt: "UnderWater, Planet, Space"
+  }
+}
+{ +Item Id: 881, Name: DetectorCVEpicWeapon 
+  Meshfile: Entities/Misc/DummyPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
+  Category: Weapons/Items
+  ShowUser: No
+  Canhold: false
+  Material: metalweapon
+  HoldType: 0
+  IsRadarItem: true
+  CustomIcon: DetectorSVT1
+  { Child 0
+    ROF: 5, type: float
+    Class: RadarScan
+    Range: 6000
+    RangeSpace: 100000      #Epic; Standard: 25000
+    DiscoveryFac: 0.12
+    ShowObjectTime: 30
+    AmmoCapacity: 0, display: false
+    AmmoType: AmmoInfinite, display: true
+    AmmoUnlimited: true
+    AllowAt: "UnderWater, Planet, Space"
+  }
+}
 
-# === High Tier sphere turret weapon and ammo (900-950) ===
+# === High Tier sphere turret weapon and ammo (900-920) ===
 { +Item Id: 900, Name: TurretEnemyLaserWeaponBlack, Ref: TurretEnemyLaserWeaponT2
   { Child 0
     AmmoType: TurretEnemyLaserChargeBlack, display: true
@@ -11519,12 +11741,13 @@
 { +Item Id: 909, Name: TurretEnemyLaserChargeOrange, Ref: TurretEnemyLaserChargeT2
   Meshfile: Entities/Items/Weapons/Projectiles/AlienRocketOrangePrefab
 } 
-{ +Item Id: 910, Name: TurretEnemyLaserWeaponPurple, Ref: TurretEnemyLaserWeaponT2
+{ +Item Id: 910, Name: TurretEnemyLaserWeaponPurple, Ref: TurretEnemyLaserWeaponT2     #Only use with TESCH
   { Child 0
     AmmoType: TurretEnemyLaserChargePurple, display: true
   }
 }
-{ +Item Id: 911, Name: TurretEnemyLaserChargePurple, Ref: TurretEnemyLaserChargeT2
+{ +Item Id: 911, Name: TurretEnemyLaserChargePurple, Ref: TurretEnemyLaserChargeT2   #Only use with TESCH
+  Info: bkiTurretDarkMatterFactionAmmo, display: true
   Meshfile: Entities/Items/Weapons/Projectiles/AlienRocketPurplePrefab
 } 
 { +Item Id: 912, Name: TurretEnemyLaserWeaponRed, Ref: TurretEnemyLaserWeaponT2
@@ -11543,11 +11766,705 @@
 { +Item Id: 915, Name: TurretEnemyLaserChargeYellow, Ref: TurretEnemyLaserChargeT2
   Meshfile: Entities/Items/Weapons/Projectiles/AlienRocketYellowPrefab
 } 
+
+# === Faction and Faction-Upgrade turret weapon and ammo (921-999) ===
+
+{ +Item Id: 921, Name: TurretMinigunFactionWeapon
+  Meshfile: @models/Blocks/Turrets/TurretMSMinigunPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
+  ShowUser: NoButCSV  # reported by HWS
+  Canhold: false
+  Material: metalweapon
+  HoldType: 0
+  StackSize: 500
+  Mass: 6120, type: float, display: false, formatter: Kilogram
+  Category: Weapons/Items
+  { Child 0
+    Class: Ranged
+    IsShootThroughCrosshair: true
+    AllowAt: "Space,Planet"
+    ROF: 0.2, type: float, display: true, formatter: ROF
+    Range: 500, display: false
+    RangeSpace: 850, display: false
+    Automatic: true    
+    Damage: 425, display: true
+    AmmoCapacity: 300, display: true
+    AmmoType: TurretMinigunFactionAmmo, display: true
+    NoiseStrength: 120, display: false  
+    CameraShake: 1    
+    AutoReload: true
+    ReloadDelay: 2, display: true # adapt sound 
+    SfxBegin: Weapons/Player/Minigun/minigun_start
+    SfxLoop: Weapons/Player/Minigun/minigun_loop
+    SfxStop: Weapons/Player/Minigun/minigun_end
+    # SfxNoAmmo: Weapons/Misc/weapon_outofammo_005
+    SfxReload: Weapons/Player/Misc/Reload/RifleBoltActionCock04_reload
+    PfxMuzzle: turretMuzzleFire2
+    TracerPerBullet: 1
+    Tracer: Weapons/Projectiles/TracerOrange1
+	
+    DamageMultiplier_1: 0.55, param1: head|body    # lower damage on entities
+    DamageMultiplier_2: 0.01, param1: wood|rock   # lower damage on trees and rocks 
+    DamageMultiplier_3: 0, param1: stone|dirt      # no damage on terrain
+    DamageMultiplier_4: 0.05, param1: shield 
+    DamageMultiplier_5: 0.85, data: hull|hullarmored|hullcombat|metal|metallight|metalhard
+  }
+}
+{ +Item Id: 922, Name: TurretMinigunUpgradeWeapon, Ref: TurretMinigunFactionWeapon
+  { Child 0
+    ROF: 0.2, type: float, display: true, formatter: ROF
+    Range: 500, display: false
+    RangeSpace: 800, display: false
+    Damage: 425, display: true
+    AmmoCapacity: 300, display: true
+    AmmoType: TurretMinigunUpgradeAmmo, display: true
+    ReloadDelay: 2, display: true # adapt sound 
+  }
+}
+{ +Item Id: 923, Name: TurretMinigunFactionAmmo
+  Info: bkiTurretMinigunFactionAmmo, display: true
+  CustomIcon: 15mmBullet
+  Meshfile: Entities/Misc/DummyPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
+  Category: Weapons/Items
+  Material: metalweapon
+  HoldType: 0 
+  Canhold: false
+  StackSize: 4000
+  MarketPrice: 1, display: true
+  Mass: 0.06, type: float, display: true, formatter: Kilogram
+  Volume: 0.03, type: float, display: true, formatter: Liter
+
+  UnlockLevel: 1
+  TechTreeNames: Hidden
+}
+{ +Item Id: 924, Name: TurretMinigunUpgradeAmmo, Ref: TurretMinigunFactionAmmo
+  Info: bkiTurretMinigunUpgradeAmmo, display: true
+  CustomIcon: 15mmBullet
+}
+{ +Item Id: 925, Name: TurretFlakFactionWeapon
+  Meshfile: @models/Blocks/Turrets/ModularTurret1/SingleFlakTurretBluePrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
+  ShowUser: NoButCSV  # reported by HWS
+  Canhold: false
+  Material: metalweapon
+  HoldType: 0
+  StackSize: 500
+  Mass: 5615, type: float, display: false, formatter: Kilogram
+  Category: Weapons/Items
+  { Child 0
+    Class: LauncherSS
+    AllowAt: "Space,Planet"
+    ROF: 0.6, type: float, display: true, formatter: ROF
+    Range: 685, display: false
+    RangeSpace: 1135, display: false
+    AmmoCapacity: 50, display: true
+    AmmoType: TurretFlakFactionAmmo, display: true
+    NoiseStrength: 150, display: false  
+    CameraShake: 2   
+    AutoReload: true
+    ReloadDelay: 5, display: true
+    SfxBegin: Weapons/Player/Misc/Single/cannon
+    #  SfxBegin: Weapons/Player/Misc/Single/AWDSDracoHeavySingle       
+    # SfxNoAmmo: Weapons/Misc/weapon_outofammo_001
+    SfxReload: Weapons/Player/Misc/Reload/RifleBoltActionCock04_reload
+    PfxMuzzle: turretMuzzleFire
+  }
+}
+
+{ +Item Id: 926, Name: TurretFlakUpgradeWeapon, Ref: TurretFlakFactionWeapon
+  { Child 0
+    ROF: 0.6, type: float, display: true, formatter: ROF
+    Range: 685, display: false
+    RangeSpace: 1135, display: false
+    AmmoCapacity: 50, display: true
+    AmmoType: TurretFlakUpgradeAmmo, display: true
+    ReloadDelay: 5, display: true
+  }
+}
+{ +Item Id: 927, Name: TurretFlakFactionAmmo
+  Info: bkiTurretFlakFactionAmmo, display: true
+  CustomIcon: FlakRocket
+  Meshfile: Entities/Items/Weapons/Projectiles/rocket01Prefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
+  Material: metalweapon
+  AllowPlacingAt: Base, display: false
+  HoldType: 0
+  StackSize: 2000
+  Canhold: false
+  Mass: 10.1, type: float, display: true, formatter: Kilogram
+  Volume: 6, type: float, display: true, formatter: Liter
+  MarketPrice: 45, display: true
+  Category: Weapons/Items
+  { Child 0
+    Class: Projectile
+    Damage: 485 
+    BlastParticleIndex: 3
+    BlastRadius: 3, display: true
+    BlastDamage: 500, display: true
+    Speed: 650
+    Range: 685
+    SpeedSpace: 750
+    RangeSpace: 1135
+    HomingSpeed: 0.15
+    Ballistic: false
+
+    DamageMultiplier_1: 0.15, param1: head|body
+    DamageMultiplier_2: 0.01, param1: stone|dirt
+    DamageMultiplier_3: 10,   param1: rock    # can destroy rocks 
+    DamageMultiplier_4: 0.083,   param1: shield    
+    BlastDamageMultiplier_1: 0.2, param1: head|body
+    BlastDamageMultiplier_2: 0.4, param1: stone|dirt 
+    BlastDamageMultiplier_3: 0,   param1: shield    
+  }
+
+  UnlockLevel: 1
+  TechTreeNames: Hidden
+}
+{ +Item Id: 928, Name: TurretFlakUpgradeAmmo, Ref: TurretFlakFactionAmmo
+  Info: bkiTurretFlakUpgradeAmmo, display: true
+  CustomIcon: FlakRocketMS
+  { Child 0
+    Class: Projectile
+    Damage: 485 
+    Speed: 650
+    Range: 685
+    SpeedSpace: 750
+    RangeSpace: 1135
+    HomingSpeed: 0.15
+  }
+}
+{ +Item Id: 929, Name: TurretCannonFactionWeapon
+  Meshfile: @models/Blocks/Turrets/ModularTurret1/SinglePlasmaTurretBluePrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
+  ShowUser: NoButCSV  # reported by HWS
+  Canhold: false
+  Material: metalweapon
+  HoldType: 0
+  StackSize: 500
+  Mass: 6150, type: float, display: false, formatter: Kilogram
+  Category: Weapons/Items
+  { Child 0
+    Class: Ranged
+    IsShootThroughCrosshair: true
+    AllowAt: "Space,Planet"
+    ROF: 0.35, type: float, display: true, formatter: ROF
+    Range: 560, display: false
+    RangeSpace: 925, display: false
+    Automatic: false
+    Damage: 600, display: true
+    AmmoCapacity: 100, display: true
+    AutoReload: true
+    AmmoType: TurretCannonFactionAmmo, display: true
+    NoiseStrength: 120, display: false   
+    CameraShake: 2   
+    ReloadDelay: 4, display: true # adapt sound
+    SfxBegin: Weapons/Player/Misc/Single/AWDSDracoHeavySingle
+    # SfxNoAmmo: Weapons/Misc/weapon_outofammo_003
+    SfxReload: Weapons/Player/Misc/Reload/RifleBoltActionCock04_reload
+    PfxMuzzle: turretMuzzleFire
+    TracerPerBullet: 1
+    Tracer: Weapons/Projectiles/TracerOrange1
+	
+    DamageMultiplier_1: 0.25, param1: head|body     # lower damage on entities
+    DamageMultiplier_2: 0.01, param1: wood|rock    # lower damage on trees and rocks 
+    DamageMultiplier_3: 0, param1: stone|dirt      # no damage on terrain
+    DamageMultiplier_4: 0.05, param1: shield       # quarter less damage vs shield than vs blocks
+    DamageMultiplier_5: 1.15, data: hull|hullarmored|hullcombat|metal|metallight|metalhard
+  }
+}
+{ +Item Id: 930, Name: TurretCannonUpgradeWeapon, Ref: TurretCannonFactionWeapon
+  { Child 0
+    Class: Ranged
+    ROF: 0.35, type: float, display: true, formatter: ROF
+    Range: 560, display: false
+    RangeSpace: 925, display: false
+    Damage: 600, display: true
+    AmmoCapacity: 100, display: true
+    AmmoType: TurretCannonUpgradeAmmo, display: true
+    ReloadDelay: 4, display: true # adapt sound
+  }
+}
+{ +Item Id: 931, Name: TurretCannonFactionAmmo
+  Info: bkiTurretCannonFactionAmmo, display: true
+  CustomIcon: 30mmBullet
+  Meshfile: Entities/Misc/DummyPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
+  Material: metalweapon
+  AllowPlacingAt: "Base,MS", display: false
+  HoldType: 0
+  StackSize: 1500
+  Canhold: false
+  Mass: 0.9, type: float, display: true, formatter: Kilogram
+  Volume: 0.5, type: float, display: true, formatter: Liter
+  Category: Weapons/Items
+  MarketPrice: 2, display: true
+
+  UnlockLevel: 1
+  TechTreeNames: Hidden
+}
+
+{ +Item Id: 932, Name: TurretCannonUpgradeAmmo, Ref: TurretCannonFactionAmmo
+  Info: bkiTurretCannonUpgradeAmmo, display: true
+}
+{ +Item Id: 933, Name: TurretRocketFactionWeapon
+  Meshfile: @models/Blocks/Turrets/ModularTurret1/SingleMissileTurretBluePrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
+  ShowUser: NoButCSV  # reported by HWS
+  Canhold: false
+  Material: metalweapon
+  HoldType: 0
+  StackSize: 500
+  Mass: 5777, type: float, display: false, formatter: Kilogram
+  Category: Weapons/Items
+  { Child 0
+    Class: LauncherSS
+    AllowAt: "Space,Planet"
+    ROF: 4, type: float, display: true, formatter: ROF
+    Range: 690, display: false
+    RangeSpace: 1150, display: false
+    AmmoCapacity: 15, display: true
+    AmmoType: TurretRocketFactionAmmo, display: true
+    NoiseStrength: 150, display: false  
+    CameraShake: 3    
+    AutoReload: true
+    ReloadDelay: 8, display: true
+    SfxBegin: Weapons/Turret/missle_fire
+    # SfxBegin: Weapons/LauncherWeapons/weapon_missile_005
+    #  SfxBegin: Weapons/Planet/TurretPS01/Cannon_2   
+    # SfxNoAmmo: Weapons/Misc/weapon_outofammo_002
+    SfxReload: Weapons/Player/Misc/Reload/RifleBoltActionCock04_reload
+    PfxMuzzle: rocketlauncherMSMuzzleFire
+  }
+}
+{ +Item Id: 934, Name: TurretRocketUpgradeWeapon, Ref: TurretRocketFactionWeapon
+  { Child 0
+    Class: LauncherSS
+    ROF: 4, type: float, display: true, formatter: ROF
+    Range: 690, display: false
+    RangeSpace: 1150, display: false
+    AmmoCapacity: 15, display: true
+    AmmoType: TurretRocketUpgradeAmmo, display: true
+    ReloadDelay: 8, display: true
+  }
+}
+{ +Item Id: 935, Name: TurretRocketFactionAmmo
+  Info: bkiTurretRocketFactionAmmo, display: true
+  CustomIcon: FastRocketBA
+  Meshfile: Entities/Items/Weapons/Projectiles/rocket01Prefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
+  Material: metalweapon
+  AllowPlacingAt: MS, display: false
+  HoldType: 0
+  StackSize: 2000
+  Canhold: false
+  Mass: 49, type: float, display: true, formatter: Kilogram
+  Volume: 32, type: float, display: true, formatter: Liter
+  Category: Weapons/Items
+  MarketPrice: 295, display: true
+  { Child 0  
+    Class: Projectile
+    Damage: 5858 
+    BlastParticleIndex: 3
+    BlastRadius: 4, display: true
+    BlastDamage: 5800, display: true
+    Speed: 150
+    Range: 635
+    SpeedSpace: 240
+    RangeSpace: 1085
+    HomingSpeed: 1.5
+    Ballistic: false
+	
+	DamageMultiplier_1: 0.05, param1: head|body
+    DamageMultiplier_2: 0.01, param1: stone|dirt
+    DamageMultiplier_3: 10,   param1: rock    # can destroy rocks 
+    DamageMultiplier_4: 0.083,   param1: shield
+    BlastDamageMultiplier_1: 0.05, param1: head|body
+    BlastDamageMultiplier_2: 0.2, param1: stone|dirt
+    BlastDamageMultiplier_3: 0,   param1: shield
+  }
+}
+{ +Item Id: 936, Name: TurretRocketUpgradeAmmo, Ref: TurretRocketFactionAmmo
+  Info: bkiTurretRocketUpgradeAmmo, display: true
+  CustomIcon: FastRocketMS
+  { Child 0
+    Damage: 5858 
+    BlastRadius: 4, display: true
+    BlastDamage: 5800, display: true
+    Speed: 150
+    Range: 635
+    SpeedSpace: 240
+    RangeSpace: 1085
+    HomingSpeed: 1.5
+  }
+}
+{ +Item Id: 937, Name: TurretArtilleryFactionWeapon
+  Meshfile: @models/Blocks/Turrets/TurretMSArtilleryPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
+  ShowUser: NoButCSV  # reported by HWS
+  Canhold: false
+  Material: metalweapon
+  HoldType: 0
+  StackSize: 250
+  Mass: 19800, type: float, display: false, formatter: Kilogram
+  Category: Weapons/Items
+  { Child 0
+    Class: LauncherSS
+    AllowAt: "Space,Planet"
+    ROF: 6.5, type: float, display: true, formatter: ROF
+    Range: 650, display: false
+    RangeSpace: 1100, display: false
+    AmmoCapacity: 5, display: true
+    AmmoType: TurretArtilleryFactionAmmo, display: true
+    NoiseStrength: 200, display: false  
+    CameraShake: 4    
+    AutoReload: true
+    ReloadDelay: 13, display: true # adapt sound 
+    SfxBegin: Weapons/MS/Turret/Cannon_2
+    # SfxNoAmmo: Weapons/Misc/weapon_outofammo_001
+    SfxReload: Weapons/Player/Misc/Reload/RifleBoltActionCock04_reload
+    PfxMuzzle: rocketlauncherMSMuzzleFire
+  }
+}
+{ +Item Id: 938, Name: TurretArtilleryUpgradeWeapon, Ref: TurretArtilleryFactionWeapon
+  { Child 0
+    Class: LauncherSS
+    ROF: 6.5, type: float, display: true, formatter: ROF
+    Range: 650, display: false
+    RangeSpace: 1100, display: false
+    AmmoCapacity: 5, display: true
+    AmmoType: TurretArtilleryUpgradeAmmo, display: true
+    ReloadDelay: 13, display: true # adapt sound 
+  }
+}
+{ +Item Id: 939, Name: TurretArtilleryFactionAmmo
+  Info: bkiTurretArtilleryFactionAmmo, display: true
+  CustomIcon: LargeRocket
+  Meshfile: Entities/Items/Weapons/Projectiles/RocketLargePrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
+  Material: metalweapon
+  AllowPlacingAt: Base, display: false
+  HoldType: 0
+  StackSize: 1000
+  Canhold: false
+  Mass: 870, type: float, display: true, formatter: Kilogram
+  Volume: 200, type: float, display: true, formatter: Liter
+  MarketPrice: 640, display: true
+  Category: Weapons/Items
+  { Child 0
+    Class: Projectile
+    Damage: 15300 
+    BlastParticleIndex: 4
+    BlastRadius: 4, display: true
+    BlastDamage: 18375, display: true
+    Speed: 165
+    Range: 715
+    SpeedSpace: 215
+    RangeSpace: 1200
+    Ballistic: true
+	
+    DamageMultiplier_1: 0.05, param1: head|body
+    DamageMultiplier_2: 0.01, param1: stone|dirt
+    DamageMultiplier_3: 10,   param1: rock    # can destroy rocks 
+    DamageMultiplier_4: 0.083,   param1: shield
+    BlastDamageMultiplier_1: 0.05, param1: head|body
+    BlastDamageMultiplier_2: 0.05, param1: stone|dirt 
+    BlastDamageMultiplier_3: 0,   param1: shield
+  }
+
+  UnlockLevel: 1
+  TechTreeNames: Hidden
+}
+{ +Item Id: 940, Name: TurretArtilleryUpgradeAmmo, Ref: TurretArtilleryFactionAmmo
+  Info: bkiTurretArtilleryUpgradeAmmo, display: true
+  CustomIcon: LargeRocketMS
+  { Child 0
+    Class: Projectile
+    Damage: 15300 
+    BlastRadius: 4, display: true
+    BlastDamage: 18375, display: true
+    Speed: 165
+    Range: 715
+    SpeedSpace: 215
+    RangeSpace: 1200
+  }
+}
+{ +Item Id: 941, Name: TurretRailgunFactionWeapon
+  Meshfile: @models/Blocks/Turrets/ModularTurret1/SingleMissileTurretBluePrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
+  ShowUser: NoButCSV  # reported by HWS
+  Canhold: false
+  Material: metalweapon
+  HoldType: 0
+  StackSize: 500
+  Mass: 5777, type: float, display: false, formatter: Kilogram
+  Category: Weapons/Items
+  { Child 0
+    Class: LauncherSS
+    AllowAt: "Space,Planet"
+    ROF: 4, type: float, display: true, formatter: ROF
+    Range: 690, display: false
+    RangeSpace: 1150, display: false
+    AmmoCapacity: 15, display: true
+    AmmoType: TurretRailgunFactionAmmo, display: true
+    NoiseStrength: 150, display: false  
+    CameraShake: 3    
+    AutoReload: true
+    ReloadDelay: 8, display: true
+    SfxBegin: Weapons/Turret/missle_fire
+    # SfxBegin: Weapons/LauncherWeapons/weapon_missile_005
+    #  SfxBegin: Weapons/Planet/TurretPS01/Cannon_2   
+    # SfxNoAmmo: Weapons/Misc/weapon_outofammo_002
+    SfxReload: Weapons/Player/Misc/Reload/RifleBoltActionCock04_reload
+    PfxMuzzle: rocketlauncherMSMuzzleFire
+  }
+}
+{ +Item Id: 942, Name: TurretRailgunUpgradeWeapon, Ref: TurretRailgunFactionWeapon
+  { Child 0
+    Class: LauncherSS
+    ROF: 4, type: float, display: true, formatter: ROF
+    Range: 690, display: false
+    RangeSpace: 1150, display: false
+    AmmoCapacity: 15, display: true
+    AmmoType: TurretRailgunUpgradeAmmo, display: true
+    ReloadDelay: 8, display: true
+  }
+}
+{ +Item Id: 943, Name: TurretRailgunFactionAmmo
+  Info: bkiTurretRailgunFactionAmmo, display: true
+  CustomIcon: RailgunBullet
+  Meshfile: Entities/Items/Weapons/Projectiles/rocket01Prefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
+  Material: metalweapon
+  AllowPlacingAt: MS, display: false
+  HoldType: 0
+  StackSize: 2000
+  Canhold: false
+  Mass: 49, type: float, display: true, formatter: Kilogram
+  Volume: 32, type: float, display: true, formatter: Liter
+  Category: Weapons/Items
+  MarketPrice: 295, display: true
+  { Child 0
+    Class: Projectile
+    Damage: 5858 
+    BlastParticleIndex: 3
+    BlastRadius: 4, display: true
+    BlastDamage: 5800, display: true
+    Speed: 450
+    Range: 700
+    SpeedSpace: 550
+    RangeSpace: 1200
+   # HomingSpeed: 1.5
+    Ballistic: false
+	
+	DamageMultiplier_1: 0.05, param1: head|body
+    DamageMultiplier_2: 0.01, param1: stone|dirt
+    DamageMultiplier_3: 10,   param1: rock    # can destroy rocks 
+    DamageMultiplier_4: 0.083,   param1: shield
+    BlastDamageMultiplier_1: 0.05, param1: head|body
+    BlastDamageMultiplier_2: 0.2, param1: stone|dirt
+    BlastDamageMultiplier_3: 0,   param1: shield
+  }
+}
+{ +Item Id: 944, Name: TurretRailgunUpgradeAmmo, Ref: TurretRailgunFactionAmmo
+  Info: bkiTurretRailgunUpgradeAmmo, display: true
+  { Child 0
+    Damage: 5858 
+    BlastRadius: 4, display: true
+    BlastDamage: 5800, display: true
+    Speed: 450
+    Range: 700
+    SpeedSpace: 550
+    RangeSpace: 1200
+    #HomingSpeed: 1.5
+  }
+}
+{ +Item Id: 945, Name: TurretPulseLaserFactionWeapon
+  Meshfile: Entities/Misc/DummyPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
+  ShowUser: NoButCSV  # reported by HWS
+  Canhold: false
+  Material: metalweapon
+  HoldType: 0
+  StackSize: 500
+  Mass: 11760, type: float, display: false, formatter: Kilogram
+  Category: Weapons/Items
+  { Child 0
+    Class: LauncherSS
+    AllowAt: "Space,Planet"
+    ROF: 0.6, type: float, display: true, formatter: ROF
+    Range: 635, display: false
+    RangeSpace: 1085, display: false
+    AmmoCapacity: 150, display: true
+    AmmoType: TurretPulseLaserFactionAmmo, display: true
+    NoiseStrength: 100, display: false 
+    Automatic: true  
+    CameraShake: 2    
+    AutoReload: true
+    ReloadDelay: 1, display: true # adapt sound 
+    SfxBegin: Weapons/Turret/laser_turret_fire2
+    # SfxBegin: Weapons/EnergyWeapons/weapon_laser_003
+    # SfxBegin: Weapons/SS/LaserSS/weapon_laser_001    
+    # SfxNoAmmo: Weapons/Misc/weapon_outofammo_006
+    SfxReload: Weapons/Player/Misc/Reload/RifleBoltActionCock04_reload
+    # PfxMuzzle: turretMuzzleFire
+  }
+}
+
+{ +Item Id: 946, Name: TurretPulseLaserUpgradeWeapon, Ref: TurretPulseLaserFactionWeapon
+  { Child 0
+    Class: LauncherSS
+    ROF: 0.6, type: float, display: true, formatter: ROF
+    Range: 635, display: false
+    RangeSpace: 1085, display: false
+    AmmoCapacity: 150, display: true
+    AmmoType: TurretPulseLaserUpgradeAmmo, display: true
+    ReloadDelay: 1, display: true # adapt sound 
+  }
+}
+{ +Item Id: 947, Name: TurretPulseLaserFactionAmmo
+  Info: bkiTurretPulseLaserFactionAmmo, display: true
+  CustomIcon: PulseLaserChargeBA
+  Meshfile: Entities/Items/Weapons/Projectiles/LaserShotBlueTurret
+  #  Meshfile: Entities/Items/Weapons/Projectiles/LaserShot02   
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
+  Material: metalweapon
+  AllowPlacingAt: MS, display: false
+  HoldType: 0
+  StackSize: 2000
+  Canhold: false
+  Mass: 15, type: float, display: true, formatter: Kilogram
+  Volume: 5, type: float, display: true, formatter: Liter
+  Category: Weapons/Items
+  MarketPrice: 4.5, display: true
+  { Child 0    
+    Class: Projectile
+    Damage: 1050, display: true   # new: because we removed explosion damage
+    BlastParticleIndex: 0 
+    # BlastRadius: 2, display: true
+    # BlastDamage: 400, display: true
+    Speed: 750
+    Range: 650
+    SpeedSpace: 850
+    RangeSpace: 1100
+    Ballistic: false
+	
+    DamageMultiplier_1: 0.25, param1: head|body
+    DamageMultiplier_2: 0.01, param1: stone|dirt
+    DamageMultiplier_3: 10,   param1: rock    # can destroy rocks 
+    DamageMultiplier_4: 0.083,   param1: shield    
+    BlastDamageMultiplier_1: 0.25, param1: head|body
+    BlastDamageMultiplier_2: 0.2, param1: stone|dirt
+  }
+}
+{ +Item Id: 948, Name: TurretPulseLaserUpgradeAmmo, Ref: TurretPulseLaserFactionAmmo
+  Info: bkiTurretPulseLaserUpgradeAmmo, display: true
+  CustomIcon: PulseLaserChargeMS
+  { Child 0    
+    Class: Projectile
+    Damage: 1050, display: true   # new: because we removed explosion damage
+    Speed: 750
+    Range: 650
+    SpeedSpace: 850
+    RangeSpace: 1100
+  }
+}
+{ +Item Id: 949, Name: TurretPlasmaFactionWeapon
+  Meshfile: @models/Blocks/Turrets/RealisticTurret/TurretGVPlasmaPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
+  ShowUser: NoButCSV  # reported by HWS
+  Canhold: false
+  Material: metalweapon
+  HoldType: 0
+  StackSize: 500
+  Mass: 8490, type: float, display: false, formatter: Kilogram
+  Category: Weapons/Items
+  { Child 0
+    Class: LauncherSS
+    AllowAt: "Space,Planet"
+    ROF: 8, type: float, display: true, formatter: ROF
+    Range: 715, display: false
+    RangeSpace: 1200, display: false
+    AmmoCapacity: 8, display: true
+    AutoReload: true
+    AmmoType: TurretPlasmaFactionAmmo, display: true
+    NoiseStrength: 120, display: false   
+    CameraShake: 4   
+    ReloadDelay: 10, display: true
+    SfxBegin: Weapons/SS/LaserSS/weapon_blaster_003
+    #  SfxBegin: Weapons/SS/RocketAlienSS/BLASTERComplexFireTriggerPowerfulRelease    
+    # SfxNoAmmo: Weapons/Misc/weapon_outofammo_006
+    SfxReload: Weapons/Player/Misc/Reload/RifleBoltActionCock04_reload
+    # PfxMuzzle: turretMuzzleFire
+  }
+}
+{ +Item Id: 950, Name: TurretPlasmaUpgradeWeapon, Ref: TurretPlasmaFactionWeapon
+  { Child 0
+    Class: LauncherSS
+    ROF: 8, type: float, display: true, formatter: ROF
+    Range: 715, display: false
+    RangeSpace: 1200, display: false
+    AmmoCapacity: 8, display: true
+    AmmoType: TurretPlasmaUpgradeAmmo, display: true
+    ReloadDelay: 10, display: true
+  }
+}
+{ +Item Id: 951, Name: TurretPlasmaFactionAmmo
+  Info: bkiTurretPlasmaFactionAmmo, display: true
+  CustomIcon: TurretBAPlasmaCharge
+  Meshfile: Entities/Items/Weapons/Projectiles/PlasmaProjectilePrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
+  Material: metalweapon
+  AllowPlacingAt: MS, display: false
+  HoldType: 0
+  StackSize: 2000
+  Canhold: false
+  Mass: 50, type: float, display: true, formatter: Kilogram
+  Volume: 20, type: float, display: true, formatter: Liter
+  MarketPrice: 44, display: true
+  Category: Weapons/Items
+  { Child 0    
+    Class: Projectile
+    Damage: 15000 
+    BlastParticleIndex: 7
+    BlastRadius: 3, display: true
+    BlastDamage: 15000, display: true
+    Speed: 400
+    Range: 650
+    SpeedSpace: 550
+    RangeSpace: 1050
+    Ballistic: false
+	
+    DamageMultiplier_1: 0.05, param1: head|body
+    DamageMultiplier_2: 0.01, param1: stone|dirt
+    DamageMultiplier_3: 10,   param1: rock    # can destroy rocks
+    DamageMultiplier_4: 0.083,   param1: shield 
+    BlastDamageMultiplier_1: 0.05, param1: head|body
+    BlastDamageMultiplier_2: 0.2, param1: stone|dirt
+    BlastDamageMultiplier_3: 0,   param1: shield 
+  }
+}
+
+{ +Item Id: 952, Name: TurretPlasmaUpgradeAmmo, Ref: TurretPlasmaFactionAmmo
+  Info: bkiTurretPlasmaUpgradeAmmo, display: true
+  CustomIcon: TurretMSPlasmaCharge
+  { Child 0    
+    Class: Projectile
+    Damage: 15000 
+    BlastRadius: 3, display: true
+    BlastDamage: 15000, display: true
+    Speed: 400
+    Range: 650
+    SpeedSpace: 550
+    RangeSpace: 1050
+  }
+}
+
 #  CATEGORIE: Commodity Trade Items id 1000 - 1100 
 
 { +Item Id: 1000, Name: TradingGoodsTemplate
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalitem
   Canhold: false
   HoldType: 0
@@ -11657,7 +12574,7 @@
 # == Reports Common
 { +Item Id: 1049, Name: ReportsTemplate
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalitem
   Canhold: false
   HoldType: 0
@@ -11843,10 +12760,19 @@
   Info: bkiRingOfTheHouseOfAbyssal, display: true
   ShowUser: Yes
 }
+{ +Item Id: 1104, Name: Presents, Ref: ComponentsTemplate
+  StackSize: 4000
+  # CustomIcon: Tablet
+  Mass: 1, type: float, display: true, formatter: Kilogram
+  Volume: 1, type: float, display: true, formatter: Liter
+  Info: bkiPresents, display: true
+  ShowUser: Yes
+  MarketPrice: 5, display: true
+}
 # ========================================= Suit Props ==========================
 { +Item Id: 1150, Name: SuitPropsTemplate
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalitem
   Canhold: false
   HoldType: 0
@@ -12055,7 +12981,7 @@
 # ========================================= SPECIAL ITEMS  ==========================
 { +Item Id: 1299, Name: KeysTemplate
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalitem
   Canhold: false
   HoldType: 0
@@ -12087,7 +13013,7 @@
 
   CustomIcon: KeyCardBlack
   Meshfile: Entities/Misc/DummyPrefab
-  DropMeshfile: Entities/Misc/BagSmallPrefab
+  DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Material: metalitem
   Canhold: false
   HoldType: 0
@@ -12146,4 +13072,77 @@
   ShowUser: Yes
   MarketPrice: 4500, display: true
 }
+{ +Item Id: 1314, Name: ExplorerToken , Ref: KeysTemplate
+  CustomIcon: Tablet
+  DropOnDeath: false
+  Info: bkiExplorerToken, display: true
+  ShowUser: Yes
+  # MarketPrice: 4500, display: true
+}
+{ +Item Id: 1315, Name: MerchantToken , Ref: KeysTemplate
+  CustomIcon: Tablet
+  DropOnDeath: false
+  Info: bkiMerchantToken, display: true
+  ShowUser: Yes
+  # MarketPrice: 4500, display: true
+}
+{ +Item Id: 1316, Name: TraderToken , Ref: KeysTemplate
+  CustomIcon: Tablet
+  DropOnDeath: false
+  Info: bkiTraderToken, display: true
+  ShowUser: Yes
+  # MarketPrice: 4500, display: true
+}
 # =============================================================================
+# ================================
+# ======== EVENT WEAPON & Items ==
+# ================================
+
+{ +Item Id: 1400, Name: ShotgunChristmas, Ref: Shotgun2Epic
+  #CustomIcon: Shotgun2Epic
+  Info: bkiShotgunChristmas, display: true
+  Meshfile: Entities/Items/Weapons/Shotguns/Shotgun1ChristmasPrefab
+}
+{ +Item Id: 1401, Name: AssaultRifleChristmas, Ref: AssaultRifle
+  #CustomIcon: AssaultRifleEpic
+  Info: bkiAssaultRifleChristmas, display: true
+  Meshfile: Entities/Items/Weapons/Rifles/AssaultRifle1ChristmasPrefab
+  PickupToToolbar: true
+  MarketPrice: 3560, display: true
+  OverrideTradingConstraints: true # even if other constraints exist allow trading this item
+  Durability: 500, display: false
+  DegradationProb: 0.039, type: float, display: false
+  RepairDisabled: true, display: true
+  SfxJammed: Weapons/Player/Reload/WeaponJammedAutoFire 
+  { Child 0
+    ROF: 0.170, type: float, display: true, formatter: ROF
+    Range: 198, display: false
+    NoiseStrength: 100, display: false 
+    BulletSpread: 0.06, display: true
+    Recoil: 0.288, display: true
+    Damage: 110, display: true
+    AmmoCapacity: 45, display: true
+    ReloadDelay: 3, display: true
+    SfxBegin: Weapons/ProjectileWeapons/Automatic/FAL_50-42_Modern_start
+    SfxLoop: Weapons/ProjectileWeapons/Automatic/FAL_50-42_Modern_loop
+    SfxStop: Weapons/ProjectileWeapons/Automatic/FAL_50-42_Modern_end
+    # SfxBegin: Weapons/ProjectileWeapons/Automatic/M14_Heavy_start
+    # SfxLoop: Weapons/ProjectileWeapons/Automatic/M14_Heavy_loop
+    # SfxStop: Weapons/ProjectileWeapons/Automatic/M14_Heavy_end
+	
+    DamageMultiplier_1: 4.5, param1: head, display: DmgMultiplierHead 
+    DamageMultiplier_2: 0, param1: dirt|stone|rock|wood|hullarmored|hullcombat
+    DamageMultiplier_3: 0, param1: shield 
+  }
+  { Child 1
+    Class: Zoom
+    ZoomOut: 40
+    ZoomIn: 40
+    # RedDot: true
+  }
+  
+  UnlockCost: 0
+  UnlockLevel: 25
+  TechTreeParent: ""
+  TechTreeNames: Hidden
+}
