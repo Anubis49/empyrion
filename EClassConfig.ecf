@@ -106,7 +106,7 @@
 { Entity Name: Backpack
   EntityType: PlayerBackpack
   /* Mesh and class properties */
-  Mesh: Misc/CargoDropPrefab
+  Mesh: Misc/CargoDropNewUCHPrefab   #In case you do not want the Backpack with UCH logo, use CargoDropNewPrefab instead.
   BlockColor: "0,100,255"
   ModelType: Custom
   Prefab: Backpack

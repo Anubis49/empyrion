@@ -1679,6 +1679,7 @@ VERSION: 9
   Volume: 800, type: float, display: true, formatter: Liter
   Mass: 250, type: float, display: true, formatter: Kilogram
   IsAccessible: false, type: bool
+  IsLockable: true
   Category: Devices
   VolumeCapacity: 8000, type: float, display: true, formatter: Liter
   CPUIn: 960, type: int, display: true

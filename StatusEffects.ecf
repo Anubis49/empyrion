@@ -69,8 +69,8 @@
 
   { Child Modify0
     Stat: health
-    Amount: -6
-    Rate: 2
+    Amount: -4
+    Rate: 3
   }
   { Child Modify1
     Stat: speedmodifier

@@ -280,7 +280,7 @@
  # ==========================
 
 { +Template Name: Cement
-  CraftTime: 1 #A1
+  CraftTime: 0.5 #A1
   Target: "SurvC,HoverC,BaseC,LargeC,AdvC"
   { Child Inputs
     RockDust: 2
@@ -310,7 +310,7 @@
 { +Template Name: PlasticMaterial
   BaseItem: true #A1
   OutputCount: 20
-  CraftTime: 5
+  CraftTime: 2
   Target: "SurvC,FoodP,SmallC,HoverC,BaseC,LargeC,AdvC"
   { Child Inputs
     Fiber: 4
@@ -542,7 +542,7 @@
   CraftTime: 3 #B1
   Target: "SmallC,HoverC,BaseC,LargeC,AdvC"
   { Child Inputs
-    CobaltIngot: 3
+    CobaltIngot: 2
     IronIngot: 2
   }
 }
@@ -616,7 +616,7 @@
  # ================= 
 
 { +Template Name: GoldCoins
-  OutputCount: 5 #A2
+  OutputCount: 50 #A2
   CraftTime: 3
   Target: "LargeC,AdvC"
   { Child Inputs
@@ -771,7 +771,7 @@
  # ======================= 
 
 { +Template Name: PlasticLargeBlocks
-  CraftTime: 2  
+  CraftTime: 1  
   DeconOverride: Continue
   Target: "SurvC,SmallC,HoverC,BaseC,LargeC,AdvC"
   { Child Inputs
@@ -1174,7 +1174,7 @@
   }
 }
 { +Template Name: CPUExtenderHVT2
-  CraftTime: 100 #A2 1
+  CraftTime: 50 #A2 1
   Target: "LargeC,AdvC"
   { Child Inputs
     SteelPlate: 12
@@ -1185,7 +1185,7 @@
   }
 }
 { +Template Name: CPUExtenderHVT3
-  CraftTime: 200 #A3 1
+  CraftTime: 100 #A3 1
   Target: "LargeC,AdvC"
   { Child Inputs
     SteelPlate: 24
@@ -1197,7 +1197,7 @@
   }
 }
 { +Template Name: CPUExtenderHVT4
-  CraftTime: 240 #A4 1
+  CraftTime: 150 #A4 1
   Target: "AdvC"
   { Child Inputs
     SteelPlate: 24
@@ -1211,7 +1211,7 @@
   }
 }
 { +Template Name: CPUExtenderSVT2
-  CraftTime: 140 #A2 1
+  CraftTime: 50 #A2 1
   Target: "LargeC,AdvC"
   { Child Inputs
     SteelPlate: 12
@@ -1222,7 +1222,7 @@
   }
 }
 { +Template Name: CPUExtenderSVT3
-  CraftTime: 300 #A3 1
+  CraftTime: 100 #A3 1
   Target: "LargeC,AdvC"
   { Child Inputs
     SteelPlate: 24
@@ -1234,7 +1234,7 @@
   }
 }
 { +Template Name: CPUExtenderSVT4
-  CraftTime: 500 #A4 1
+  CraftTime: 150 #A4 1
   Target: "AdvC"
   { Child Inputs
     SteelPlate: 24
@@ -1248,7 +1248,7 @@
   }
 }
 { +Template Name: CPUExtenderCVT2
-  CraftTime: 170 #A2 1
+  CraftTime: 50 #A2 1
   Target: "LargeC,AdvC"
   { Child Inputs
     SteelPlate: 12
@@ -1259,7 +1259,7 @@
   }
 }
 { +Template Name: CPUExtenderCVT3
-  CraftTime: 400 #A3 1
+  CraftTime: 100 #A3 1
   Target: "AdvC"
   { Child Inputs
     SteelPlate: 24
@@ -1271,7 +1271,7 @@
   }
 }
 { +Template Name: CPUExtenderCVT4
-  CraftTime: 800 #A4 1
+  CraftTime: 150 #A4 1
   Target: "AdvC"
   { Child Inputs
     SteelPlate: 24
@@ -1285,7 +1285,7 @@
   }
 }
 { +Template Name: CPUExtenderBAT2
-  CraftTime: 160 #A2 1
+  CraftTime: 50 #A2 1
   Target: "LargeC,AdvC"
   { Child Inputs
     SteelPlate: 12
@@ -1296,7 +1296,7 @@
   }
 }
 { +Template Name: CPUExtenderBAT3
-  CraftTime: 400 #A3 1
+  CraftTime: 100 #A3 1
   Target: "AdvC"
   { Child Inputs
     SteelPlate: 24
@@ -1308,7 +1308,7 @@
   }
 }
 { +Template Name: CPUExtenderBAT4
-  CraftTime: 800 #A4 1
+  CraftTime: 150 #A4 1
   Target: "AdvC"
   { Child Inputs
     SteelPlate: 24
@@ -3221,16 +3221,16 @@
     AssaultRifle: 1
   }
 }
-# { +Template Name: AssaultRifleEpic
-  # CraftTime: 30 #B1
-  # Target: "AdvC"
+{ +Template Name: AssaultRifleEpic
+  CraftTime: 30 #B1
+  Target: "AdvC"
   # #Target: ""
-  # { Child Inputs
-    # CobaltAlloy: 5
-    # RifleKit: 1
-    # AssaultRifleT2: 1
-  # }
-# }
+  { Child Inputs
+    CobaltAlloy: 5
+    RifleKit: 1
+    AssaultRifleT2: 1
+  }
+}
 
 { +Template Name: Shotgun
   CraftTime: 30 #A2 3
@@ -3369,16 +3369,16 @@
     SniperKit: 1
   }
 }
-# { +Template Name: Sniper2Epic
-  # CraftTime: 30 #C1 15
-  # Target: "AdvC"
+{ +Template Name: Sniper2Epic
+  CraftTime: 30 #C1 15
+  Target: "AdvC"
   # #Target: ""
-  # { Child Inputs
-    # SteelPlateArmored: 1
-    # SniperKit: 1
-    # Sniper2: 1
-  # }
-# }
+  { Child Inputs
+    SteelPlateArmored: 1
+    SniperKit: 1
+    Sniper2: 1
+  }
+}
 
 { +Template Name: PulseRifle #"Pulse Rifle"
   CraftTime: 30 #C2 10 uses "5.8mmBullet"
@@ -3843,7 +3843,7 @@
 
 { +Template Name: BioFuel
   OutputCount: 1 #A1 
-  CraftTime: 28
+  CraftTime: 15
   Target: "SurvC,SmallC,HoverC,BaseC,LargeC,AdvC"
   { Child Inputs
     Fiber: 10
@@ -4668,14 +4668,14 @@
 }
 { +Template Name: EmergencyRations
   DeconOverride: Stop
-  CraftTime: 60
+  CraftTime: 30
   Target: FoodP
   { Child Inputs
     WaterBottle: 1
     HotBeverage: 1
     FruitJuice: 2
-    PowerBar: 6
-    Salami: 3
+    PowerBar: 3
+    Salami: 0
   }
 }
 
@@ -5216,14 +5216,14 @@
 { +Template Name: AutoMinerCore
   DeconOverride: Stop
   CraftTime: 2
-  Target: ""
+  Target: "AdvC"
   { Child Inputs
     SteelPlate: 10
   }
 }
 { +Template Name: SmallOptronicBridge
   BaseItem: true 
-  CraftTime: 600
+  CraftTime: 50
   Target: "AdvC"
   { Child Inputs
     GoldIngot: 15
@@ -5233,7 +5233,7 @@
 }
 { +Template Name: SmallOptronicMatrix
   BaseItem: true 
-  CraftTime: 900
+  CraftTime: 50
   Target: "AdvC"
   { Child Inputs
     GoldIngot: 20
@@ -5243,7 +5243,7 @@
 }
 { +Template Name: LargeOptronicBridge
   BaseItem: true 
-  CraftTime: 600
+  CraftTime: 100
   Target: "AdvC"
   { Child Inputs
     GoldIngot: 15
@@ -5254,7 +5254,7 @@
 }
 { +Template Name: LargeOptronicMatrix
   BaseItem: true 
-  CraftTime: 900
+  CraftTime: 100
   Target: "AdvC"
   { Child Inputs
     GoldIngot: 20
@@ -5288,23 +5288,23 @@
 
 { +Template Name: PistolKit
   CraftTime: 2
-  Target: ""
+  Target: "AdvC"
   { Child Inputs
-    SteelPlate: 1
+    SteelPlate: 100
   }
 }
 
 { +Template Name: RifleKit
   CraftTime: 2
-  Target: ""
+  Target: "AdvC"
   { Child Inputs
-    CobaltAlloy: 5
+    CobaltAlloy: 20
   }
 }
 
 { +Template Name: LaserKit
   CraftTime: 2
-  Target: ""
+  Target: "AdvC"
   { Child Inputs
     ZascosiumAlloy: 5
   }
@@ -5312,23 +5312,23 @@
 
 { +Template Name: HeavyWeaponKit
   CraftTime: 2
-  Target: ""
+  Target: "AdvC"
   { Child Inputs
-    CobaltAlloy: 5
+    CobaltAlloy: 30
   }
 }
 
 { +Template Name: ShotgunKit
   CraftTime: 2
-  Target: ""
+  Target: "AdvC"
   { Child Inputs
-    SteelPlateArmored: 1
+    SteelPlateArmored: 50
   }
 }
 
 { +Template Name: SniperKit
   CraftTime: 2
-  Target: ""
+  Target: "AdvC"
   { Child Inputs
     SteelPlateArmored: 1
   }

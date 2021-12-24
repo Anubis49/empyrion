@@ -472,18 +472,18 @@
     Class: Ranged
     AllowRemote: false  
     ROF: 0.85, type: float, display: true, formatter: ROF
-    Range: 66, display: false
+    Range: 75, display: false
     NoiseStrength: 80, display: false    
     CameraShake: 3  
     Automatic: false
     BulletsPerShot: 8
-    BulletSpread: 0
+    BulletSpread: 2
     RaySpread: 0.750, display: true
     Recoil: 1.68, display: true
-    Damage: 115, display: true
-    AmmoCapacity: 7, display: true
+    Damage: 125, display: true
+    AmmoCapacity: 15, display: true
     AmmoType: ShotgunShells, display: true
-    ReloadDelay: 2.85, display: true
+    ReloadDelay: 2.50, display: true
     # SfxBegin: Weapons/Player/Shotgun/w1200_fire
     SfxBegin: Weapons/Player/Shotgun/Resistance-ShotGun-01-Single_Shot-03
     SfxNoAmmo: Weapons/Misc/PumpgunDryFire02
@@ -523,7 +523,7 @@
   #just for display - BlastRadius and BlastDamage is controlled by "SlowRocket"
   BlastRadius: 3, display: true
   BlastDamage: 500, display: true
-  Durability: 100, display: false
+  Durability: 500, display: false
   DegradationProb: 1, type: float, display: false
   SfxJammed: Weapons/Player/Reload/WeaponJammedSingleShot  
   { Child 0
@@ -534,9 +534,9 @@
     NoiseStrength: 140, display: false 
     Recoil: 2.4, display: true
     CameraShake: 3  
-    AmmoCapacity: 4, display: true
+    AmmoCapacity: 10, display: true
     AmmoType: SlowRocket, display: true
-    ReloadDelay: 4.5, display: true
+    ReloadDelay: 3.0, display: true
     SfxBegin: Weapons/Player/RocketLauncher/FLYBYMissile02Slow
     SfxNoAmmo: Weapons/DryFireFromManuallyCockedHammer
     SfxReload: Weapons/Player/Reload/RifleReloadSlow
@@ -570,7 +570,7 @@
     Class: Driller
     AllowAt: "UnderWater, Planet, Space"
     ROF: 0.5, type: float, display: false, formatter: ROF
-    Range: 5
+    Range: 6
     NoiseStrength: 10, display: false  
     CameraShake: 0    
     IgnoreAtmo: true
@@ -881,7 +881,7 @@
     AllowAt: "UnderWater, Planet, Space"
     FlattenTerrain: true
     ROF: 0.5, type: float
-    Range: 5.5
+    Range: 7
     NoiseStrength: 10, display: false   
     IgnoreAtmo: true
     Automatic: true
@@ -890,8 +890,8 @@
     AmmoCapacity: 750
     AmmoType: FillerCharge
     UseSingleMagazine: true
-    Bullet_use_per_shot: 2
-    ReloadDelay: 2.9
+    Bullet_use_per_shot: 1
+    ReloadDelay: 2.0
     SfxBegin: Weapons/Player/Drill/THRUSTERFlangerShiftingBurningAirHot_start
     SfxLoop: Weapons/Player/Drill/THRUSTERFlangerShiftingBurningAirHot_loop
     #  ParticleTransform: Muzzle/Particle2   
@@ -1059,7 +1059,7 @@
     Class: Ranged
     AllowRemote: false
     ROF: 0.2, type: float, display: true, formatter: ROF
-    Range: 150, display: false
+    Range: 190, display: false
     NoiseStrength: 100, display: false 
     CameraShake: 1  
     Automatic: true, display: true 
@@ -1068,7 +1068,7 @@
     Damage: 70, display: true
     AmmoCapacity: 20, display: true
     AmmoType: 5.8mmBullet, display: true
-    ReloadDelay: 3.1, display: true
+    ReloadDelay: 3.0, display: true
     SfxBegin: Weapons/ProjectileWeapons/Automatic/HK416_Modern_start
     SfxLoop: Weapons/ProjectileWeapons/Automatic/HK416_Modern_loop
     SfxStop: Weapons/ProjectileWeapons/Automatic/HK416_Modern_end
@@ -1126,7 +1126,7 @@
     Damage: 110, display: true
     AmmoCapacity: 25, display: true
     AmmoType: PulseLaserChargeRifle, display: true
-    ReloadDelay: 3.0, display: true
+    ReloadDelay: 2.0, display: true
     ParticleTransform: Muzzle/Particle1
     SfxBegin: Weapons/EnergyWeapons/Automatic/BLASTERComplexFireTriggerDigitalDischarge_start
     SfxLoop: Weapons/EnergyWeapons/Automatic/BLASTERComplexFireTriggerDigitalDischarge_loop
@@ -1186,7 +1186,7 @@
   BlastRadius: 3, display: true
   BlastDamage: 500, display: true
   # Explosion Radius: 3, display: true 
-  Durability: 100, display: false
+  Durability: 300, display: false
   DegradationProb: 1, type: float, display: false
   SfxJammed: Weapons/Player/Reload/WeaponJammedSingleShot  
   { Child 0
@@ -1230,14 +1230,14 @@
     Class: Ranged
     AllowRemote: false
     ROF: 0.425, type: float, display: true, formatter: ROF
-    Range: 333, display: false
-    NoiseStrength: 100, display: false    
-    CameraShake: 2 
+    Range: 1000, display: false
+    NoiseStrength: 200, display: false    
+    CameraShake: 3 
     Automatic: false
-    BulletSpread: 0.023, display: true
-    Recoil: 0.88, display: true
-    Damage: 300, display: true
-    AmmoCapacity: 8, display: true
+    BulletSpread: 0.013, display: true
+    Recoil: 0.50, display: true
+    Damage: 400, display: true
+    AmmoCapacity: 10, display: true
     AmmoType: 12.7mmBullet, display: true
     ReloadDelay: 2.945, display: true
     SfxBegin: Weapons/Player/Sniper/Resistance-SniperRifle-02-Single_Shot-01
@@ -1248,8 +1248,8 @@
     Tracer: Weapons/Projectiles/TracerOrange1
     TracerPerBullet: 1
 	
-    DamageMultiplier_1: 5, param1: head, display: DmgMultiplierHead
-    DamageMultiplier_2: 0, param1: dirt|stone|rock|wood
+    DamageMultiplier_1: 6, param1: head, display: DmgMultiplierHead
+    DamageMultiplier_2: 1, param1: dirt|stone|rock|wood
     DamageMultiplier_3: 0, param1: hullarmored|hullcombat
     DamageMultiplier_4: 0, param1: shield 
   }
@@ -1292,8 +1292,8 @@
     AllowAt: "UnderWater, Planet, Space"
     ROF: 0.5, type: float
     Damage: 600
-    Radius: 2
-    Range: 7, display: false
+    Radius: 5
+    Range: 9, display: false
     NoiseStrength: 40, display: false 
     CameraShake: 0 
     IgnoreAtmo: true
@@ -1301,7 +1301,7 @@
     AmmoCapacity: 750, display: true
     AmmoType: DrillCharge, display: true
     UseSingleMagazine: true
-    ReloadDelay: 2.9, display: true
+    ReloadDelay: 2.0, display: true
     Bullet_use_per_shot: 0.25
     Particles: digger     # particle effect shown at impact
     ParticleTransform: Muzzle/Particle1  # particle effect shown at muzzle  
@@ -1336,7 +1336,7 @@
 	AllowAt: "UnderWater, Planet, Space"
     ROF: 0.5, type: float
     Damage: 35
-    Radius: 1
+    Radius: 3
     Range: 5, display: false    # lower range to match resource mining range (DrillMode: 2 seems to have lower range)
     NoiseStrength: 40, display: false 
     CameraShake: 0 
@@ -1345,7 +1345,7 @@
     AmmoCapacity: 750
     AmmoType: DrillCharge
     UseSingleMagazine: true
-    ReloadDelay: 2.9
+    ReloadDelay: 2.0
     Bullet_use_per_shot: 0.25
     Particles: digger     # particle effect shown at impact
     ParticleTransform: Muzzle/Particle2 # particle effect shown at muzzle  
@@ -1375,7 +1375,7 @@
     ROF: 0.5, type: float
     Damage: 500
     Radius: 3
-    Range: 5, display: false    # lower range to match resource mining range (DrillMode: 2 seems to have lower range)
+    Range: 9, display: false    # lower range to match resource mining range (DrillMode: 2 seems to have lower range)
     NoiseStrength: 40, display: false    
     CameraShake: 0  
     IgnoreAtmo: true
@@ -1383,8 +1383,8 @@
     AmmoCapacity: 750
     AmmoType: DrillCharge
     UseSingleMagazine: true
-    ReloadDelay: 2.9
-    Bullet_use_per_shot: 2
+    ReloadDelay: 2.0
+    Bullet_use_per_shot: 1
     Particles:                           # particle effect shown at impact
     ParticleTransform: Muzzle/Particle3  # particle effect shown at muzzle       
     PfxMuzzle: MuzzleFlashLightningLargeGreen
@@ -1448,8 +1448,8 @@
     # AmmoCapacity: 750
     # AmmoType: DrillCharge
     # UseSingleMagazine: true
-    # ReloadDelay: 2.9
-    # Bullet_use_per_shot: 2
+    # ReloadDelay: 2.0
+    # Bullet_use_per_shot: 1
     # Particles: diggerplasma_green        # particle effect shown at impact
     # ParticleTransform: Muzzle/Particle2  # particle effect shown at muzzle    
     # SfxBegin: Weapons/Player/Drill/THRUSTERFlangerShiftingBurningAirHot_start
@@ -1618,10 +1618,10 @@
     CameraShake: 0   
     IgnoreAtmo: true
     Automatic: true  
-    Damage: 85, display: true
-    AmmoCapacity: 125, display: true
+    Damage: 90, display: true
+    AmmoCapacity: 160, display: true
     AmmoType: BioFuel, display: true
-    ReloadDelay: 3.8, display: true
+    ReloadDelay: 2.0, display: true
     UseSingleMagazine: true
     #  SfxBegin: Weapons/Player/Tools/Chainsaw_start   
     SfxLoop: Weapons/Player/Tools/Chainsaw_loop
@@ -1629,9 +1629,9 @@
     SfxReload: Weapons/Player/Reload/HeavyWeaponReloadNormal
     # SfxReload: Weapons/Player/Drill/WaltherP99MagInQuick01
 	
-    DamageMultiplier_1: 0.04, param1: wood|plants     # be able to remove trees and plants
-    DamageMultiplier_2: 0, param1: concrete|hull|hullarmored|hullcombat|metal|metalhard
-    DamageMultiplier_3: 0, param1: dirt|stone|rock   
+    DamageMultiplier_1: 0.5, param1: wood|plants     # be able to remove trees and plants
+    DamageMultiplier_2: 0.5, param1: concrete|hull|hullarmored|hullcombat|metal|metalhard
+    DamageMultiplier_3: 0.5, param1: dirt|stone|rock   
     DamageMultiplier_4: 0, param1: shield 
   }
 
@@ -1697,16 +1697,16 @@
   OverrideTradingConstraints: true # even if other constraints exist allow trading this item
   Durability: 500, display: false
   DegradationProb: 0.305, type: float, display: false
-  RepairDisabled: true, display: true
+  RepairDisabled: false, display: true
   SfxJammed: Weapons/Player/Reload/WeaponJammedSingleShot  
   { Child 0
     ROF: 0.425, type: float, display: true, formatter: ROF
-    Range: 400, display: false
-    NoiseStrength: 100, display: false 
+    Range: 1200, display: false
+    NoiseStrength: 350, display: false 
     BulletSpread: 0.011, display: true
     Recoil: 0.528, display: true
     AmmoType: 15mmBullet, display: true
-    Damage: 500, display: true
+    Damage: 800, display: true
     AmmoCapacity: 13, display: true
     ReloadDelay: 5, display: true
     # AmmoType: PulseLaserChargeRifle, display: true
@@ -1714,15 +1714,15 @@
     SfxBegin: Weapons/Player/Sniper/Resistance-SniperRifle-01-Single_Shot-03
     # PfxMuzzle: MuzzleFlash5
 	
-    DamageMultiplier_1: 8, param1: head, display: DmgMultiplierHead
-    DamageMultiplier_2: 0, param1: dirt|stone|rock|wood 
-    DamageMultiplier_3: 0.75, param1: hullarmored|hullcombat
-    DamageMultiplier_4: 0, param1: shield 
+    DamageMultiplier_1: 12, param1: head, display: DmgMultiplierHead
+    DamageMultiplier_2: 2, param1: dirt|stone|rock|wood 
+    DamageMultiplier_3: 1.75, param1: hullarmored|hullcombat
+    DamageMultiplier_4: 2, param1: shield 
   }
   { Child 1
     Class: Zoom
     ZoomOverlay: Entities/Items/Weapons/SniperScopes/ScopeNew
-    ZoomOut: 40
+    ZoomOut: 45
     ZoomIn: 5
     RedDot: true
   }
@@ -1743,7 +1743,7 @@
   MarketPrice: 4500, display: true
   Info: bkiEpicWeapon, display: true
   OverrideTradingConstraints: true # even if other constraints exist allow trading this item
-  Durability: 500, display: false
+  Durability: 700, display: false
   DegradationProb: 0.024, type: float, display: false
   RepairDisabled: true, display: true
   SfxJammed: Weapons/Player/Reload/WeaponJammedAutoFire  
@@ -1752,11 +1752,11 @@
     Range: 198, display: false
     NoiseStrength: 100, display: false  
     BulletSpread: 0.113, display: true
-    Recoil: 0.24, display: true
-    Damage: 80, display: true
+    Recoil: 0.20, display: true
+    Damage: 99, display: true
     AmmoCapacity: 560, display: true
     AmmoType: PulseLaserChargeRifle, display: true
-    ReloadDelay: 3.149, display: true
+    ReloadDelay: 2.149, display: true
     SfxBegin: Weapons/Player/Minigun/minigun2_start
     SfxLoop: Weapons/Player/Minigun/minigun2_loop
     SfxStop: Weapons/Player/Minigun/minigun2_end
@@ -1882,16 +1882,16 @@
   MarketPrice: 12500, display: true
   Info: bkiEpicWeapon, display: true
   OverrideTradingConstraints: true # even if other constraints exist allow trading this item
-  Durability: 700, display: false
-  DegradationProb: 0.488, type: float, display: false
+  Durability: 1000, display: false
+  DegradationProb: 0.288, type: float, display: false
   RepairDisabled: true, display: true
   SfxJammed: Weapons/Player/Reload/WeaponJammedSingleShot  
   { Child 0
     ROF: 0.5, type: float, display: true, formatter: ROF
     Automatic: true, display: true
-    AmmoCapacity: 3, display: true
-    Recoil: 1.44, display: true 
-    ReloadDelay: 6, display: true
+    AmmoCapacity: 10, display: true
+    Recoil: 1.1, display: true 
+    ReloadDelay: 5, display: true
   }
 
   UnlockCost: 0
@@ -1909,7 +1909,7 @@
   MarketPrice: 1200, display: true
   Info: bkiEpicWeapon, display: true
   OverrideTradingConstraints: true # even if other constraints exist allow trading this item
-  Durability: 500, display: false
+  Durability: 1000, display: false
   DegradationProb: 0.151, type: float, display: false
   RepairDisabled: true, display: true
   SfxJammed: Weapons/Player/Reload/WeaponJammedSingleShot  
@@ -1948,10 +1948,10 @@
 }
 { +Item Id: 31, Name: MultiToolT2, Ref: MultiTool
   Meshfile: Entities/Items/Weapons/MultiToolT2Prefab
-  MarketPrice: 1998, display: true
+  MarketPrice: 10998, display: true
   { Child 0 # "Retrieve Blocks" (= get complete blocks in own structure, do "Salvage" in others)
-    Range: 8
-	  ReturnFactor: 0.667, display: true
+    Range: 10
+	  ReturnFactor: 0.888, display: true
 	
     DamageMultiplier_1: 0, param1: dirt|stone|wood|shield|rock
     DamageMultiplier_2: 50, param1: metalhard    # 400 damage
@@ -1963,22 +1963,22 @@
     DamageMultiplier_8: 50, param1: woodblock    # 400 damage
   }
   { Child 1 # "Repair"
-    Range: 8
-    RepairPoints: 50
+    Range: 10
+    RepairPoints: 100
   }
   { Child 2 # "Exchange and Rotate"
-    Range: 8
+    Range: 10
   }
   { Child 3 # "Downgrade"
-    Range: 8
-    ReturnFactor: 0.667
+    Range: 10
+    ReturnFactor: 0.888
   }
   { Child 4 # "Upgrade"
-    Range: 8
+    Range: 10
   }
   { Child 5 # "Salvage" (get components from a block)
-	  ReturnFactor: 0.667 
-    Range: 8
+	  ReturnFactor: 0.888 
+    Range: 10
 	
     DamageMultiplier_1: 0, param1: dirt|stone|wood|shield|rock
     DamageMultiplier_2: 50, param1: metalhard    # 400 damage
@@ -2064,7 +2064,7 @@
   BlastRadius: 3, display: true
   BlastDamage: 500, display: true
   OverrideTradingConstraints: true # even if other constraints exist allow trading this item
-  Durability: 500, display: false
+  Durability: 1000, display: false
   DegradationProb: 0.488, type: float, display: false
   RepairDisabled: true, display: true
   SfxJammed: Weapons/Player/Reload/WeaponJammedSingleShot  
@@ -2134,7 +2134,7 @@
   # Meshfile: Entities/Items/Weapons/Rifles/ScifiRifle2BlackPrefab
   PickupToToolbar: true
   MarketPrice: 2960, display: true
-  Durability: 500, display: false
+  Durability: 1000, display: false
   DegradationProb: 0.06, type: float, display: false
   SfxJammed: Weapons/Player/Reload/WeaponJammedAutoFire
   { Child 0
@@ -2144,7 +2144,7 @@
     BulletSpread: 0.12, display: true
     Recoil: 0.48, display: true
     Damage: 81, display: true
-    AmmoCapacity: 28, display: true
+    AmmoCapacity: 35, display: true
     ReloadDelay: 2.945, display: true
     # SfxBegin: Weapons/Player/AssaultRifle/AWDS_AR_HK416_start
     # SfxLoop: Weapons/Player/AssaultRifle/AWDS_AR_HK416_loop
@@ -2181,16 +2181,16 @@
   { Child 0
     Class: Ranged
     ROF: 0.1, type: float, display: true, formatter: ROF
-    Range: 187, display: false
+    Range: 199, display: false
     BulletSpread: 0.075, display: true
-    Recoil: 0.32, display: true
+    Recoil: 0.22, display: true
     Automatic: true, display: true    
-    Damage: 80, display: true
-    AmmoCapacity: 35, display: true
+    Damage: 82, display: true
+    AmmoCapacity: 45, display: true
     AmmoType: 5.8mmBullet, display: true
-    ReloadDelay: 2.945, display: true
+    ReloadDelay: 2.0, display: true
 	
-    DamageMultiplier_1: 3.5, param1: head, display: DmgMultiplierHead  
+    DamageMultiplier_1: 3.9, param1: head, display: DmgMultiplierHead  
     DamageMultiplier_2: 0, param1: dirt|stone|rock|wood|hullarmored|hullcombat
     DamageMultiplier_3: 0, param1: shield 
   }
@@ -2211,7 +2211,7 @@
   # Meshfile: Entities/Items/Weapons/PulseRifle/PulseRifleEpicPrefab
   PickupToToolbar: true
   MarketPrice: 4650, display: true
-  Durability: 500, display: false
+  Durability: 1000, display: false
   DegradationProb: 0.061, type: float, display: false
   RepairDisabled: true, display: true
   SfxJammed: Weapons/Player/Reload/WeaponJammedAutoFire
@@ -2220,12 +2220,12 @@
   { Child 0
     Class: Ranged
     ROF: 0.1, type: float, display: true, formatter: ROF
-    ReloadDelay: 3, display: true
+    ReloadDelay: 2, display: true
     Range: 224, display: false
     BulletSpread: 0.038, display: true
     Recoil: 0.192, display: true
     Automatic: true, display: true    
-    Damage: 140, display: true
+    Damage: 145, display: true
     AmmoCapacity: 56, display: true
     AmmoType: PulseLaserChargeRifle, display: true
 	
@@ -2272,18 +2272,18 @@
     Class: Ranged
     AllowRemote: false
     ROF: 0.25, type: float
-    Range: 15, display: false
+    Range: 20, display: false
     NoiseStrength: 20, display: false  
     CameraShake: 0  
     IgnoreAtmo: true
     Automatic: true  
-    Damage: 19, display: true
+    Damage: 50, display: true
     # Recoil: 0.2, display: true
     # Stamina: -7, display: false
-    AmmoCapacity: 25, display: false           # no need to display since unlimited ammo
+    AmmoCapacity: 40, display: false           # no need to display since unlimited ammo
     AmmoType: AmmoInfinite, display: true     # no need to display since unlimited ammo
     AmmoUnlimited: true
-    ReloadDelay: 3, display: false             # no need to display since unlimited ammo
+    ReloadDelay: 2, display: false             # no need to display since unlimited ammo
     HarvestSupport: true
     UseSingleMagazine: true
     ParticleTransform: Muzzle/Particle1  
@@ -2318,11 +2318,11 @@
     CameraShake: 0    
     IgnoreAtmo: true
     Automatic: true
-    AmmoCapacity: 25, display: false           # no need to display since unlimited ammo
+    AmmoCapacity: 100, display: false           # no need to display since unlimited ammo
     AmmoType: AmmoInfinite, display: true     # no need to display since unlimited ammo
     AmmoUnlimited: true
     UseSingleMagazine: true
-    ReloadDelay: 3.1, display: true
+    ReloadDelay: 2.0, display: true
     Bullet_use_per_shot: 0.25
     Particles: digger     # particle effect shown at impact
     ParticleTransform: Muzzle/Particle2  # particle effect shown at muzzle  
@@ -2353,15 +2353,15 @@
     CameraShake: 0 
     IgnoreAtmo: true
     Automatic: true
-    Damage: 17
+    Damage: 25
     # Stamina: -7
-    Radius: 3
+    Radius: 4
     Demolish: True
     ReturnFactor: 0.333, display: true
-    AmmoCapacity: 25, display: false           # no need to display since unlimited ammo
+    AmmoCapacity: 100, display: false           # no need to display since unlimited ammo
     AmmoType: AmmoInfinite, display: true      # no need to display since unlimited ammo
     AmmoUnlimited: true
-    ReloadDelay: 3, display: false             # no need to display since unlimited ammo
+    ReloadDelay: 2, display: false             # no need to display since unlimited ammo
     ParticleTransform: Muzzle/Particle3      # particle effect shown at muzzle  
     SfxBegin: Weapons/Player/Tools/WeaponLightning_start
     SfxLoop: Weapons/Player/Tools/WeaponLightning_loop
@@ -2421,7 +2421,7 @@
     Class: TextureColorBlock
     AllowAt: "UnderWater, Planet, Space"
     ROF: 0.1, type: float
-    Range: 30, display: false
+    Range: 50, display: false
     CameraShake: 0 
     IgnoreAtmo: true
     Automatic: true
@@ -2508,8 +2508,8 @@
   BlastRadius: 3, display: true
   BlastDamage: 500, display: true
   # Explosion Radius: 3, display: true 
-  Durability: 350, display: false
-  DegradationProb: 1, type: float, display: false
+  Durability: 777, display: false
+  DegradationProb: 0.4, type: float, display: false
   SfxJammed: Weapons/Player/Reload/WeaponJammedSingleShot  
   { Child 0
     Class: LauncherSS
@@ -2520,9 +2520,9 @@
     CameraShake: 1 
     Recoil: 0, display: true
     IgnoreAtmo: true, display: true
-    AmmoCapacity: 5, display: true
+    AmmoCapacity: 10, display: true
     AmmoType: PlasmaCannonAlienCharge, display: true
-    ReloadDelay: 3, display: true
+    ReloadDelay: 2, display: true
     SfxBegin: Weapons/SS/RocketAlienSS/BLASTERComplexFireTriggerPowerfulRelease
     SfxNoAmmo: Weapons/DryFireFromManuallyCockedHammer
     SfxReload: Weapons/Player/Reload/HeavyWeaponReloadNormal
@@ -2558,8 +2558,8 @@
     Buff: "Fire"
     Buff_chance: 1
     Automatic: true
-    Damage: 70
-    Radius: 3
+    Damage: 90
+    Radius: 5
     AmmoCapacity: 750, display: true
     AmmoType: BioFuel, display: true
     UseSingleMagazine: true
@@ -3566,7 +3566,7 @@
   Category: Weapons/Items
   { Child 0
     Class: LauncherSS
-    AllowAt: Space
+    AllowAt: Space, Planet
     ROF: 6.5, type: float, display: true, formatter: ROF
     Range: 575, display: false
     RangeSpace: 950, display: false
@@ -3779,7 +3779,7 @@
   Category: Weapons/Items
   { Child 0
     Class: LauncherSS
-    AllowAt: Space
+    AllowAt: Space,Planet
     ROF: 4, type: float, display: true, formatter: ROF
     Range: 560, display: false
     RangeSpace: 975, display: false
@@ -3836,7 +3836,7 @@
   Category: Weapons/Items
   { Child 0
     Class: Ranged
-    AllowAt: Space
+    AllowAt: Space,Planet
     ROF: 0.6, type: float, display: true, formatter: ROF
     Range: 510, display: false
     RangeSpace: 925, display: false
@@ -3864,7 +3864,7 @@
   }
   # { Child 0
     # Class: LauncherSS
-    # AllowAt: Space
+    # AllowAt: Space,Planet
     # ROF: 0.4, type: float, display: true, formatter: ROF
     # Range: 850, display: false
     # AmmoCapacity: 150, display: true
@@ -3892,7 +3892,7 @@
   Category: Weapons/Items
   { Child 0
     Class: LauncherSS
-    AllowAt: Space
+    AllowAt: Space,Planet
     ROF: 0.8, type: float, display: true, formatter: ROF
     Range: 525, display: false
     RangeSpace: 1100, display: false
@@ -4053,7 +4053,7 @@
   Category: Weapons/Items
   { Child 0
     Class: LauncherSS
-    AllowAt: Space
+    AllowAt: Space,Planet
     ROF: 8, type: float, display: true, formatter: ROF
     Range: 635, display: false
     RangeSpace: 1050, display: false
@@ -4216,7 +4216,7 @@
   Category: Weapons/Items
   { Child 0
     Class: LauncherSS
-    AllowAt: Space
+    AllowAt: Space,Planet
     ROF: 0.6, type: float, display: true, formatter: ROF
     Range: 560, display: false
     RangeSpace: 925, display: false
@@ -4278,7 +4278,7 @@
   Category: Weapons/Items
   { Child 0
     Class: LauncherSS
-    AllowAt: Space
+    AllowAt: Space,Planet
     ROF: 0.6, type: float, display: true, formatter: ROF
     Range: 585, display: false
     RangeSpace: 975, display: false
@@ -4307,7 +4307,7 @@
   Category: Weapons/Items
   { Child 0
     Class: LauncherSS
-    AllowAt: Space
+    AllowAt: Space,Planet
     ROF: 4, type: float, display: true, formatter: ROF
     Range: 600, display: false
     RangeSpace: 1000, display: false
@@ -4621,7 +4621,7 @@
     Class: Driller
 	DrillMode: 1
     TerrainMode: true
-    AllowAt: "Space"
+    AllowAt: "Space,Planet"
     HarvestSupport: true
     ForceMuzzleAiming: true 
     ROF: 0.5, type: float
@@ -4815,7 +4815,7 @@
   RadialMenu: true
   { Child 0
     Class: Driller
-    AllowAt: "Space"
+    AllowAt: "Space,Planet"
     ROF: 0.5, type: float, display: false, formatter: ROF
     Range: 120
     IgnoreAtmo: true
@@ -4851,7 +4851,7 @@
   }
   { Child 1
     Class: Repair
-    AllowAt: "Space"
+    AllowAt: "Space,Planet"
     Range: 120, display: true
     IgnoreAtmo: true 
     ROF: 0.3, type: float
@@ -4878,7 +4878,7 @@
   }
   { Child 2
     Class: Driller
-    AllowAt: "Space"
+    AllowAt: "Space,Planet"
     Range: 120
     IgnoreAtmo: true
     ROF: 0.5, type: float, display: false, formatter: ROF
@@ -4984,7 +4984,7 @@
     InfoPopup: true
     TerrainMode: true
     HarvestSupport: true
-    AllowAt: "Space"
+    AllowAt: "Space,Planet"
     ForceMuzzleAiming: true 
     ROF: 0.5, type: float
     Damage: 500
