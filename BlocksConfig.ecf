@@ -1073,7 +1073,8 @@
   Shape: Terrain
   Mesh: terrain
   Texture: 140    
-  AutoMinerFactor: 0 # Gold has to be a limited asset (inflation!) => no endless production by the virtual AutoMiners
+  AutoMinerFactor: 0.2
+   # Gold has to be a limited asset (inflation!) => no endless production by the virtual AutoMiners
   ShowUser: No
   Group: resource 
   { Child DropOnDestroy
@@ -2068,7 +2069,7 @@
   Mass: 256, type: float, display: true, formatter: Kilogram
   Volume: 100, type: float, display: true, formatter: Liter
   IsActivateable: true
-  IsOxygenTight: false, display: true
+  IsOxygenTight: true, display: true
   IsIgnoreLC: true
   Info: bkiGyroscope, display: true
   # ModelOffset: "0,0.5,0"
@@ -2078,7 +2079,7 @@
   Torque: 100, type: int, display: true, formatter: NewtonMeter
   EnergyDynamicGroup: RCS
   EnergyIn: 10, type: int, display: true, formatter: Watt
-  CPUIn: 450, type: int, display: true
+  CPUIn: 1, type: int, display: true
   BlastParticleIndex: 4
   BlastRadius: 4
   BlastDamage: 100
@@ -4518,7 +4519,7 @@
   #  Torque: 2000000, type: int, display: true, formatter: NewtonMeter   
   EnergyDynamicGroup: RCS
   EnergyIn: 25, type: int, display: true, formatter: Watt
-  CPUIn: 75000, type: int, display: true
+  CPUIn: 1, type: int, display: true
   BlastParticleIndex: 4
   BlastRadius: 3
   BlastDamage: 80
@@ -4851,18 +4852,18 @@
   BlockColor: "110,110,110"
   # ModelOffset: "0,0.5,0"
   StackSize: 500
-  MaxCount: 6, type: int, display: true
+  MaxCount: 20, type: int, display: true
   BlastParticleIndex: 4
-  BlastRadius: 2
-  BlastDamage: 50
+  BlastRadius: 3
+  BlastDamage: 100
   EnergyIn: 5, type: int, display: true, formatter: Watt
   CPUIn: 720, type: int, display: true
   HitPoints: 530, type: int, display: true
-  # Damage: 7, display: true
-  # AmmoCapacity: 300, display: true
-  # AmmoType: 15mmBullet, display: true
-  # ReloadDelay: 2, display: true
-  # ROF: 0.1, type: float, display: true, formatter: ROF
+  Damage: 14, display: true
+  AmmoCapacity: 1000, display: true
+  AmmoType: 15mmBullet, display: true
+  ReloadDelay: 1, display: true
+  ROF: 0.1, type: float, display: true, formatter: ROF
 
   UnlockCost: 5, display: true
   UnlockLevel: 3, display: true
@@ -4904,18 +4905,18 @@
   BlockColor: "110,110,110"
   # ModelOffset: "0,0.5,0"
   StackSize: 500
-  MaxCount: 4, type: int, display: true
+  MaxCount: 12, type: int, display: true
   BlastParticleIndex: 4
-  BlastRadius: 2
-  BlastDamage: 50
+  BlastRadius: 3
+  BlastDamage: 100
   EnergyIn: 20, type: int, display: true, formatter: Watt
-  CPUIn: 2070, type: int, display: true
+  CPUIn: 20, type: int, display: true
   HitPoints: 530, type: int, display: true
-  # Damage: 33, display: true
-  # AmmoCapacity: 150, display: true
-  # AmmoType: PulseLaserChargeSS, display: true
-  # ReloadDelay: 1, display: true
-  # ROF: 0.5, type: float, display: true, formatter: ROF
+  Damage: 44, display: true
+  AmmoCapacity: 350, display: true
+  AmmoType: PulseLaserChargeSS, display: true
+  ReloadDelay: 1, display: true
+  ROF: 0.5, type: float, display: true, formatter: ROF
 
   UnlockCost: 25, display: true
   UnlockLevel: 20, display: true
@@ -4958,18 +4959,18 @@
   BlockColor: "110,110,110"
   # ModelOffset: "0,0.5,0"
   StackSize: 500
-  MaxCount: 4, type: int, display: true
+  MaxCount: 20, type: int, display: true
   BlastParticleIndex: 4
   BlastRadius: 2
   BlastDamage: 50
   EnergyIn: 20, type: int, display: true, formatter: Watt
-  CPUIn: 750, type: int, display: true
+  CPUIn: 75, type: int, display: true
   HitPoints: 530, type: int, display: true
-  # Damage: 54, display: true
-  # AmmoCapacity: 50, display: true
-  # AmmoType: PlasmaCannonChargeSS, display: true
-  # ReloadDelay: 3, display: true
-  # ROF: 0.8, type: float, display: true, formatter: ROF
+  Damage: 300, display: true
+  AmmoCapacity: 150, display: true
+  AmmoType: PlasmaCannonChargeSS, display: true
+  ReloadDelay: 1, display: true
+  ROF: 0.8, type: float, display: true, formatter: ROF
 
   UnlockCost: 20, display: true
   UnlockLevel: 17, display: true
@@ -5011,18 +5012,18 @@
   Category: Weapons/Items
   BlockColor: "110,110,110"
   StackSize: 500
-  MaxCount: 4, type: int, display: true
+  MaxCount: 20, type: int, display: true
   BlastParticleIndex: 4
   BlastRadius: 2
   BlastDamage: 50
   EnergyIn: 6, type: int, display: true, formatter: Watt
-  CPUIn: 1050, type: int, display: true
+  CPUIn: 105, type: int, display: true
   HitPoints: 530, type: int, display: true
-  # Damage: 211, display: true
-  # AmmoCapacity: 15, display: true
-  # AmmoType: FastRocket, display: true
-  # ReloadDelay: 8, display: true
-  # ROF: 2, type: float, display: true, formatter: ROF
+  Damage: 250, display: true
+  AmmoCapacity: 20, display: true
+  AmmoType: FastRocket, display: true
+  ReloadDelay: 4, display: true
+  ROF: 2, type: float, display: true, formatter: ROF
 
   UnlockCost: 10, display: true
   UnlockLevel: 7, display: true
@@ -5376,7 +5377,7 @@
   ThrusterForce: 7200, type: int, display: true, formatter: Newton
   EnergyIn: 450, type: int, display: true, formatter: Watt
   EnergyDynamicGroup: Thruster
-  CPUIn: 5336, type: int, display: true
+  CPUIn: 1, type: int, display: true
   Category: Devices
   BlastParticleIndex: 11
   BlastRadius: 2
@@ -6990,7 +6991,6 @@
   Volume: 800, type: float, display: true, formatter: Liter
   Mass: 250, type: float, display: true, formatter: Kilogram
   IsAccessible: false, type: bool
-  IsLockable: true
   # ModelOffset: "0,0.5,0"
   Category: Devices
   VolumeCapacity: 8000, type: float, display: true, formatter: Liter      
@@ -8691,7 +8691,7 @@
   Torque: 80, type: int, display: true, formatter: NewtonMeter
   EnergyDynamicGroup: RCS
   EnergyIn: 10, type: int, display: true, formatter: Watt
-  CPUIn: 350, type: int, display: true
+  CPUIn: 1, type: int, display: true
   BlastParticleIndex: 4
   BlastRadius: 4
   BlastDamage: 100
@@ -9430,18 +9430,18 @@
   BlockColor: "110,110,110"
   # ModelOffset: "0,0.5,0"
   StackSize: 500
-  MaxCount: 4, type: int, display: true
+  MaxCount: 12, type: int, display: true
   BlastParticleIndex: 4
-  BlastRadius: 2
-  BlastDamage: 50
+  BlastRadius: 3
+  BlastDamage: 100
   EnergyIn: 10, type: int, display: true, formatter: Watt
-  CPUIn: 4800, type: int, display: true
+  CPUIn: 480, type: int, display: true
   HitPoints: 3000, type: int, display: true
-  # Damage: 502, display: true
-  # AmmoCapacity: 15, display: true
-  # AmmoType: FastRocketMS, display: true
-  # ReloadDelay: 8, display: true
-  # ROF: 4, type: float, display: true, formatter: ROF
+  Damage: 602, display: true
+  AmmoCapacity: 25, display: true
+  AmmoType: FastRocketMS, display: true
+  ReloadDelay: 4, display: true
+  ROF: 4, type: float, display: true, formatter: ROF
 
   UnlockCost: 25, display: true
   UnlockLevel: 20, display: true
@@ -9524,14 +9524,14 @@
   Volume: 281.25, type: float, display: true, formatter: Liter
   Mass: 500, type: float, display: true, formatter: Kilogram
   StackSize: 500
-  # MaxCount: 6, type: int, display: true
+  MaxCount: 12, type: int, display: true
   BlastParticleIndex: 11
-  BlastRadius: 2
-  BlastDamage: 50
+  BlastRadius: 3
+  BlastDamage: 100
   EnergyIn: 15, type: int, display: true, formatter: Watt
   CPUIn: 900, type: int, display: true
   HitPoints: 550, type: int, display: true
-  RotSpeed: 140, type: int, display: true
+  RotSpeed: 180, type: int, display: true
   Zoom: 5, type: float
 }
 { +Block Id: 649, Name: TurretGVRocket       #TurretPlayer HV Rocket
@@ -10099,7 +10099,7 @@
   # Mesh-Damage-4: Mesh/D3
   WeaponItem: TurretGVDrillWeapon
   TemplateRoot: TurretGVToolBlocks
-  AllowPlacingAt: GV, display: true
+  AllowPlacingAt: GV,SV display: true
   SizeInBlocks: "3,1,3", display: true  
   Volume: 281.25, type: float, display: true, formatter: Liter
   Mass: 790, type: float, display: true, formatter: Kilogram
@@ -10992,9 +10992,9 @@
   Mesh-Damage-4: Mesh/D3
   DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Place: Free
-  AllowPlacingAt: MS, display: true
+  AllowPlacingAt: MS,SV display: true
   SizeInBlocks: "3,2,5", display: true
-  SizeInBlocksLocked: "Base,MS"
+  SizeInBlocksLocked: "Base,MS,SV"
   Volume: 4800, type: float, display: true, formatter: Liter
   Mass: 82200, type: float, display: true, formatter: Kilogram
   IsDuplicateable: false
@@ -11019,8 +11019,8 @@
   ItemPerAU: PentaxidCrystal, display: true
   CostPerAU: 1, display: true
   CostPerLY: 1, display: true
-  RangeAU: 50, display: true
-  RangeLY: 30, display: true
+  RangeAU: 100, display: true
+  RangeLY: 50, display: true
       
   Radiation: 25, display: RadiationLevel    # Radiation (= Radiation Protection) already exists for Player Armor
   Temperature: 40, display: true
@@ -13600,7 +13600,7 @@
   #  Torque: 20000, type: int, display: true, formatter: NewtonMeter   
   EnergyDynamicGroup: RCS
   EnergyIn: 50, type: int, display: true, formatter: Watt
-  CPUIn: 1250000, type: int, display: true
+  CPUIn: 12, type: int, display: true
   BlastParticleIndex: 4
   BlastRadius: 3
   BlastDamage: 80
@@ -14738,7 +14738,7 @@
   Group: cpgHangarShutterDoor
   Material: hullarmored
   Shape: ModelEntity
-  Model: @models/Blocks/Mothership/ShutterDoor/ShutterDoor1x1Prefab
+  Model: @models/Blocks/Mothership/ShutterDoor1x1Prefab
   DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Place: Free
   TemplateRoot: ShutterDoorLargeBlocks
@@ -14761,7 +14761,7 @@
 }
 { +Block Id: 1012, Name: ShutterDoor2x2, Ref: ShutterDoor1x1
   TemplateRoot: ShutterDoorLargeBlocks
-  Model: @models/Blocks/Mothership/ShutterDoor/ShutterDoor2x2Prefab
+  Model: @models/Blocks/Mothership/ShutterDoor2x2Prefab
   SizeInBlocks: "2,2,1", display: true
   # Volume: 1000, type: float, display: true, formatter: Liter
   HitPoints: 480, type: int, display: true
@@ -14770,7 +14770,7 @@
 }
 { +Block Id: 1013, Name: ShutterDoor3x3, Ref: ShutterDoor1x1
   TemplateRoot: ShutterDoorLargeBlocks
-  Model: @models/Blocks/Mothership/ShutterDoor/ShutterDoor3x3Prefab
+  Model: @models/Blocks/Mothership/ShutterDoor3x3Prefab
   SizeInBlocks: "3,3,1", display: true
   # Volume: 2000, type: float, display: true, formatter: Liter
   HitPoints: 1080, type: int, display: true
@@ -14779,7 +14779,7 @@
 }
 { +Block Id: 1014, Name: ShutterDoor4x4, Ref: ShutterDoor1x1
   TemplateRoot: ShutterDoorLargeBlocks
-  Model: @models/Blocks/Mothership/ShutterDoor/ShutterDoor4x4Prefab
+  Model: @models/Blocks/Mothership/ShutterDoor4x4Prefab
   SizeInBlocks: "4,4,1", display: true
   # Volume: 4000, type: float, display: true, formatter: Liter
   HitPoints: 1910, type: int, display: true
@@ -14788,7 +14788,7 @@
 }
 { +Block Id: 1015, Name: ShutterDoor5x5, Ref: ShutterDoor1x1
   TemplateRoot: ShutterDoorLargeBlocks
-  Model: @models/Blocks/Mothership/ShutterDoor/ShutterDoor5x5Prefab
+  Model: @models/Blocks/Mothership/ShutterDoor5x5Prefab
   SizeInBlocks: "5,5,1", display: true
   # Volume: 6000, type: float, display: true, formatter: Liter
   HitPoints: 2980, type: int, display: true
@@ -14801,7 +14801,7 @@
   Material: hullarmored
   Shape: Invisible
   MarketPrice: 1000, display: true
-  # Model: @models/Blocks/Mothership/ShutterDoor/ShutterDoor1x1Prefab
+  # Model: @models/Blocks/Mothership/ShutterDoor1x1Prefab
   DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Place: Free
   Info: bkiBlockGroup, display: true
@@ -15048,7 +15048,7 @@
 }
 { +Block Id: 1036, Name: ShutterDoor1x2, Ref: ShutterDoor1x1
   TemplateRoot: ShutterDoorLargeBlocks
-  Model: @models/Blocks/Mothership/ShutterDoor/ShutterDoor1x2Prefab
+  Model: @models/Blocks/Mothership/ShutterDoor1x2Prefab
   SizeInBlocks: "1,2,1", display: true
   HitPoints: 240, type: int, display: true
   Mass: 360, type: float, display: true, formatter: Kilogram
@@ -15056,7 +15056,7 @@
 }
 { +Block Id: 1037, Name: ShutterDoor2x3, Ref: ShutterDoor1x1
   TemplateRoot: ShutterDoorLargeBlocks
-  Model: @models/Blocks/Mothership/ShutterDoor/ShutterDoor2x3Prefab
+  Model: @models/Blocks/Mothership/ShutterDoor2x3Prefab
   SizeInBlocks: "2,3,1", display: true
   HitPoints: 720, type: int, display: true
   Mass: 640, type: float, display: true, formatter: Kilogram
@@ -15779,7 +15779,7 @@
   # Mesh-Damage-4: Mesh/D3
   WeaponItem: TurretGVToolWeapon
   TemplateRoot: TurretGVToolBlocks
-  AllowPlacingAt: GV, display: true
+  AllowPlacingAt: GV,SV display: true
   SizeInBlocks: "3,1,3", display: true  
   Info: bkiTurretTool, display: true
   EnergyIn: 750, type: int, display: true, formatter: Watt  
@@ -16464,7 +16464,7 @@
   IndexName: Door
   Material: hullcombat
   Shape: Invisible
-  # Model: @models/Blocks/Mothership/ShutterDoor/ShutterDoor1x1Prefab
+  # Model: @models/Blocks/Mothership/ShutterDoor1x1Prefab
   DropMeshfile: Entities/Misc/BagSmallChristmasPrefab   #Revert after Christmas to: BagSmallNewPrefab
   Place: Free
   Info: bkiBlockGroup, display: true
@@ -18560,7 +18560,7 @@
   MarketPrice: 42012, display: true
   IndexName: Teleporter
   Info: bkiTeleporterCV, display: true
-  # AllowedInBlueprint: false, display: true
+  AllowedInBlueprint: true, display: true
   Shape: ModelEntity  
   ShowBlockName: true
   Material: metalhard
@@ -19350,7 +19350,7 @@
   Group: cpgTransportation  
   Category: Devices
   IndexName: Teleporter
-  # AllowedInBlueprint: false, display: true
+  AllowedInBlueprint: true, display: true
   Material: metal
   Shape: ModelEntity
   ShowBlockName: true
@@ -19989,7 +19989,7 @@
   CostPerAU: 1, display: true
   CostPerLY: 0, display: true
   RangeAU: 15, display: true
-  RangeLY: 0, display: true
+  RangeLY: 5, display: true
 
   UnlockCost: 12, display: true
   UnlockLevel: 10, display: true
@@ -20787,7 +20787,7 @@
   Group: cpgSolar
   MarketPrice: 268, display: true
   PanelAngle: 30
-  SolarPanelEfficiency: 1.8, display: true 
+  SolarPanelEfficiency: 2.1, display: true 
   EssentialCategory: cpgFuelTank
   Material: metallight
   Shape: Invisible
@@ -20799,7 +20799,7 @@
   Mass: 730, type: float, display: true, formatter: Kilogram
   Volume: 55, type: float, display: true, formatter: Liter
   StackSize: 500
-  MaxCount: 15, type: int, display: true
+  MaxCount: 100, type: int, display: true
   CPUIn: 45, type: int, display: true
   ChildBlocks: "SolarPanelSlope, SolarPanelSlope2, SolarPanelSlope3, SolarPanelHorizontal, SolarPanelHorizontal2, SolarPanelHorizontalMount, SolarPanelHorizontalStand"
   Info: bkiSolarPanel, display: true
@@ -20859,7 +20859,7 @@
   IndexName: SolarPanel
   Group: cpgSolar
   PanelAngle: 30
-  SolarPanelEfficiency: 1.8, display: true 
+  SolarPanelEfficiency: 2.1, display: true 
   EssentialCategory: cpgFuelTank
   Material: metallight
   Shape: ModelEntity
@@ -20872,7 +20872,7 @@
   Category: Devices
   HitPoints: 150, type: int, display: true
   Mass: 730, type: float, display: true, formatter: Kilogram
-  MaxCount: 15, type: int, display: true
+  MaxCount: 100, type: int, display: true
   CPUIn: 45, type: int, display: true
   TemplateRoot: SolarPanelBlocks
   IsOxygenTight: false, display: true
@@ -21046,7 +21046,7 @@
   IndexName: SolarPanel
   Group: cpgSolar
   PanelAngle: 27
-  SolarPanelEfficiency: 1.0, display: true 
+  SolarPanelEfficiency: 1.5, display: true 
   EssentialCategory: cpgFuelTank
   Material: metallight
   Shape: ModelEntity
@@ -22767,7 +22767,7 @@
   BlockColor: "110,110,110"
   Category: Weapons/Items
   ChildBlocks: "TurretGVMinigun, TurretGVMinigunRetract"
-  MaxCount: 6, type: int, display: true
+  MaxCount: 20, type: int, display: true
   StackSize: 1000  
   AllowPlacingAt: GV, display: true
   Volume: 281.25, type: float, display: true, formatter: Liter
@@ -22794,7 +22794,7 @@
   BlockColor: "110,110,110"
   Category: Weapons/Items
   ChildBlocks: "TurretGVRocket, TurretGVRocketRetract"
-  MaxCount: 4, type: int, display: true
+  MaxCount: 20, type: int, display: true
   StackSize: 1000 
   AllowPlacingAt: GV, display: true
   Volume: 281.25, type: float, display: true, formatter: Liter
@@ -22821,7 +22821,7 @@
   BlockColor: "110,110,110"
   Category: Weapons/Items
   ChildBlocks: "TurretGVPlasma, TurretGVPlasmaRetract"
-  MaxCount: 4, type: int, display: true
+  MaxCount: 10, type: int, display: true
   StackSize: 1000
   
   AllowPlacingAt: GV, display: true
@@ -22850,10 +22850,10 @@
   BlockColor: "110,110,110"
   Category: Weapons/Items
   ChildBlocks: "TurretGVArtillery, TurretGVArtilleryRetract"
-  MaxCount: 1, type: int, display: true
+  MaxCount: 3, type: int, display: true
   StackSize: 500
   
-  AllowPlacingAt: GV, display: true
+  AllowPlacingAt: GV,SV display: true
   Info: bkiBlockGroup, display: true 
   IsOxygenTight: varies, display: true        # not all child blocks are the same
   Mass: 4350, type: float, display: true, formatter: Kilogram  # do not display mass, otherwise mass from material will be displayed
@@ -22878,10 +22878,10 @@
   BlockColor: "110,110,110"
   Category: Weapons/Items
   ChildBlocks: "TurretGVTool, TurretGVToolRetract, TurretGVDrill, TurretGVDrillRetract"
-  MaxCount: 2, type: int, display: true
+  MaxCount: 4, type: int, display: true
   StackSize: 1000
   
-  AllowPlacingAt: GV, display: true
+  AllowPlacingAt: GV,SV display: true
   Info: bkiBlockGroup, display: true 
   IsOxygenTight: varies, display: true        # not all child blocks are the same
   Mass: 790, type: float, display: true, formatter: Kilogram  # do not display mass, otherwise mass from material will be displayed
@@ -24643,10 +24643,10 @@
   EnergyIn: 25000, type: int, display: true, formatter: Watt
   CPUIn: 24700, type: int, display: true  
   EnergyInIdle: 1000, type: int, display: true, formatter: Watt
-  ShieldCapacity: 25000, type: int, display: true
-  ShieldRecharge: 150, type: int, display: true # per second
-  ShieldCooldown: 15, type: int, display: true   # in seconds
-  ShieldPerCrystal: 1000, type: int, display: true
+  ShieldCapacity: 30000, type: int, display: true
+  ShieldRecharge: 250, type: int, display: true # per second
+  ShieldCooldown: 8, type: int, display: true   # in seconds
+  ShieldPerCrystal: 1500, type: int, display: true
   UpgradeTo: ShieldGeneratorBAT2, display: true
 
   UnlockCost: 12, display: true
@@ -24669,8 +24669,8 @@
   EnergyIn: 18000, type: int, display: true, formatter: Watt
   CPUIn: 18100, type: int, display: true  
   EnergyInIdle: 800, type: int, display: true, formatter: Watt
-  ShieldCapacity: 18000, type: int, display: true
-  ShieldRecharge: 120, type: int, display: true     # recharge rate per sec
+  ShieldCapacity: 33000, type: int, display: true
+  ShieldRecharge: 320, type: int, display: true     # recharge rate per sec
   UpgradeTo: ShieldGeneratorCVT2, display: true
   
   UnlockCost: 12, display: true
@@ -24692,10 +24692,10 @@
   Mass: 1630, type: float, display: true, formatter: Kilogram
   Volume: 187.5, type: float, display: true, formatter: Liter
   EnergyIn: 3600, type: int, display: true, formatter: Watt
-  CPUIn: 16300, type: int, display: true  
+  CPUIn: 1630, type: int, display: true  
   EnergyInIdle: 360, type: int, display: true, formatter: Watt
-  ShieldCapacity: 4000, type: int, display: true
-  ShieldRecharge: 500, type: int, display: true     # recharge rate per sec
+  ShieldCapacity: 10000, type: int, display: true
+  ShieldRecharge: 650, type: int, display: true     # recharge rate per sec
   UpgradeTo: null
   
   UnlockCost: 10, display: true
@@ -24715,10 +24715,10 @@
   Mass: 14635, type: float, display: true, formatter: Kilogram
   Volume: 4320, type: float, display: true, formatter: Liter
   EnergyIn: 36000, type: int, display: true, formatter: Watt
-  CPUIn: 33100, type: int, display: true  
+  CPUIn: 3310, type: int, display: true  
   EnergyInIdle: 1600, type: int, display: true, formatter: Watt
-  ShieldCapacity: 36000, type: int, display: true
-  ShieldRecharge: 120, type: int, display: true     # recharge rate per sec
+  ShieldCapacity: 66000, type: int, display: true
+  ShieldRecharge: 320, type: int, display: true     # recharge rate per sec
   PickupTarget: ShieldGeneratorCV    # Avoid getting back T2 and then be able to place T1 and T2 
   UpgradeTo: null
   
@@ -24742,8 +24742,8 @@
   EnergyIn: 50000, type: int, display: true, formatter: Watt
   CPUIn: 45500, type: int, display: true  
   EnergyInIdle: 1500, type: int, display: true, formatter: Watt
-  ShieldCapacity: 50000, type: int, display: true
-  ShieldRecharge: 150, type: int, display: true     # recharge rate per sec
+  ShieldCapacity: 70000, type: int, display: true
+  ShieldRecharge: 350, type: int, display: true     # recharge rate per sec
   PickupTarget: ShieldGeneratorBA   # Avoid getting back T2 and then be able to place T1 and T2 
   UpgradeTo: null
   
@@ -25176,9 +25176,9 @@
   Mass: 1630, type: float, display: true, formatter: Kilogram
   Volume: 187.5, type: float, display: true, formatter: Liter
   EnergyIn: 3600, type: int, display: true, formatter: Watt
-  CPUIn: 15400, type: int, display: true  
+  CPUIn: 1540, type: int, display: true  
   EnergyInIdle: 360, type: int, display: true, formatter: Watt
-  ShieldCapacity: 6000, type: int, display: true
+  ShieldCapacity: 10000, type: int, display: true
   ShieldRecharge: 400, type: int, display: true     # recharge rate per sec
   UpgradeTo: null
   
@@ -25219,35 +25219,35 @@
 }
 { +Block Id: 1894, Name: ShutterDoor1x3, Ref: ShutterDoor1x1
   TemplateRoot: ShutterDoorLargeBlocks
-  Model: @models/Blocks/Mothership/ShutterDoor/ShutterDoor1x3Prefab
+  Model: @models/Blocks/Mothership/ShutterDoor1x3Prefab
   SizeInBlocks: "1,3,1", display: true
   HitPoints: 360, type: int, display: true
   Mass: 510, type: float, display: true, formatter: Kilogram
 }
 { +Block Id: 1895, Name: ShutterDoor1x4, Ref: ShutterDoor1x1
   TemplateRoot: ShutterDoorLargeBlocks
-  Model: @models/Blocks/Mothership/ShutterDoor/ShutterDoor1x4Prefab
+  Model: @models/Blocks/Mothership/ShutterDoor1x4Prefab
   SizeInBlocks: "1,4,1", display: true
   HitPoints: 480, type: int, display: true
   Mass: 660, type: float, display: true, formatter: Kilogram
 }
 { +Block Id: 1896, Name: ShutterDoor4x3, Ref: ShutterDoor1x1
   TemplateRoot: ShutterDoorLargeBlocks
-  Model: @models/Blocks/Mothership/ShutterDoor/ShutterDoor4x3Prefab
+  Model: @models/Blocks/Mothership/ShutterDoor4x3Prefab
   SizeInBlocks: "4,3,1", display: true
   HitPoints: 1430, type: int, display: true
   Mass: 2330, type: float, display: true, formatter: Kilogram
 }
 { +Block Id: 1897, Name: ShutterDoor1x5, Ref: ShutterDoor1x1
   TemplateRoot: ShutterDoorLargeBlocks
-  Model: @models/Blocks/Mothership/ShutterDoor/ShutterDoor1x5Prefab
+  Model: @models/Blocks/Mothership/ShutterDoor1x5Prefab
   SizeInBlocks: "1,5,1", display: true
   HitPoints: 600, type: int, display: true
   Mass: 810, type: float, display: true, formatter: Kilogram
 }
 { +Block Id: 1898, Name: ShutterDoor5x3, Ref: ShutterDoor1x1
   TemplateRoot: ShutterDoorLargeBlocks
-  Model: @models/Blocks/Mothership/ShutterDoor/ShutterDoor5x3Prefab
+  Model: @models/Blocks/Mothership/ShutterDoor5x3Prefab
   SizeInBlocks: "5,3,1", display: true
   HitPoints: 1790, type: int, display: true
   Mass: 2680, type: float, display: true, formatter: Kilogram
@@ -25996,7 +25996,7 @@
   Volume: 31.25, type: float, display: true, formatter: Liter
   StackSize: 1000
   EnergyIn: 5, type: int, display: true, formatter: Watt
-  # CPUOut: 3000, type: int, display: true
+  CPUOut: 10000, type: int, display: true
   CPUExtenderLevel: 2, type: int, display: true
   HitPoints: 200, type: int, display: true
   AllowWander: true
@@ -26044,7 +26044,7 @@
   Volume: 62.5, type: float, display: true, formatter: Liter
   StackSize: 500
   EnergyIn: 7, type: int, display: true, formatter: Watt
-  # CPUOut: 3000, type: int, display: true
+  CPUOut: 10000, type: int, display: true
   CPUExtenderLevel: 3, type: int, display: true
   HitPoints: 300, type: int, display: true
   AllowWander: true
@@ -26067,7 +26067,7 @@
   MaxCount: 4, type: int, display: true
   ForceMaxCount: true
   EnergyIn: 10, type: int, display: true, formatter: Watt
-  # CPUOut: 3000, type: int, display: true
+  CPUOut: 10000, type: int, display: true
   CPUExtenderLevel: 4, type: int, display: true
   HitPoints: 330, type: int, display: true
 
@@ -26113,7 +26113,7 @@
   Volume: 31.25, type: float, display: true, formatter: Liter
   StackSize: 1000
   EnergyIn: 5, type: int, display: true, formatter: Watt
-  # CPUOut: 6000, type: int, display: true
+  CPUOut: 10000, type: int, display: true
   CPUExtenderLevel: 2, type: int, display: true
   HitPoints: 200, type: int, display: true
   AllowWander: true
@@ -26161,7 +26161,7 @@
   Volume: 62.5, type: float, display: true, formatter: Liter
   StackSize: 500
   EnergyIn: 7, type: int, display: true, formatter: Watt
-  # CPUOut: 6000, type: int, display: true  
+  CPUOut: 10000, type: int, display: true  
   CPUExtenderLevel: 3, type: int, display: true
   HitPoints: 300, type: int, display: true
   AllowWander: true
@@ -26184,7 +26184,7 @@
   MaxCount: 4, type: int, display: true
   ForceMaxCount: true
   EnergyIn: 10, type: int, display: true, formatter: Watt
-  # CPUOut: 6000, type: int, display: true  
+  CPUOut: 15000, type: int, display: true  
   CPUExtenderLevel: 4, type: int, display: true
   HitPoints: 330, type: int, display: true
 
@@ -26230,7 +26230,7 @@
   Volume: 800, type: float, display: true, formatter: Liter
   StackSize: 500
   EnergyIn: 50, type: int, display: true, formatter: Watt
-  # CPUOut: 200000, type: int, display: true
+  CPUOut: 260000, type: int, display: true
   CPUExtenderLevel: 2, type: int, display: true
   HitPoints: 650, type: int, display: true
   AllowWander: true
@@ -26278,7 +26278,7 @@
   Volume: 1600, type: float, display: true, formatter: Liter
   StackSize: 500
   EnergyIn: 85, type: int, display: true, formatter: Watt
-  # CPUOut: 200000, type: int, display: true
+  CPUOut: 310000, type: int, display: true
   CPUExtenderLevel: 3, type: int, display: true
   HitPoints: 900, type: int, display: true
   AllowWander: true
@@ -26301,7 +26301,7 @@
   MaxCount: 4, type: int, display: true
   ForceMaxCount: true
   EnergyIn: 100, type: int, display: true, formatter: Watt
-  # CPUOut: 200000, type: int, display: true  
+  CPUOut: 500000, type: int, display: true  
   CPUExtenderLevel: 4, type: int, display: true
   HitPoints: 950, type: int, display: true
 
@@ -26347,7 +26347,7 @@
   Volume: 800, type: float, display: true, formatter: Liter
   StackSize: 500
   EnergyIn: 50, type: int, display: true, formatter: Watt
-  # CPUOut: 300000, type: int, display: true
+  CPUOut: 350000, type: int, display: true
   CPUExtenderLevel: 2, type: int, display: true
   HitPoints: 650, type: int, display: true
   AllowWander: true
@@ -26395,7 +26395,7 @@
   Volume: 1600, type: float, display: true, formatter: Liter
   StackSize: 500
   EnergyIn: 85, type: int, display: true, formatter: Watt
-  # CPUOut: 300000, type: int, display: true
+  CPUOut: 450000, type: int, display: true
   CPUExtenderLevel: 3, type: int, display: true
   HitPoints: 900, type: int, display: true
   AllowWander: true
@@ -26418,7 +26418,7 @@
   MaxCount: 4, type: int, display: true
   ForceMaxCount: true
   EnergyIn: 100, type: int, display: true, formatter: Watt
-  # CPUOut: 300000, type: int, display: true
+  CPUOut: 550000, type: int, display: true
   CPUExtenderLevel: 4, type: int, display: true
   HitPoints: 950, type: int, display: true
 
@@ -27030,7 +27030,7 @@
   Category: Devices
   IndexName: Teleporter
   CustomIcon: TeleporterBA
-  # AllowedInBlueprint: false, display: true
+  AllowedInBlueprint: true, display: true
   Material: metal
   Shape: ModelEntity
   ShowBlockName: true
@@ -27060,7 +27060,7 @@
   BlastRadius: 3
   BlastDamage: 80
   
-  RangeLY: 0 # a value of 0 allows to teleport only within the current sector
+  RangeLY: 10 # a value of 0 allows to teleport only within the current sector
   
   #UnlockCost: 20, display: true
   #UnlockLevel: 15, display: true
@@ -27081,10 +27081,10 @@
   Group: cpgTransportation  
   Category: Devices
   IndexName: Teleporter
-  # RepairToTemplate: false                    #Blocks can be placed, and used for R2T when destroyed
+  RepairToTemplate: true                    #Blocks can be placed, and used for R2T when destroyed
   AllowedInBlueprint: false, display: true  #Struct with these blocks cannot be blueprinted to avoid easy multiplication of these blocks!
   CustomIcon: TeleporterBA
-  # AllowedInBlueprint: false, display: true
+  AllowedInBlueprint: true, display: true
   Material: metal
   Shape: ModelEntity
   ShowBlockName: true
@@ -27173,7 +27173,7 @@
   CostPerAU: 1, display: true
   CostPerLY: 1, display: true
   RangeAU: 500, display: true
-  RangeLY: 150, display: true
+  RangeLY: 250, display: true
       
   Radiation: 25, display: RadiationLevel    # Radiation (= Radiation Protection) already exists for Player Armor
   Temperature: 40, display: true
@@ -27352,8 +27352,8 @@
   IndexName: Turret
   Group: cpgAlien     # Indicates non-player origin; default cpgTurret
   Category: Weapons/Items
-  RepairToTemplate: false                   #Blocks can be placed, but not R2T when destroyed
-  AllowedInBlueprint: false, display: true  #Struct with these blocks cannot be blueprinted to avoid easy multiplication of these blocks!
+  RepairToTemplate: true                   #Blocks can be placed, but not R2T when destroyed
+  AllowedInBlueprint: true, display: true  #Struct with these blocks cannot be blueprinted to avoid easy multiplication of these blocks!
   Place: Face                               # If turret is retractable: Free; other: Face
   # AllowPlacingAt: MS, display: true
   Material: metalhard
@@ -27590,8 +27590,8 @@
   IndexName: Turret
   Group: cpgAlien     # Indicates non-player origin; default cpgTurret
   Category: Weapons/Items
-  #RepairToTemplate: false                   #Blocks can be placed, but not R2T when destroyed
-  AllowedInBlueprint: false, display: true  #Struct with these blocks cannot be blueprinted to avoid easy multiplication of these blocks!
+  RepairToTemplate: true                   #Blocks can be placed, but not R2T when destroyed
+  AllowedInBlueprint: true, display: true  #Struct with these blocks cannot be blueprinted to avoid easy multiplication of these blocks!
   Place: Face                               # If turret is retractable: Free; other: Face
   # AllowPlacingAt: MS, display: true
   Material: metalhard
@@ -27853,8 +27853,8 @@
   Radiation: 1, display: RadiationLevel    # Radiation (= Radiation Protection) already exists for Player Armor
   Temperature: 40, display: true
   
-  RepairToTemplate: false
-  AllowedInBlueprint: false, display: true
+  RepairToTemplate: true
+  AllowedInBlueprint: true, display: true
   ShowUser: No
 
 }
@@ -27903,8 +27903,8 @@
   Radiation: 1, display: RadiationLevel    # Radiation (= Radiation Protection) already exists for Player Armor
   Temperature: 35, display: true
   
-  RepairToTemplate: false
-  AllowedInBlueprint: false, display: true
+  RepairToTemplate: true
+  AllowedInBlueprint: true, display: true
   ShowUser: No
 }
 
@@ -27924,9 +27924,9 @@
   Shape: ModelEntity
   ShowBlockName: true
   Place: Free
-  RepairToTemplate: false
+  RepairToTemplate: true
   PickupTarget: Presents
-  AllowedInBlueprint: false, display: true
+  AllowedInBlueprint: true, display: true
   IsActivateable: true
   IsActivatedOnPlace: false
   IsAccessible: true, type: bool
