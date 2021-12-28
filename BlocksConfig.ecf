@@ -11019,8 +11019,8 @@
   ItemPerAU: PentaxidCrystal, display: true
   CostPerAU: 1, display: true
   CostPerLY: 1, display: true
-  RangeAU: 100, display: true
-  RangeLY: 50, display: true
+  RangeAU: 60, display: true
+  RangeLY: 85, display: true
       
   Radiation: 25, display: RadiationLevel    # Radiation (= Radiation Protection) already exists for Player Armor
   Temperature: 40, display: true
@@ -25178,7 +25178,7 @@
   EnergyIn: 3600, type: int, display: true, formatter: Watt
   CPUIn: 1540, type: int, display: true  
   EnergyInIdle: 360, type: int, display: true, formatter: Watt
-  ShieldCapacity: 10000, type: int, display: true
+  ShieldCapacity: 15000, type: int, display: true
   ShieldRecharge: 400, type: int, display: true     # recharge rate per sec
   UpgradeTo: null
   

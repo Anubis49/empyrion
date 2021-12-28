@@ -3568,12 +3568,12 @@
     Class: LauncherSS
     AllowAt: Space, Planet
     ROF: 6.5, type: float, display: true, formatter: ROF
-    Range: 575, display: false
-    RangeSpace: 950, display: false
+    Range: 600, display: false
+    RangeSpace: 1000, display: false
     AmmoCapacity: 5, display: true
     AmmoType: LargeRocketMS, display: true
-    NoiseStrength: 200, display: false   
-    CameraShake: 4   
+    NoiseStrength: 400, display: false   
+    CameraShake: 6   
     AutoReload: true
     ReloadDelay: 13, display: true # adapt sound 
     SfxBegin: Weapons/MS/Turret/Cannon_2
@@ -3747,7 +3747,7 @@
     Damage: 425, display: true
     AmmoCapacity: 300, display: true
     AmmoType: 15mmBullet, display: true
-    NoiseStrength: 120, display: false  
+    NoiseStrength: 250, display: false  
     CameraShake: 1    
     AutoReload: true
     ReloadDelay: 2, display: true # adapt sound 
@@ -3786,7 +3786,7 @@
     AmmoCapacity: 15, display: true
     AmmoType: FastRocketMS, display: true
     Automatic: false    
-    NoiseStrength: 150, display: false   
+    NoiseStrength: 300, display: false   
     AutoReload: true
     CheckObstructed: true
     ReloadDelay: 8, display: true # adapt sound 
@@ -4223,7 +4223,7 @@
     AmmoCapacity: 150, display: true
     AmmoType: PulseLaserChargeMS, display: true	
     Automatic: true  
-    NoiseStrength: 100, display: false   
+    NoiseStrength: 250, display: false   
     CameraShake: 0   
     AutoReload: true
     ReloadDelay: 1, display: true # adapt sound 
@@ -4313,10 +4313,10 @@
     RangeSpace: 1000, display: false
     AmmoCapacity: 8, display: true
     AmmoType: FastRocketMS, display: true
-    NoiseStrength: 150, display: false  
-    CameraShake: 3    
+    NoiseStrength: 350, display: false  
+    CameraShake: 4    
     AutoReload: true
-    ReloadDelay: 8, display: true
+    ReloadDelay: 4, display: true
     SfxBegin: Weapons/Turret/missle_fire
     # SfxBegin: Weapons/LauncherWeapons/weapon_missile_005
     #  SfxBegin: Weapons/Planet/TurretPS01/Cannon_2    
